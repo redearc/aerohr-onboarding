@@ -37,7 +37,7 @@
         </div>
         <div>
           <h1 class="text-sm font-bold text-slate-900 tracking-tight">AeroHR React Application Module</h1>
-          <p class="text-[11px] text-slate-400">Standalone React 18 Engine • Live Supabase Backend & Phase 2 PDF Workspace</p>
+          <p class="text-[11px] text-slate-400">Standalone React 18 Engine • Live Supabase Backend & Full-Width Anti-Clipping Canvas</p>
         </div>
       </div>
 
@@ -595,131 +595,135 @@ function OffshoreOnboardingEngine() {
         </div>
 
         {/* Phase 1 & Phase 2 Container */}
-        <div className={`p-6 bg-slate-50/40 gap-6 ${isExpanded ? 'space-y-6' : 'grid grid-cols-1 lg:grid-cols-2'}`}>
+        <div className="p-6 bg-slate-50/40 space-y-6">
           
           {/* Phase 1 Panel */}
-          <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-sm space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
-                  Phase 1: Document Vault & Server Sync
-                </h3>
+          {!isExpanded && (
+            <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-sm space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                    Phase 1: Document Vault & Server Sync
+                  </h3>
+                </div>
+                <span className="text-[11px] font-mono text-slate-400">
+                  BUCKET: {SUPABASE_STORAGE_BUCKET}
+                </span>
               </div>
-              <span className="text-[11px] font-mono text-slate-400">
-                BUCKET: {SUPABASE_STORAGE_BUCKET}
-              </span>
-            </div>
 
-            <div className="flex items-center gap-3 p-3 bg-emerald-50/70 border border-emerald-100 rounded-lg text-xs text-emerald-800">
-              <span className="text-base">📧</span>
-              <div>
-                <p className="font-semibold">Automatic Onboarding Link Dispatched via Resend</p>
-                <p className="text-emerald-600 text-[11px]">
-                  Sent to {activeCandidate?.email} • Triggered by AFTER INSERT database trigger
-                </p>
+              <div className="flex items-center gap-3 p-3 bg-emerald-50/70 border border-emerald-100 rounded-lg text-xs text-emerald-800">
+                <span className="text-base">📧</span>
+                <div>
+                  <p className="font-semibold">Automatic Onboarding Link Dispatched via Resend</p>
+                  <p className="text-emerald-600 text-[11px]">
+                    Sent to {activeCandidate?.email} • Triggered by AFTER INSERT database trigger
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-600">Candidate Secure Upload Drop-Link</label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  readOnly
-                  value={`https://aero.hr/portal/upload/${activeCandidate?.secure_token || ''}`}
-                  className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono text-slate-600 focus:outline-none select-all"
-                />
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-600">Candidate Secure Upload Drop-Link</label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    readOnly
+                    value={`https://aero.hr/portal/upload/${activeCandidate?.secure_token || ''}`}
+                    className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono text-slate-600 focus:outline-none select-all"
+                  />
+                  <button
+                    onClick={handleCopyLink}
+                    className="px-4 py-2 bg-slate-900 hover:bg-slate-800 active:scale-95 text-white rounded-lg text-xs font-semibold transition-all shadow-sm flex items-center gap-1.5"
+                  >
+                    <span>📋</span>
+                    <span>Copy Link</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-2.5 pt-2">
+                <div className="flex items-center justify-between text-xs font-semibold text-slate-500">
+                  <span>Required KYC Document Payload</span>
+                  <span>Storage Status</span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {/* Aadhaar Row */}
+                  <div className="flex flex-col justify-between p-3.5 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors gap-2">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-base text-slate-500">🪪</span>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-800">National ID / Aadhaar</h4>
+                        <p className="text-[10px] text-slate-400">UIDAI Verified</p>
+                      </div>
+                    </div>
+                    <div>{renderDocBadge(activeCandidate?.aadhaar_status)}</div>
+                  </div>
+
+                  {/* PAN Card Row */}
+                  <div className="flex flex-col justify-between p-3.5 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors gap-2">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-base text-slate-500">💳</span>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-800">Tax / PAN Card</h4>
+                        <p className="text-[10px] text-slate-400">Income Tax Dept</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {renderDocBadge(activeCandidate?.pan_status)}
+                      {activeCandidate?.pan_status !== 'verified' && (
+                        <button
+                          onClick={handleApprovePan}
+                          className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold rounded-md shadow-sm transition-all"
+                        >
+                          Approve
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Experience Letter Row */}
+                  <div className="flex flex-col justify-between p-3.5 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors gap-2">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-base text-slate-500">📄</span>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-800">Relieving Letter</h4>
+                        <p className="text-[10px] text-slate-400">Employer Clearance</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {renderDocBadge(activeCandidate?.experience_doc_status)}
+                      {activeCandidate?.experience_doc_status !== 'verified' && (
+                        <button
+                          onClick={() => {
+                            setUploadDocType('experience');
+                            setUploadModalOpen(true);
+                          }}
+                          className="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-semibold rounded-md shadow-sm transition-all"
+                        >
+                          Upload
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-1 flex justify-end">
                 <button
-                  onClick={handleCopyLink}
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 active:scale-95 text-white rounded-lg text-xs font-semibold transition-all shadow-sm flex items-center gap-1.5"
+                  onClick={() => setUploadModalOpen(true)}
+                  className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"
                 >
-                  <span>📋</span>
-                  <span>Copy Link</span>
+                  <span>+ Upload Missing Vault File Directly</span>
                 </button>
               </div>
             </div>
-
-            <div className="space-y-2.5 pt-2">
-              <div className="flex items-center justify-between text-xs font-semibold text-slate-500">
-                <span>Required KYC Document Payload</span>
-                <span>Storage Status</span>
-              </div>
-
-              {/* Aadhaar Row */}
-              <div className="flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                <div className="flex items-center gap-3">
-                  <span className="text-base text-slate-500">🪪</span>
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-800">National ID / Aadhaar Card</h4>
-                    <p className="text-[11px] text-slate-400">Identity & Address Proof (UIDAI)</p>
-                  </div>
-                </div>
-                <div>{renderDocBadge(activeCandidate?.aadhaar_status)}</div>
-              </div>
-
-              {/* PAN Card Row */}
-              <div className="flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                <div className="flex items-center gap-3">
-                  <span className="text-base text-slate-500">💳</span>
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-800">Tax Registration / PAN Card</h4>
-                    <p className="text-[11px] text-slate-400">Income Tax Dept of India</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  {renderDocBadge(activeCandidate?.pan_status)}
-                  {activeCandidate?.pan_status !== 'verified' && (
-                    <button
-                      onClick={handleApprovePan}
-                      className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold rounded-md shadow-sm transition-all"
-                    >
-                      Approve
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {/* Experience Letter Row */}
-              <div className="flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                <div className="flex items-center gap-3">
-                  <span className="text-base text-slate-500">📄</span>
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-800">Relieving / Experience Letter</h4>
-                    <p className="text-[11px] text-slate-400">Previous Employer Clearance</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  {renderDocBadge(activeCandidate?.experience_doc_status)}
-                  {activeCandidate?.experience_doc_status !== 'verified' && (
-                    <button
-                      onClick={() => {
-                        setUploadDocType('experience');
-                        setUploadModalOpen(true);
-                      }}
-                      className="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-semibold rounded-md shadow-sm transition-all"
-                    >
-                      Upload
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-2 flex justify-end">
-              <button
-                onClick={() => setUploadModalOpen(true)}
-                className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"
-              >
-                <span>+ Upload Missing Vault File Directly</span>
-              </button>
-            </div>
-          </div>
+          )}
 
           {/* ========================================================================= */}
           {/* PHASE 2: DYNAMIC AGREEMENT GENERATION & INTERACTIVE PDF WORKSPACE        */}
           {/* ========================================================================= */}
-          <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-sm space-y-5 flex flex-col justify-between">
+          <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-sm space-y-5 flex flex-col justify-between w-full">
             <div className="space-y-4">
               
               {/* Header with Mode Toggle Tabs */}
@@ -736,7 +740,7 @@ function OffshoreOnboardingEngine() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   {/* Mode Navigation Tabs */}
                   <div className="inline-flex bg-slate-100 p-1 rounded-full text-xs font-semibold">
                     <button
@@ -765,13 +769,14 @@ function OffshoreOnboardingEngine() {
                     </button>
                   </div>
 
-                  {/* Expand Toggle */}
+                  {/* Expand / Focus Studio Toggle */}
                   <button
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg text-xs"
-                    title="Toggle Full Width Canvas"
+                    className="px-2.5 py-1 text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs font-semibold transition-all flex items-center gap-1"
+                    title={isExpanded ? 'Restore Phase 1 view' : 'Focus studio mode'}
                   >
-                    {isExpanded ? '✕' : '⛶'}
+                    <span>{isExpanded ? '✕' : '⛶'}</span>
+                    <span>{isExpanded ? 'Exit Focus' : 'Focus Studio'}</span>
                   </button>
                 </div>
               </div>
@@ -780,8 +785,8 @@ function OffshoreOnboardingEngine() {
               {(activeCandidate?.aadhaar_status !== 'verified' ||
                 activeCandidate?.pan_status !== 'verified' ||
                 activeCandidate?.experience_doc_status !== 'verified') && (
-                <div className="p-3 rounded-lg bg-amber-50 border border-amber-200/80 text-amber-800 text-xs flex items-center gap-2">
-                  <span className="text-base">🔒</span>
+                <div className="p-3.5 rounded-lg bg-amber-50 border border-amber-200/80 text-amber-800 text-xs flex items-center gap-3">
+                  <span className="text-xl">🔒</span>
                   <div className="flex-1">
                     <strong>Phase 2 Guardrail Enforced:</strong> All 3 KYC documents must be verified in Supabase to finalize legal execution.
                   </div>
@@ -792,34 +797,39 @@ function OffshoreOnboardingEngine() {
               {/* TAB 1: INTERACTIVE LIVE EDITOR CANVAS & QUICK-CORRECT SIDEBAR       */}
               {/* =================================================================== */}
               {workspaceTab === 'editor' && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+                <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 pt-1 items-start">
                   
-                  {/* Digital PDF Viewport Component (2 Cols) */}
-                  <div className="md:col-span-2 bg-slate-900 p-4 rounded-xl shadow-inner text-slate-800 overflow-hidden space-y-3">
-                    <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
-                      <span className="text-emerald-400">● LIVE PREVIEW</span>
-                      <span>{templateFileName}</span>
-                      <span>SHA256:7f83b165</span>
+                  {/* Digital PDF Viewport Component (8 Cols) */}
+                  <div className="xl:col-span-8 bg-slate-900 p-4 sm:p-6 rounded-xl shadow-inner text-slate-800 overflow-hidden space-y-4">
+                    <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-400 font-mono gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-emerald-400 font-bold">● LIVE PREVIEW</span>
+                        <span className="text-slate-200 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">{templateFileName}</span>
+                      </div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-slate-400">100% Zoom</span>
+                        <span className="bg-slate-800 px-2 py-0.5 rounded border border-slate-700 text-sky-400">SHA256:7f83b165</span>
+                      </div>
                     </div>
 
                     {/* Digital PDF Page Sheet */}
-                    <div className="bg-white p-6 rounded-lg shadow-2xl min-h-[460px] text-xs leading-relaxed space-y-3 font-serif relative">
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl font-bold font-sans text-emerald-500/5 rotate-[-25deg] pointer-events-none select-none tracking-widest whitespace-nowrap">
+                    <div className="bg-white p-6 sm:p-10 rounded-lg shadow-2xl min-h-[460px] text-xs leading-relaxed space-y-4 font-serif relative max-w-2xl mx-auto break-words overflow-hidden">
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl sm:text-3xl font-bold font-sans text-emerald-500/5 rotate-[-25deg] pointer-events-none select-none tracking-widest whitespace-nowrap">
                         AEROHR OFFICIAL LEGAL EXECUTION
                       </div>
 
                       {/* Letterhead */}
-                      <div className="flex items-center justify-between border-b-2 border-slate-900 pb-2 font-sans">
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
+                      <div className="flex flex-wrap items-center justify-between border-b-2 border-slate-900 pb-3 font-sans gap-2">
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <div className="w-7 h-7 rounded bg-slate-900 text-white flex items-center justify-center font-bold text-xs shrink-0">
                             ⚡
                           </div>
-                          <div>
-                            <div className="font-extrabold text-xs">AEROHR GLOBAL STAFFING</div>
-                            <div className="text-[9px] text-slate-400">US-India Cross-Border Delivery Practice</div>
+                          <div className="min-w-0">
+                            <div className="font-extrabold text-xs sm:text-sm tracking-tight">AEROHR GLOBAL STAFFING</div>
+                            <div className="text-[9px] text-slate-400 uppercase">US-India Cross-Border Delivery Practice</div>
                           </div>
                         </div>
-                        <div className="text-[9px] text-right font-mono text-slate-500">
+                        <div className="text-[9px] text-right font-mono text-slate-500 shrink-0">
                           <div>REF: #AERO-IND-2026-9041</div>
                           <div>Date: October 7, 2026</div>
                         </div>
@@ -827,68 +837,68 @@ function OffshoreOnboardingEngine() {
 
                       {/* Agreement Title */}
                       <div className="text-center font-sans pt-1">
-                        <h4 className="font-extrabold text-xs tracking-wider uppercase text-slate-900">
+                        <h4 className="font-extrabold text-xs sm:text-sm tracking-wider uppercase text-slate-900">
                           Offshore Employment & Statutory Compliance Agreement
                         </h4>
-                        <p className="text-[9px] text-slate-400">Executed Under IT Act 2000 &bull; US-India Client Overlap Framework</p>
+                        <p className="text-[9px] text-slate-400 mt-0.5">Executed Under IT Act 2000 &bull; US-India Client Overlap Framework</p>
                       </div>
 
                       {/* Recitals & Clauses */}
-                      <div className="space-y-2 text-[11px] text-slate-700">
+                      <div className="space-y-2.5 text-[11.5px] text-slate-700 leading-relaxed">
                         <p>
                           This Agreement is entered into between <strong>AeroHR Services India Pvt. Ltd.</strong> ("Company") and{' '}
-                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans">
+                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans inline-block">
                             {qcState.name || activeCandidate?.full_name}
                           </span>{' '}
                           ("Employee").
                         </p>
                         <p>
                           <strong>1. Position:</strong> Employee is appointed to the designation of{' '}
-                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans">
+                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans inline-block">
                             {activeCandidate?.role_type ? activeCandidate.role_type.replace('_', ' ').toUpperCase() : 'RECRUITER'}
                           </span>.
                         </p>
                         <p>
                           <strong>2. Compensation:</strong> Annual Gross Cost to Company (CTC) of{' '}
-                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans">
+                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans inline-block">
                             {qcState.ctc}
                           </span>{' '}
                           payable monthly in arrears subject to statutory tax deductions.
                         </p>
                         <p>
                           <strong>3. Shift Window:</strong> Employee agrees to maintain active attendance during{' '}
-                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans">
+                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans inline-block">
                             {qcState.shift}
                           </span>.
                         </p>
                         <p>
                           <strong>4. Probation:</strong> Subject to a covenant of{' '}
-                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans">
+                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans inline-block">
                             {qcState.probation}
                           </span>.
                         </p>
                         <p>
                           <strong>5. Security & IP:</strong> Employee certifies strict adherence to{' '}
-                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans">
+                          <span className="bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.5 rounded border border-emerald-300 font-sans inline-block">
                             {qcState.rules}
                           </span>.
                         </p>
                       </div>
 
                       {/* Signature Receipt Box */}
-                      <div className="pt-3 border-t border-dashed border-slate-200 grid grid-cols-2 gap-3 font-sans text-[10px]">
-                        <div className="p-2 rounded bg-slate-50 border border-slate-100">
-                          <div className="font-bold text-slate-500">For AeroHR Delivery:</div>
-                          <div className="italic text-slate-800 font-semibold mt-1">Sarah Jenkins</div>
+                      <div className="pt-3 border-t border-dashed border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-3 font-sans text-[10px]">
+                        <div className="p-2.5 rounded bg-slate-50 border border-slate-100">
+                          <div className="font-bold text-slate-500 uppercase">For AeroHR Delivery:</div>
+                          <div className="italic text-slate-800 font-semibold mt-1 text-xs">Sarah Jenkins</div>
                           <div className="text-[9px] text-slate-400">Director of Talent • PKCE Sealed</div>
                         </div>
 
-                        <div className="p-2 rounded bg-emerald-50/70 border border-emerald-200">
-                          <div className="font-bold text-emerald-700 flex justify-between">
+                        <div className="p-2.5 rounded bg-emerald-50/70 border border-emerald-200">
+                          <div className="font-bold text-emerald-700 uppercase flex justify-between">
                             <span>Candidate Digital Sign:</span>
                             <span>{activeCandidate?.current_step === 'server_archived' ? '✓ Sealed' : 'Pending'}</span>
                           </div>
-                          <div className="italic text-emerald-900 font-semibold mt-1">
+                          <div className="italic text-emerald-900 font-semibold mt-1 text-xs">
                             {qcState.name || activeCandidate?.full_name}
                           </div>
                           <div className="text-[9px] text-slate-400 font-mono">
@@ -900,9 +910,9 @@ function OffshoreOnboardingEngine() {
                     </div>
                   </div>
 
-                  {/* "Quick-Correct & Fine-Tune" Sidebar Toolbar (1 Col) */}
-                  <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-3">
-                    <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                  {/* "Quick-Correct & Fine-Tune" Sidebar Toolbar (4 Cols) */}
+                  <div className="xl:col-span-4 bg-slate-50 border border-slate-200/80 rounded-xl p-5 space-y-3.5">
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
                       <div className="flex items-center gap-1.5 font-bold text-xs text-slate-900">
                         <span className="text-amber-500">⚡</span>
                         <span>Quick-Correct Toolbar</span>
@@ -912,7 +922,7 @@ function OffshoreOnboardingEngine() {
                       </span>
                     </div>
 
-                    <div className="space-y-2 text-xs">
+                    <div className="space-y-2.5 text-xs">
                       <div>
                         <label className="text-[10px] font-bold text-slate-500 uppercase block mb-1">
                           Candidate Legal Name
@@ -980,7 +990,7 @@ function OffshoreOnboardingEngine() {
                     <div className="pt-2 flex gap-2">
                       <button
                         onClick={handleApplyQuickCorrect}
-                        className="flex-1 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold transition-all shadow-sm"
+                        className="flex-1 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold transition-all shadow-sm"
                       >
                         💾 Apply to Draft
                       </button>

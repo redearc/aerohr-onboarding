@@ -3025,17 +3025,13 @@
       box-shadow: 0 0 6px #10b981;
     }
 
-    /* Phase 1 & Phase 2 Panels Layout */
+    /* Phase 1 & Phase 2 Panels Layout (Stacked Full-Width Architecture) */
     .aero-offshore-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 24px;
       margin-bottom: 24px;
-    }
-    @media (max-width: 900px) {
-      .aero-offshore-grid {
-        grid-template-columns: 1fr;
-      }
+      width: 100%;
     }
 
     .aero-offshore-subcard {
@@ -3358,65 +3354,96 @@
       font-weight: 700;
     }
 
-    /* Interactive Live Editor Canvas */
+    /* Interactive Live Editor Canvas (Fluid Anti-Clipping Architecture) */
     .aero-editor-split-grid {
       display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 20px;
+      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 380px);
+      gap: 24px;
       align-items: start;
+      width: 100%;
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 1100px) {
       .aero-editor-split-grid {
         grid-template-columns: 1fr;
       }
     }
     .aero-pdf-viewport-container {
       background: #0f172a;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+      border-radius: 14px;
+      padding: clamp(14px, 2.5vw, 24px);
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.55), 0 4px 16px rgba(0, 0, 0, 0.2);
       position: relative;
       overflow-x: auto;
-      max-height: 600px;
+      max-height: 680px;
       overflow-y: auto;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .aero-pdf-viewport-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: #94a3b8;
+      font-size: 11px;
+      font-family: ui-monospace, monospace;
+    }
+    .aero-pdf-header-pill {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+      font-weight: 600;
     }
     .aero-pdf-page-sheet {
       background: #ffffff;
       width: 100%;
-      min-width: 440px;
+      max-width: 680px;
+      min-width: 0; /* CRITICAL: Remove hard min-width to permanently prevent clipping */
       min-height: 580px;
       margin: 0 auto;
-      border-radius: 6px;
-      padding: 32px 36px;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+      padding: clamp(18px, 4vw, 36px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
       color: #0f172a;
       font-family: 'Times New Roman', Times, serif;
-      line-height: 1.55;
+      line-height: 1.6;
       position: relative;
+      box-sizing: border-box;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
     .aero-pdf-watermark {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) rotate(-30deg);
-      font-size: 38px;
+      font-size: clamp(24px, 4vw, 38px);
       font-weight: 900;
       font-family: 'Inter', sans-serif;
       color: rgba(16, 185, 129, 0.05);
       pointer-events: none;
       letter-spacing: 4px;
       white-space: nowrap;
+      user-select: none;
     }
     .aero-dynamic-field {
       background: #ecfdf5;
       color: #065f46;
       border-bottom: 2px solid #10b981;
-      padding: 1px 4px;
+      padding: 1px 6px;
       font-weight: 700;
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
+      font-size: 11.5px;
       border-radius: 3px;
       transition: background 0.3s ease;
+      display: inline-block;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
     .aero-dynamic-field.highlighted {
       animation: varFlash 1s ease;
@@ -6138,8 +6165,8 @@
                       </div>
 
                       <!-- Canvas Expand Toggle -->
-                      <button class="aero-btn aero-btn-outline aero-btn-sm" id="btnTogglePhase2Expand" onclick="togglePhase2ExpandCanvas()" title="Toggle Full Canvas Width" style="font-size: 12px; padding: 4px 9px;">
-                        <span id="phase2ExpandIcon">⛶</span>
+                      <button class="aero-btn aero-btn-outline aero-btn-sm" id="btnTogglePhase2Expand" onclick="togglePhase2ExpandCanvas()" title="Toggle Focus Studio Mode" style="font-size: 11px; padding: 4px 10px; font-weight: 600;">
+                        <span id="phase2ExpandIcon">⛶ Focus Studio</span>
                       </button>
                     </div>
                   </div>
@@ -6163,14 +6190,15 @@
                       
                       <!-- Central Viewport Component: Crisp Digital PDF Preview Page -->
                       <div class="aero-pdf-viewport-container">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; color: #94a3b8; font-size: 11px; font-family: ui-monospace, monospace;">
-                          <div style="display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #34d399;">● LIVE PREVIEW</span>
-                            <span>Offshore_Agreement_v2.4.pdf</span>
+                        <!-- Viewport Header Toolbar -->
+                        <div class="aero-pdf-viewport-header">
+                          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <span style="color: #34d399; font-weight: 700; letter-spacing: 0.5px;">● LIVE PREVIEW</span>
+                            <span class="aero-pdf-header-pill" id="pdfActiveFilename">Offshore_Agreement_v2.4.pdf</span>
                           </div>
-                          <div style="display: flex; align-items: center; gap: 10px;">
-                            <span>100% Zoom</span>
-                            <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">SHA256:7f83b165</span>
+                          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <span style="color: #64748b;">100% Zoom</span>
+                            <span class="aero-pdf-header-pill" style="color: #38bdf8;">SHA256:7f83b165</span>
                           </div>
                         </div>
 
@@ -6179,17 +6207,17 @@
                           <div class="aero-pdf-watermark">AEROHR OFFICIAL LEGAL EXECUTION</div>
                           
                           <!-- Letterhead -->
-                          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 18px;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                              <div style="width: 32px; height: 32px; background: #0f172a; color: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-family: sans-serif; font-size: 14px;">
+                          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
+                            <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+                              <div style="width: 32px; height: 32px; background: #0f172a; color: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-family: sans-serif; font-size: 14px; flex-shrink: 0;">
                                 ⚡
                               </div>
-                              <div>
-                                <div style="font-family: sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.5px;">AEROHR GLOBAL STAFFING</div>
-                                <div style="font-family: sans-serif; font-size: 9px; color: #64748b; text-transform: uppercase;">US-India Cross-Border Practice &bull; Bangalore &bull; San Francisco</div>
+                              <div style="min-width: 0;">
+                                <div style="font-family: sans-serif; font-weight: 800; font-size: clamp(12px, 1.8vw, 14px); letter-spacing: 0.5px;">AEROHR GLOBAL STAFFING</div>
+                                <div style="font-family: sans-serif; font-size: clamp(8px, 1.2vw, 9.5px); color: #64748b; text-transform: uppercase;">US-India Cross-Border Practice &bull; San Francisco</div>
                               </div>
                             </div>
-                            <div style="text-align: right; font-family: sans-serif; font-size: 9px; color: #64748b;">
+                            <div style="text-align: right; font-family: sans-serif; font-size: 9.5px; color: #64748b; flex-shrink: 0;">
                               <div>REF: <strong id="pdfDocRefCode">#AERO-IND-2026-9041</strong></div>
                               <div id="pdfDocEffectiveDate">Effective: October 15, 2026</div>
                             </div>
@@ -6197,16 +6225,16 @@
 
                           <!-- Agreement Title -->
                           <div style="text-align: center; margin-bottom: 16px;">
-                            <h2 style="font-size: 15px; font-weight: 900; margin: 0; letter-spacing: 0.5px; text-transform: uppercase; font-family: sans-serif;">
+                            <h2 style="font-size: clamp(12.5px, 1.6vw, 15px); font-weight: 900; margin: 0; letter-spacing: 0.5px; text-transform: uppercase; font-family: sans-serif; line-height: 1.35;">
                               Offshore Employment &amp; Statutory Compliance Agreement
                             </h2>
-                            <div style="font-size: 10px; color: #64748b; font-family: sans-serif; margin-top: 2px;">
+                            <div style="font-size: 10px; color: #64748b; font-family: sans-serif; margin-top: 3px;">
                               Executed Under IT Act 2000 &bull; US-India Client Overlap Framework
                             </div>
                           </div>
 
                           <!-- Contract Clauses with Highlighted Dynamic Merged Variables -->
-                          <div style="font-size: 11.5px; line-height: 1.6; color: #1e293b;">
+                          <div style="font-size: 11.5px; line-height: 1.65; color: #1e293b;">
                             <p style="margin-bottom: 10px;">
                               This Offshore Employment Agreement is formally entered into between <strong>AeroHR Services India Pvt. Ltd.</strong> ("Company") and 
                               <span class="aero-dynamic-field" id="pdfVarCandidateName">Rahul Sharma</span> ("Employee").
@@ -6239,7 +6267,7 @@
                           </div>
 
                           <!-- Digital Signature Receipt Execution Box -->
-                          <div style="margin-top: 24px; padding-top: 14px; border-top: 1px dashed #cbd5e1; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-family: sans-serif;">
+                          <div style="margin-top: 24px; padding-top: 14px; border-top: 1px dashed #cbd5e1; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; font-family: sans-serif;">
                             <div style="background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 10px;">
                               <div style="font-weight: 700; color: #475569; text-transform: uppercase;">For: AeroHR Global Delivery</div>
                               <div style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 18px; color: #0f172a; margin: 4px 0;">Sarah Jenkins</div>
@@ -12932,15 +12960,15 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
 
     function togglePhase2ExpandCanvas() {
       isPhase2Expanded = !isPhase2Expanded;
-      const container = document.getElementById('phase2CardContainer');
+      const phase1 = document.querySelector('.aero-offshore-subcard');
       const icon = document.getElementById('phase2ExpandIcon');
-      if (container) {
-        container.classList.toggle('expanded-canvas', isPhase2Expanded);
+      if (phase1) {
+        phase1.style.display = isPhase2Expanded ? 'none' : 'flex';
       }
       if (icon) {
-        icon.innerHTML = isPhase2Expanded ? '✕ Minimize' : '⛶';
+        icon.innerHTML = isPhase2Expanded ? '✕ Exit Focus' : '⛶ Focus Studio';
       }
-      showToast(isPhase2Expanded ? '⛶ Phase 2 Workspace expanded to full width canvas' : 'Phase 2 Workspace restored to standard grid');
+      showToast(isPhase2Expanded ? '⛶ Focus Studio Mode: Phase 1 hidden for dedicated full-screen drafting' : 'Standard View: Both Phase 1 and Phase 2 visible');
     }
 
     // Live update of contract text from Quick-Correct inputs
