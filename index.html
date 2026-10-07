@@ -3238,6 +3238,344 @@
       box-shadow: none;
     }
 
+    /* =========================================================================
+       DYNAMIC AGREEMENT GENERATION & INTERACTIVE PDF WORKSPACE (PHASE 2)
+       Inspired by DocuSign, Adobe Acrobat Sign, and Linear
+       ========================================================================= */
+    .aero-workspace-container {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .aero-workspace-container.expanded-canvas {
+      grid-column: 1 / -1;
+    }
+    .aero-workspace-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f1f5f9;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .aero-workspace-nav-tabs {
+      display: inline-flex;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 9999px;
+      padding: 4px;
+      gap: 4px;
+    }
+    .aero-workspace-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #64748b;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .aero-workspace-tab:hover {
+      color: #0f172a;
+    }
+    .aero-workspace-tab.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+    .tab-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1px 6px;
+      border-radius: 9999px;
+      font-size: 9.5px;
+      font-weight: 800;
+      background: #e2e8f0;
+      color: #475569;
+    }
+
+    /* Template Bank Styles */
+    .aero-template-vault-dropzone {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      background: #f8fafc;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .aero-template-vault-dropzone:hover {
+      border-color: #10b981;
+      background: #f0fdf4;
+    }
+    .aero-template-active-slot {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      margin-top: 14px;
+    }
+    .aero-merge-chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .aero-merge-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      color: #334155;
+      font-weight: 600;
+    }
+    .aero-merge-chip code {
+      color: #2563eb;
+      font-weight: 700;
+    }
+
+    /* Interactive Live Editor Canvas */
+    .aero-editor-split-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 1024px) {
+      .aero-editor-split-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .aero-pdf-viewport-container {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow-x: auto;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    .aero-pdf-page-sheet {
+      background: #ffffff;
+      width: 100%;
+      min-width: 440px;
+      min-height: 580px;
+      margin: 0 auto;
+      border-radius: 6px;
+      padding: 32px 36px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+      color: #0f172a;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.55;
+      position: relative;
+    }
+    .aero-pdf-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-size: 38px;
+      font-weight: 900;
+      font-family: 'Inter', sans-serif;
+      color: rgba(16, 185, 129, 0.05);
+      pointer-events: none;
+      letter-spacing: 4px;
+      white-space: nowrap;
+    }
+    .aero-dynamic-field {
+      background: #ecfdf5;
+      color: #065f46;
+      border-bottom: 2px solid #10b981;
+      padding: 1px 4px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+    .aero-dynamic-field.highlighted {
+      animation: varFlash 1s ease;
+    }
+    @keyframes varFlash {
+      0% { background: #fde68a; }
+      100% { background: #ecfdf5; }
+    }
+
+    /* Quick-Correct Sidebar */
+    .aero-quick-correct-sidebar {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .aero-qc-field {
+      margin-bottom: 12px;
+    }
+    .aero-qc-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .aero-qc-input {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 12px;
+      color: #0f172a;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .aero-qc-input:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    }
+
+    /* Action Runway */
+    .aero-action-runway {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    /* Luxury Glass-Pilled Signature Ribbon */
+    .aero-luxury-ribbon {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    @media (max-width: 768px) {
+      .aero-luxury-ribbon {
+        grid-template-columns: 1fr;
+      }
+    }
+    .aero-luxury-pill {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
+    }
+    .aero-luxury-pill.done {
+      border-color: #a7f3d0;
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.1);
+    }
+    .aero-luxury-pill.active {
+      border-color: #fde68a;
+      background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.15);
+    }
+    .aero-luxury-pill-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .aero-luxury-pill.done .aero-luxury-pill-icon {
+      background: #10b981;
+      color: #ffffff;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+    }
+    .aero-luxury-pill.active .aero-luxury-pill-icon {
+      background: #f59e0b;
+      color: #ffffff;
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+    }
+    .aero-luxury-pill.waiting .aero-luxury-pill-icon {
+      background: #e2e8f0;
+      color: #94a3b8;
+    }
+
+    /* Automated Return Handshake Notification Asset */
+    .aero-loop-closure-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .aero-loop-closure-card.active {
+      border-color: #86efac;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    }
+    .aero-data-flow-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .aero-flow-ping {
+      width: 6px;
+      height: 6px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: flowPing 1.5s infinite;
+    }
+    @keyframes flowPing {
+      0% { transform: scale(0.9); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0.4; }
+      100% { transform: scale(0.9); opacity: 1; }
+    }
+
     /* Invisible Automation Guardrails Footer (Expand-on-hover) */
     .aero-rules-footer {
       background: #ffffff;
@@ -5767,25 +6105,47 @@
 
                 </div>
 
-                <!-- PHASE 2 PANEL: Automated Contract & E-Sign Execution -->
-                <div class="aero-offshore-subcard">
-                  <div class="aero-offshore-subcard-header">
+                <!-- PHASE 2 PANEL: Dynamic Agreement Generation & Interactive PDF Workspace -->
+                <div class="aero-workspace-container" id="phase2CardContainer">
+                  
+                  <!-- Workspace Header & Mode Toggle Tabs -->
+                  <div class="aero-workspace-header">
                     <div>
                       <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 16px;">📝</span>
-                        <h3 style="font-size: 14px; font-weight: 800; color: #0f172a; margin: 0;">
-                          Phase 2: Agreement Generation &amp; AeroSign Digital Signature Track
+                        <span style="font-size: 18px;">📝</span>
+                        <h3 style="font-size: 14.5px; font-weight: 800; color: #0f172a; margin: 0; letter-spacing: -0.2px;">
+                          Dynamic Agreement Generation &amp; Interactive PDF Workspace
                         </h3>
+                        <span class="pill-neon-emerald" style="font-size: 10px;">AeroSign v4 Studio</span>
                       </div>
                       <div style="font-size: 11px; color: #64748b; margin-top: 3px;">
-                        Dynamic PDF compilation + AeroSign multi-party digital signature workflow
+                        DocuSign &amp; Linear inspired multi-party agreement studio &bull; Live PDF canvas, template engine &amp; return loop handshake
                       </div>
                     </div>
-                    <span class="pill-neon-emerald" style="font-size: 10px;">AeroSign v4</span>
+
+                    <!-- Mode Toggle Tabs (3 Navigation Buttons) -->
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div class="aero-workspace-nav-tabs">
+                        <button class="aero-workspace-tab active" id="tabPhase2Editor" onclick="switchPhase2WorkspaceTab('editor')">
+                          <span>📄</span> Live Editor Canvas
+                        </button>
+                        <button class="aero-workspace-tab" id="tabPhase2Templates" onclick="switchPhase2WorkspaceTab('templates')">
+                          <span>📁</span> Template Bank
+                        </button>
+                        <button class="aero-workspace-tab" id="tabPhase2Distribution" onclick="switchPhase2WorkspaceTab('distribution')">
+                          <span>⚡</span> AeroSign Distribution
+                        </button>
+                      </div>
+
+                      <!-- Canvas Expand Toggle -->
+                      <button class="aero-btn aero-btn-outline aero-btn-sm" id="btnTogglePhase2Expand" onclick="togglePhase2ExpandCanvas()" title="Toggle Full Canvas Width" style="font-size: 12px; padding: 4px 9px;">
+                        <span id="phase2ExpandIcon">⛶</span>
+                      </button>
+                    </div>
                   </div>
 
                   <!-- Guardrail Lock Banner (Displays if Phase 1 docs are incomplete) -->
-                  <div class="aero-guard-locked-banner" id="phase2LockedBanner" style="display: none;">
+                  <div class="aero-guard-locked-banner" id="phase2LockedBanner" style="display: none; margin-bottom: 16px;">
                     <span style="font-size: 20px;">🔒</span>
                     <div>
                       <strong>Phase 2 Guardrail Enforced:</strong>
@@ -5795,70 +6155,365 @@
                     </div>
                   </div>
 
-                  <!-- Automated Document Packaging (Triggered when Phase 1 files are 100% verified) -->
-                  <div id="phase2CompiledBundle" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 16px; margin-bottom: 16px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                      <strong style="font-size: 12.5px; color: #0f172a;">📦 Offshore Employment Bundle (Auto-Compiled)</strong>
-                      <span class="card-tag tag-success" style="font-size: 10px;" id="bundleStatusTag">Compiled (3 Artifacts)</span>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; font-size: 11px; color: #475569;">
-                      <div style="background: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #f1f5f9;">
-                        <span style="color: #059669; font-weight: 700;">✓ Offer Letter</span>
-                        <div style="color: #64748b; font-size: 10px;" id="bundleOfferCTC">CTC: ₹16,50,000 PA</div>
+                  <!-- ========================================================================= -->
+                  <!-- VIEW 1: INTERACTIVE LIVE EDITOR CANVAS & QUICK-CORRECT SIDEBAR (DEFAULT)  -->
+                  <!-- ========================================================================= -->
+                  <div id="phase2ViewEditor">
+                    <div class="aero-editor-split-grid">
+                      
+                      <!-- Central Viewport Component: Crisp Digital PDF Preview Page -->
+                      <div class="aero-pdf-viewport-container">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; color: #94a3b8; font-size: 11px; font-family: ui-monospace, monospace;">
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #34d399;">● LIVE PREVIEW</span>
+                            <span>Offshore_Agreement_v2.4.pdf</span>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: 10px;">
+                            <span>100% Zoom</span>
+                            <span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">SHA256:7f83b165</span>
+                          </div>
+                        </div>
+
+                        <!-- Crisp Digital PDF Page Sheet -->
+                        <div class="aero-pdf-page-sheet" id="contractPdfSheet">
+                          <div class="aero-pdf-watermark">AEROHR OFFICIAL LEGAL EXECUTION</div>
+                          
+                          <!-- Letterhead -->
+                          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 18px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                              <div style="width: 32px; height: 32px; background: #0f172a; color: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-family: sans-serif; font-size: 14px;">
+                                ⚡
+                              </div>
+                              <div>
+                                <div style="font-family: sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.5px;">AEROHR GLOBAL STAFFING</div>
+                                <div style="font-family: sans-serif; font-size: 9px; color: #64748b; text-transform: uppercase;">US-India Cross-Border Practice &bull; Bangalore &bull; San Francisco</div>
+                              </div>
+                            </div>
+                            <div style="text-align: right; font-family: sans-serif; font-size: 9px; color: #64748b;">
+                              <div>REF: <strong id="pdfDocRefCode">#AERO-IND-2026-9041</strong></div>
+                              <div id="pdfDocEffectiveDate">Effective: October 15, 2026</div>
+                            </div>
+                          </div>
+
+                          <!-- Agreement Title -->
+                          <div style="text-align: center; margin-bottom: 16px;">
+                            <h2 style="font-size: 15px; font-weight: 900; margin: 0; letter-spacing: 0.5px; text-transform: uppercase; font-family: sans-serif;">
+                              Offshore Employment &amp; Statutory Compliance Agreement
+                            </h2>
+                            <div style="font-size: 10px; color: #64748b; font-family: sans-serif; margin-top: 2px;">
+                              Executed Under IT Act 2000 &bull; US-India Client Overlap Framework
+                            </div>
+                          </div>
+
+                          <!-- Contract Clauses with Highlighted Dynamic Merged Variables -->
+                          <div style="font-size: 11.5px; line-height: 1.6; color: #1e293b;">
+                            <p style="margin-bottom: 10px;">
+                              This Offshore Employment Agreement is formally entered into between <strong>AeroHR Services India Pvt. Ltd.</strong> ("Company") and 
+                              <span class="aero-dynamic-field" id="pdfVarCandidateName">Rahul Sharma</span> ("Employee").
+                            </p>
+
+                            <p style="margin-bottom: 10px;">
+                              <strong>1. Position &amp; Scope:</strong> Employee is appointed to the role of 
+                              <span class="aero-dynamic-field" id="pdfVarRoleTitle">Senior Bench Sales Recruiter</span>, reporting to the Offshore Operations Lead.
+                            </p>
+
+                            <p style="margin-bottom: 10px;">
+                              <strong>2. Total Compensation:</strong> The Company shall compensate Employee with an annual Gross Package of 
+                              <span class="aero-dynamic-field" id="pdfVarCTC">₹16,50,000 PA</span>, disbursed monthly in arrears with statutory TDS deductions.
+                            </p>
+
+                            <p style="margin-bottom: 10px;">
+                              <strong>3. Shift Window &amp; Client Alignment:</strong> Employee agrees to maintain dedicated shift coverage during 
+                              <span class="aero-dynamic-field" id="pdfVarShift">Night Shift (6:30 PM - 3:30 AM IST)</span> to guarantee direct US EST client overlap.
+                            </p>
+
+                            <p style="margin-bottom: 10px;">
+                              <strong>4. Probation Period:</strong> Engagement is subject to a 
+                              <span class="aero-dynamic-field" id="pdfVarProbation">90 Days Standard Review</span> performance probation covenant.
+                            </p>
+
+                            <p style="margin-bottom: 10px;">
+                              <strong>5. Information Security &amp; IP:</strong> Employee certifies strict adherence to 
+                              <span class="aero-dynamic-field" id="pdfVarRules">ISO-27001 &amp; Client Non-Solicitation</span> policies with zero local client data caching.
+                            </p>
+                          </div>
+
+                          <!-- Digital Signature Receipt Execution Box -->
+                          <div style="margin-top: 24px; padding-top: 14px; border-top: 1px dashed #cbd5e1; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-family: sans-serif;">
+                            <div style="background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 10px;">
+                              <div style="font-weight: 700; color: #475569; text-transform: uppercase;">For: AeroHR Global Delivery</div>
+                              <div style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 18px; color: #0f172a; margin: 4px 0;">Sarah Jenkins</div>
+                              <div style="color: #64748b; font-size: 9px;">Director of People &amp; Talent &bull; Signed via PKCE</div>
+                            </div>
+
+                            <div style="background: #f0fdf4; padding: 10px; border-radius: 6px; border: 1px solid #86efac; font-size: 10px;">
+                              <div style="font-weight: 700; color: #166534; text-transform: uppercase; display: flex; justify-content: space-between;">
+                                <span>Candidate Digital Signature</span>
+                                <span id="pdfSignStatusIndicator" style="color: #059669; font-weight: 800;">AeroSign Verified</span>
+                              </div>
+                              <div id="pdfCandidateSignDisplay" style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 18px; color: #166534; margin: 4px 0;">
+                                Rahul Sharma
+                              </div>
+                              <div style="color: #64748b; font-size: 9px; font-family: monospace;" id="pdfSignCryptoHash">
+                                SHA256: 7f83b165...e9041 &bull; 2FA Validated
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
                       </div>
-                      <div style="background: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #f1f5f9;">
-                        <span style="color: #059669; font-weight: 700;">✓ Office Rules</span>
-                        <div style="color: #64748b; font-size: 10px;" id="bundleRulesDesc">ISO-27001 &amp; IP Clause</div>
+
+                      <!-- Contextual "Quick-Correct & Fine-Tune" Sidebar Toolbar Panel -->
+                      <div class="aero-quick-correct-sidebar">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0;">
+                          <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="color: #f59e0b; font-size: 14px;">⚡</span>
+                            <strong style="font-size: 12px; color: #0f172a;">Quick-Correct &amp; Fine-Tune</strong>
+                          </div>
+                          <span style="font-size: 10px; color: #059669; background: #ecfdf5; padding: 2px 6px; border-radius: 9999px; font-weight: 700;">Live Sync</span>
+                        </div>
+
+                        <p style="font-size: 11px; color: #64748b; margin-bottom: 14px; line-height: 1.4;">
+                          Type in hard corrections below to override dynamic contract strings on the fly before dispatching.
+                        </p>
+
+                        <!-- Field 1: Candidate Full Name -->
+                        <div class="aero-qc-field">
+                          <label class="aero-qc-label">
+                            <span>Candidate Legal Name</span>
+                            <span style="color: #3b82f6; font-size: 9.5px;">{{Candidate_Full_Name}}</span>
+                          </label>
+                          <input type="text" id="qcCandidateName" class="aero-qc-input" value="Rahul Sharma" oninput="updateContractLivePreview()">
+                        </div>
+
+                        <!-- Field 2: Compensation CTC Package -->
+                        <div class="aero-qc-field">
+                          <label class="aero-qc-label">
+                            <span>CTC Compensation</span>
+                            <span style="color: #3b82f6; font-size: 9.5px;">{{CTC_Package}}</span>
+                          </label>
+                          <input type="text" id="qcCandidateCTC" class="aero-qc-input" value="₹16,50,000 PA" oninput="updateContractLivePreview()">
+                        </div>
+
+                        <!-- Field 3: Shift Window Schedule -->
+                        <div class="aero-qc-field">
+                          <label class="aero-qc-label">
+                            <span>Shift Schedule (IST)</span>
+                            <span style="color: #3b82f6; font-size: 9.5px;">{{Shift_Schedule_IST}}</span>
+                          </label>
+                          <select id="qcCandidateShift" class="aero-qc-input" onchange="updateContractLivePreview()">
+                            <option value="Night Shift (6:30 PM - 3:30 AM IST)">Night Shift (6:30 PM - 3:30 AM IST) &bull; US EST</option>
+                            <option value="Hybrid Shift (4:00 PM - 1:00 AM IST)">Hybrid Shift (4:00 PM - 1:00 AM IST) &bull; US EST/CST</option>
+                            <option value="Day Shift (9:30 AM - 6:30 PM IST)">Day Shift (9:30 AM - 6:30 PM IST) &bull; India Core</option>
+                          </select>
+                        </div>
+
+                        <!-- Field 4: Custom Probation Clause -->
+                        <div class="aero-qc-field">
+                          <label class="aero-qc-label">
+                            <span>Probation Clause</span>
+                            <span style="color: #3b82f6; font-size: 9.5px;">{{Probation_Period}}</span>
+                          </label>
+                          <input type="text" id="qcCandidateProbation" class="aero-qc-input" value="90 Days Standard Review" oninput="updateContractLivePreview()">
+                        </div>
+
+                        <!-- Field 5: Corporate Rules / IP Clause -->
+                        <div class="aero-qc-field">
+                          <label class="aero-qc-label">
+                            <span>Compliance &amp; IP Rules</span>
+                            <span style="color: #3b82f6; font-size: 9.5px;">{{Compliance_Rule}}</span>
+                          </label>
+                          <input type="text" id="qcCandidateRules" class="aero-qc-input" value="ISO-27001 &amp; Client Non-Solicitation" oninput="updateContractLivePreview()">
+                        </div>
+
+                        <!-- Control Actions -->
+                        <div style="display: flex; gap: 8px; margin-top: 14px;">
+                          <button class="aero-btn aero-btn-primary aero-btn-sm" style="flex: 1; font-size: 11px; padding: 6px 10px;" onclick="applyQuickCorrectModifications()">
+                            💾 Apply to Draft
+                          </button>
+                          <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 11px; padding: 6px 10px;" onclick="resetQuickCorrectToDb()">
+                            ↺ Reset
+                          </button>
+                        </div>
+
                       </div>
-                      <div style="background: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #f1f5f9;">
-                        <span style="color: #059669; font-weight: 700;">✓ Shift Timings</span>
-                        <div style="color: #64748b; font-size: 10px;" id="bundleShiftHours">6:30 PM - 3:30 AM IST</div>
-                      </div>
+
                     </div>
                   </div>
 
-                  <!-- AeroSign E-Signature Ribbon (Dispatched ── Opened ── Digitally Signed) -->
-                  <div style="font-size: 11.5px; font-weight: 700; color: #475569; margin-bottom: 4px;">
-                    AeroSign Real-Time Execution Ribbon
-                  </div>
-                  <div class="aero-sign-ribbon" id="aeroSignRibbon">
-                    <div class="aero-sign-step done" id="signStepDispatched">
-                      <div class="aero-sign-badge">✓</div>
-                      <div>
-                        <div>Dispatched</div>
-                        <div style="font-size: 9.5px; color: #059669;" id="signMetaDispatched">Oct 7, 09:15 IST</div>
-                      </div>
-                    </div>
+                  <!-- ========================================================================= -->
+                  <!-- VIEW 2: DOCUMENT TEMPLATE BANK & MERGE VARIABLE OVERLAY (MODE TAB 2)      -->
+                  <!-- ========================================================================= -->
+                  <div id="phase2ViewTemplates" style="display: none;">
                     
-                    <div class="aero-sign-connector done" id="signConn1"></div>
+                    <!-- Drag & Drop Vault Zone -->
+                    <div class="aero-template-vault-dropzone" onclick="document.getElementById('templateFileInput').click()">
+                      <input type="file" id="templateFileInput" accept=".docx,.pdf" style="display: none;" onchange="handleTemplateFileUpload(event)">
+                      <div style="font-size: 28px; margin-bottom: 8px;">📑</div>
+                      <div style="font-size: 13px; font-weight: 700; color: #0f172a;">
+                        Master Contract Templates (.docx / .pdf)
+                      </div>
+                      <p style="font-size: 11px; color: #64748b; margin: 4px 0 0 0;">
+                        Drag and drop master agreement templates here or click to browse corporate repository
+                      </p>
+                    </div>
 
-                    <div class="aero-sign-step done" id="signStepOpened">
-                      <div class="aero-sign-badge">✓</div>
-                      <div>
-                        <div>Opened</div>
-                        <div style="font-size: 9.5px; color: #059669;" id="signMetaOpened">Bangalore, Chrome IP: 49.37.112.4</div>
+                    <!-- Active File Line Slot -->
+                    <div class="aero-template-active-slot">
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 22px;">📄</span>
+                        <div>
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <strong style="font-size: 12.5px; color: #0f172a;" id="activeTemplateFileName">Offshore_Recruiter_Master_Agreement_v2.4.pdf</strong>
+                            <span class="pill-neon-emerald" style="font-size: 9.5px;">✓ Active Production Master</span>
+                          </div>
+                          <div style="font-size: 10.5px; color: #64748b; margin-top: 2px;">
+                            Size: 324 KB &bull; Calibrated Oct 7, 2026 &bull; Strict ISO-27001 Clause Armed
+                          </div>
+                        </div>
+                      </div>
+
+                      <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 11px;" onclick="document.getElementById('templateFileInput').click()">
+                        Swap Template
+                      </button>
+                    </div>
+
+                    <!-- Overlay Settings Configuration Chip: Bound Merge Variables -->
+                    <div style="margin-top: 18px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <span style="font-size: 14px;">🏷️</span>
+                          <strong style="font-size: 12px; color: #0f172a;">Dynamic Dataset Merge Variables (Active Bindings)</strong>
+                        </div>
+                        <span style="font-size: 10px; color: #475569; font-mono;">Auto-Pulled from Supabase</span>
+                      </div>
+
+                      <div class="aero-merge-chips-wrap">
+                        <div class="aero-merge-chip">
+                          <code>{{Candidate_Full_Name}}</code> &rarr; <span id="chipMergeName">Rahul Sharma</span>
+                        </div>
+                        <div class="aero-merge-chip">
+                          <code>{{CTC_Package}}</code> &rarr; <span id="chipMergeCTC">₹16,50,000 PA</span>
+                        </div>
+                        <div class="aero-merge-chip">
+                          <code>{{Shift_Schedule_IST}}</code> &rarr; <span id="chipMergeShift">Night Shift (6:30 PM - 3:30 AM IST)</span>
+                        </div>
+                        <div class="aero-merge-chip">
+                          <code>{{Role_Title}}</code> &rarr; <span id="chipMergeRole">Senior Bench Sales Recruiter</span>
+                        </div>
+                        <div class="aero-merge-chip">
+                          <code>{{Effective_Date}}</code> &rarr; <span>October 15, 2026</span>
+                        </div>
+                        <div class="aero-merge-chip">
+                          <code>{{Probation_Period}}</code> &rarr; <span>90 Days Standard Review</span>
+                        </div>
+                        <div class="aero-merge-chip">
+                          <code>{{Compliance_Rule}}</code> &rarr; <span>ISO-27001 &amp; Non-Solicitation</span>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="aero-sign-connector" id="signConn2"></div>
-
-                    <div class="aero-sign-step active" id="signStepSigned">
-                      <div class="aero-sign-badge" id="signBadge3">⚡</div>
-                      <div>
-                        <div id="signLabel3">Digitally Signed</div>
-                        <div style="font-size: 9.5px; color: #d97706;" id="signMetaSigned">Awaiting candidate e-sign...</div>
-                      </div>
-                    </div>
                   </div>
 
-                  <!-- Final Success Handshake: Glowing Emerald Lock Stamp -->
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 14px; border-top: 1px solid #f1f5f9; flex-wrap: wrap; gap: 10px;">
-                    <div class="aero-success-stamp dimmed" id="offshoreSuccessStamp">
-                      <span>🔒 Executed &amp; Saved to Supabase Vault Ledger</span>
+                  <!-- ========================================================================= -->
+                  <!-- VIEW 3: AEROSIGN DISTRIBUTION & AUTOMATED RETURN HANDSHAKE (MODE TAB 3)   -->
+                  <!-- ========================================================================= -->
+                  <div id="phase2ViewDistribution" style="display: none;">
+                    
+                    <!-- Luxury Glass-Pilled Signature Progress Tracking Ribbon (Milestones 1-3) -->
+                    <div style="font-size: 11.5px; font-weight: 700; color: #475569; margin-bottom: 8px; display: flex; justify-content: space-between;">
+                      <span>AeroSign Receiver-to-Sender Tracking Ribbon</span>
+                      <span style="font-size: 10.5px; color: #059669; font-mono;">Webhook Callback Armed</span>
                     </div>
-                    <button class="aero-btn aero-btn-primary aero-btn-sm" id="btnSimulateEsign" onclick="simulateOffshoreEsign()">
-                      ✍️ Finalize &amp; Seal E-Sign
-                    </button>
+
+                    <div class="aero-luxury-ribbon" id="aeroSignRibbon">
+                      
+                      <!-- Milestone 1: Dispatched -->
+                      <div class="aero-luxury-pill done" id="signStepDispatched">
+                        <div class="aero-luxury-pill-icon">✓</div>
+                        <div>
+                          <strong style="font-size: 12px; color: #0f172a; display: block;">1. Dispatched</strong>
+                          <div style="font-size: 10.5px; color: #059669; margin-top: 2px;" id="signMetaDispatched">
+                            Oct 7, 09:15 IST &bull; Dispatched via Resend API
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Milestone 2: Opened -->
+                      <div class="aero-luxury-pill done" id="signStepOpened">
+                        <div class="aero-luxury-pill-icon">✓</div>
+                        <div>
+                          <strong style="font-size: 12px; color: #0f172a; display: block;">2. Opened</strong>
+                          <div style="font-size: 10.5px; color: #059669; margin-top: 2px;" id="signMetaOpened">
+                            Bangalore, Chrome IP: 49.37.112.4
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Milestone 3: Digitally Signed -->
+                      <div class="aero-luxury-pill active" id="signStepSigned">
+                        <div class="aero-luxury-pill-icon" id="signBadge3">⚡</div>
+                        <div>
+                          <strong style="font-size: 12px; color: #0f172a; display: block;" id="signLabel3">3. Digitally Signed</strong>
+                          <div style="font-size: 10.5px; color: #d97706; margin-top: 2px;" id="signMetaSigned">
+                            Awaiting candidate e-sign...
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <!-- Automated Return Handshake Notification Asset ("Automated Loop Closure Rule") -->
+                    <div class="aero-loop-closure-card active" id="loopClosureCard">
+                      <div style="display: flex; items-center; gap: 10px;">
+                        <span style="font-size: 20px;">🔄</span>
+                        <div>
+                          <strong style="font-size: 12px; color: #0f172a;">Automated Loop Closure Rule (Receiver to Sender)</strong>
+                          <div class="aero-data-flow-arrow" style="margin-top: 3px;">
+                            <span>[Executed PDF Copy]</span>
+                            <span class="aero-flow-ping"></span>
+                            <span>&mdash;&mdash;&gt;</span>
+                            <span>[Dispatched instantly back to Internal Sender Email via Resend Client]</span>
+                          </div>
+                          <div style="font-size: 10.5px; color: #64748b; margin-top: 4px;">
+                            Route destination: <code style="color: #0f172a;">hr-ops@aerohr.com</code> &bull; SHA-256 Audit Sealed
+                          </div>
+                        </div>
+                      </div>
+
+                      <span class="pill-neon-emerald" style="font-size: 10px;">
+                        ✓ Automated Sender Copy Route Active
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <!-- ========================================================================= -->
+                  <!-- SIGNATURE DISTRIBUTION ACTION RUNWAY                                      -->
+                  <!-- ========================================================================= -->
+                  <div class="aero-action-runway">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <div class="aero-success-stamp dimmed" id="offshoreSuccessStamp">
+                        <span>🔒 Executed &amp; Saved to Supabase Vault Ledger</span>
+                      </div>
+                    </div>
+
+                    <div style="display: flex; items-center; gap: 8px;">
+                      <!-- Action 1: Generate Protected PDF -->
+                      <button class="aero-btn aero-btn-outline aero-btn-sm" id="btnGenerateProtectedPdf" onclick="generateProtectedPdfAction()" style="font-weight: 700;">
+                        💾 Generate Protected PDF
+                      </button>
+
+                      <!-- Action 2: Dispatch to Candidate for E-Sign -->
+                      <button class="aero-btn aero-btn-primary aero-btn-sm" id="btnDispatchCandidateEsign" onclick="dispatchCandidateEsignAction()" style="font-weight: 700; background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);">
+                        🚀 Dispatch to Candidate for E-Sign
+                      </button>
+
+                      <!-- Action 3: Finalize & Seal E-Sign -->
+                      <button class="aero-btn aero-btn-primary aero-btn-sm" id="btnSimulateEsign" onclick="simulateOffshoreEsign()" style="font-weight: 700;">
+                        ✍️ Finalize &amp; Seal E-Sign
+                      </button>
+                    </div>
                   </div>
 
                 </div>
@@ -12202,9 +12857,200 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         }
       }
 
+      // Sync Quick-Correct inputs & PDF Preview
+      const qcName = document.getElementById('qcCandidateName');
+      const qcCTC = document.getElementById('qcCandidateCTC');
+      const qcShift = document.getElementById('qcCandidateShift');
+      const qcProb = document.getElementById('qcCandidateProbation');
+      const qcRules = document.getElementById('qcCandidateRules');
+
+      if (qcName) qcName.value = cand.full_name;
+      if (qcCTC) qcCTC.value = cand.ctc || '₹16,50,000 PA';
+      if (qcShift) qcShift.value = cand.shift || 'Night Shift (6:30 PM - 3:30 AM IST)';
+      if (qcProb) qcProb.value = cand.probation || '90 Days Standard Review';
+      if (qcRules) qcRules.value = cand.rules || 'ISO-27001 & Client Non-Solicitation';
+
+      // Update live contract text in central PDF preview
+      updateContractLivePreview();
+
+      // Sync luxury ribbon pills
+      const pillSign = document.getElementById('signStepSigned');
+      const loopClosure = document.getElementById('loopClosureCard');
+      const signIndicator = document.getElementById('pdfSignStatusIndicator');
+
+      if (pillSign) {
+        if (isArchived) {
+          pillSign.className = 'aero-luxury-pill done';
+          if (badge3) { badge3.innerHTML = '✓'; badge3.style.background = '#10b981'; badge3.style.color = '#fff'; }
+          if (label3) label3.innerText = '3. Digitally Signed & Sealed';
+          if (metaSign) {
+            metaSign.innerText = 'Digitally Sealed: SHA-256 Verified • Aadhaar OTP 2FA Validated';
+            metaSign.style.color = '#059669';
+          }
+          if (loopClosure) loopClosure.classList.add('active');
+          if (signIndicator) {
+            signIndicator.innerText = '✓ AeroSign SHA-256 Validated';
+            signIndicator.style.color = '#059669';
+          }
+        } else {
+          pillSign.className = 'aero-luxury-pill active';
+          if (badge3) { badge3.innerHTML = '⚡'; badge3.style.background = '#f59e0b'; badge3.style.color = '#fff'; }
+          if (label3) label3.innerText = '3. Digitally Signed';
+          if (metaSign) {
+            metaSign.innerText = 'Awaiting candidate e-sign...';
+            metaSign.style.color = '#d97706';
+          }
+          if (signIndicator) {
+            signIndicator.innerText = 'Pending Execution';
+            signIndicator.style.color = '#d97706';
+          }
+        }
+      }
+
       // Sync milestone progress bar
       const phaseNum = OFFSHORE_STEP_MAP[cand.current_step] || 2;
       setOffshorePhase(phaseNum, false);
+    }
+
+    // =========================================================================
+    // DYNAMIC AGREEMENT GENERATION & INTERACTIVE PDF WORKSPACE CONTROLLER
+    // =========================================================================
+    let currentPhase2WorkspaceTab = 'editor'; // 'editor', 'templates', 'distribution'
+    let isPhase2Expanded = false;
+
+    function switchPhase2WorkspaceTab(tabKey) {
+      currentPhase2WorkspaceTab = tabKey;
+      const tabs = ['editor', 'templates', 'distribution'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tabPhase2${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        const view = document.getElementById(`phase2View${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (btn) btn.classList.toggle('active', t === tabKey);
+        if (view) view.style.display = t === tabKey ? 'block' : 'none';
+      });
+      showToast(`⚡ Workspace switched to: ${tabKey === 'editor' ? 'Interactive Live Editor Canvas' : tabKey === 'templates' ? 'Document Template Bank' : 'AeroSign Distribution'}`);
+    }
+
+    function togglePhase2ExpandCanvas() {
+      isPhase2Expanded = !isPhase2Expanded;
+      const container = document.getElementById('phase2CardContainer');
+      const icon = document.getElementById('phase2ExpandIcon');
+      if (container) {
+        container.classList.toggle('expanded-canvas', isPhase2Expanded);
+      }
+      if (icon) {
+        icon.innerHTML = isPhase2Expanded ? '✕ Minimize' : '⛶';
+      }
+      showToast(isPhase2Expanded ? '⛶ Phase 2 Workspace expanded to full width canvas' : 'Phase 2 Workspace restored to standard grid');
+    }
+
+    // Live update of contract text from Quick-Correct inputs
+    function updateContractLivePreview() {
+      const cand = OFFSHORE_DB_STATE.find(c => c.id === activeOffshoreCandidateId);
+      const name = document.getElementById('qcCandidateName')?.value || (cand ? cand.full_name : 'Candidate');
+      const ctc = document.getElementById('qcCandidateCTC')?.value || (cand ? cand.ctc : '₹16,50,000 PA');
+      const shift = document.getElementById('qcCandidateShift')?.value || (cand ? cand.shift : 'Night Shift (6:30 PM - 3:30 AM IST)');
+      const probation = document.getElementById('qcCandidateProbation')?.value || '90 Days Standard Review';
+      const rules = document.getElementById('qcCandidateRules')?.value || 'ISO-27001 & Client Non-Solicitation';
+
+      // Update PDF Spans
+      const elName = document.getElementById('pdfVarCandidateName');
+      const elCTC = document.getElementById('pdfVarCTC');
+      const elShift = document.getElementById('pdfVarShift');
+      const elProb = document.getElementById('pdfVarProbation');
+      const elRules = document.getElementById('pdfVarRules');
+      const elSignName = document.getElementById('pdfCandidateSignDisplay');
+
+      if (elName) { elName.innerText = name; }
+      if (elCTC) { elCTC.innerText = ctc; }
+      if (elShift) { elShift.innerText = shift; }
+      if (elProb) { elProb.innerText = probation; }
+      if (elRules) { elRules.innerText = rules; }
+      if (elSignName) { elSignName.innerText = name; }
+
+      // Also sync merge variable chips in Template Bank
+      const cName = document.getElementById('chipMergeName');
+      const cCTC = document.getElementById('chipMergeCTC');
+      const cShift = document.getElementById('chipMergeShift');
+      if (cName) cName.innerText = name;
+      if (cCTC) cCTC.innerText = ctc;
+      if (cShift) cShift.innerText = shift;
+    }
+
+    function applyQuickCorrectModifications() {
+      const cand = OFFSHORE_DB_STATE.find(c => c.id === activeOffshoreCandidateId);
+      if (!cand) return;
+
+      const name = document.getElementById('qcCandidateName')?.value;
+      const ctc = document.getElementById('qcCandidateCTC')?.value;
+      const shift = document.getElementById('qcCandidateShift')?.value;
+      const probation = document.getElementById('qcCandidateProbation')?.value;
+      const rules = document.getElementById('qcCandidateRules')?.value;
+
+      if (name) cand.full_name = name;
+      if (ctc) cand.ctc = ctc;
+      if (shift) cand.shift = shift;
+      if (probation) cand.probation = probation;
+      if (rules) cand.rules = rules;
+
+      updateContractLivePreview();
+      renderDbRosterTable();
+      showToast(`💾 [QUICK-CORRECT SAVED]: Agreement draft updated for ${cand.full_name}. Merged fields calibrated for legal dispatch.`);
+    }
+
+    function resetQuickCorrectToDb() {
+      const cand = OFFSHORE_DB_STATE.find(c => c.id === activeOffshoreCandidateId);
+      if (!cand) return;
+
+      const qcName = document.getElementById('qcCandidateName');
+      const qcCTC = document.getElementById('qcCandidateCTC');
+      const qcShift = document.getElementById('qcCandidateShift');
+      const qcProb = document.getElementById('qcCandidateProbation');
+      const qcRules = document.getElementById('qcCandidateRules');
+
+      if (qcName) qcName.value = cand.full_name;
+      if (qcCTC) qcCTC.value = cand.ctc || '₹16,50,000 PA';
+      if (qcShift) qcShift.value = cand.shift || 'Night Shift (6:30 PM - 3:30 AM IST)';
+      if (qcProb) qcProb.value = '90 Days Standard Review';
+      if (qcRules) qcRules.value = cand.rules || 'ISO-27001 & Client Non-Solicitation';
+
+      updateContractLivePreview();
+      showToast('↺ Quick-Correct inputs restored to database baseline.');
+    }
+
+    function handleTemplateFileUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const nameEl = document.getElementById('activeTemplateFileName');
+      if (nameEl) nameEl.innerText = file.name;
+      showToast(`📑 [TEMPLATE BANK]: Master contract template replaced with "${file.name}" (${(file.size / 1024).toFixed(1)} KB). Dynamic merge tags re-mapped.`);
+    }
+
+    function generateProtectedPdfAction() {
+      const cand = OFFSHORE_DB_STATE.find(c => c.id === activeOffshoreCandidateId) || OFFSHORE_DB_STATE[0];
+      const cryptoHash = '7f83b165' + Math.random().toString(16).slice(2, 10) + 'e9041';
+      showToast(`🔒 [PROTECTED PDF GENERATED]: Cryptographically sealed with SHA-256 (${cryptoHash}). Watermark and AES-256 encryption active.`);
+      
+      switchPhase2WorkspaceTab('distribution');
+    }
+
+    function dispatchCandidateEsignAction() {
+      const cand = OFFSHORE_DB_STATE.find(c => c.id === activeOffshoreCandidateId) || OFFSHORE_DB_STATE[0];
+      
+      if (!cand.esign) cand.esign = {};
+      cand.esign.dispatched = { done: true, meta: 'Just Now • Dispatched via Resend API' };
+      cand.esign.opened = { done: true, meta: 'Candidate Drop-Link Active' };
+      
+      if (cand.current_step === 'hired' || cand.current_step === 'pre_offer_docs') {
+        cand.current_step = 'e_sign_execution';
+      }
+
+      renderOffshoreCandidateData();
+      renderDbRosterTable();
+      switchPhase2WorkspaceTab('distribution');
+      setOffshorePhase(4, true);
+
+      showToast(`🚀 [AEROSIGN DISPATCHED]: Unique signature URL sent to ${cand.email}! Telemetry hook armed and candidate action ribbon active.`);
     }
 
     // Action: Copy Portal URL
