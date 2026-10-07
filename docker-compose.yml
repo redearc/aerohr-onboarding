@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  # ---------------------------------------------------------------------------
+  # Primary Relational Store: PostgreSQL 16 with pgvector extension
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: aerohr-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: aerohr_db
+      POSTGRES_USER: aerohr_admin
+      POSTGRES_PASSWORD: aerohr_secure_password_2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aerohr_admin -d aerohr_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ---------------------------------------------------------------------------
+  # Distributed Cache & Real-Time Event Broker: Redis 7
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: aerohr-redis
+    restart: always
+    command: redis-server --appendonly yes --requirepass aerohr_redis_secret
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "aerohr_redis_secret", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ---------------------------------------------------------------------------
+  # Backend API Service: Node.js / NestJS Core Modular Monolith
+  # ---------------------------------------------------------------------------
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: aerohr-api
+    restart: always
+    environment:
+      NODE_ENV: development
+      PORT: 8080
+      DATABASE_URL: postgresql://aerohr_admin:aerohr_secure_password_2026@postgres:5432/aerohr_db
+      REDIS_URL: redis://:aerohr_redis_secret@redis:6379
+      AI_SERVICE_URL: http://ai-service:8000
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ---------------------------------------------------------------------------
+  # AI Orchestration Service: Python FastAPI (Gemini / RAG / Anomaly Engine)
+  # ---------------------------------------------------------------------------
+  ai-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.ai
+    container_name: aerohr-ai-service
+    restart: always
+    environment:
+      PORT: 8000
+      DATABASE_URL: postgresql://aerohr_admin:aerohr_secure_password_2026@postgres:5432/aerohr_db
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  redis_data:

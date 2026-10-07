@@ -1,0 +1,225 @@
+openapi: 3.1.0
+info:
+  title: AeroHR Pure AI Portal API
+  version: 1.0.0
+  description: >
+    Production REST & Event API for AeroHR Workforce Operating System.
+    Covers Onboarding, Attendance, Break Timings, Timesheets, Client Invoicing,
+    and the ambient Aero Copilot AI orchestration layer.
+servers:
+  - url: https://api.aerohr.internal/v1
+    description: Production Cluster
+  - url: http://localhost:8080/v1
+    description: Local Development
+
+paths:
+  # ---------------------------------------------------------------------------
+  # Attendance & Break Timings
+  # ---------------------------------------------------------------------------
+  /attendance/clock-in:
+    post:
+      summary: 1-Tap Employee Clock In
+      operationId: clockIn
+      tags: [Attendance]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                latitude: { type: number, nullable: true }
+                longitude: { type: number, nullable: true }
+                deviceFingerprint: { type: string }
+      responses:
+        '200':
+          description: Punch registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttendancePunchResponse'
+
+  /attendance/clock-out:
+    post:
+      summary: Employee Clock Out with Shift Reconciliation
+      operationId: clockOut
+      tags: [Attendance]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notes: { type: string }
+      responses:
+        '200':
+          description: Shift ended; timesheet reconciliation triggered
+
+  /breaks/start:
+    post:
+      summary: Initiate Statutory or Rest Break
+      operationId: startBreak
+      tags: [Breaks]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [breakType]
+              properties:
+                breakType:
+                  type: string
+                  enum: [REST_PAID, MEAL_UNPAID, WELLNESS]
+      responses:
+        '200':
+          description: Break timer initialized with statutory threshold countdown
+
+  /breaks/end:
+    post:
+      summary: Conclude Break and Resume Active Shift
+      operationId: endBreak
+      tags: [Breaks]
+      responses:
+        '200':
+          description: Break ended; compliance validated
+
+  # ---------------------------------------------------------------------------
+  # Timesheets
+  # ---------------------------------------------------------------------------
+  /timesheets/current:
+    get:
+      summary: Get Current Week Timesheet with Pre-filled Allocations
+      operationId: getCurrentTimesheet
+      tags: [Timesheets]
+      responses:
+        '200':
+          description: Timesheet with calendar AI pre-fill suggestions
+
+  /timesheets/{id}/submit:
+    post:
+      summary: Submit Weekly Timesheet with Anomaly Pre-check
+      operationId: submitTimesheet
+      tags: [Timesheets]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Timesheet submitted and evaluated by rules engine
+
+  /timesheets/batch-approve:
+    post:
+      summary: 1-Click Batch Approval for Verified Anomaly-Free Timesheets
+      operationId: batchApproveTimesheets
+      tags: [Timesheets, Approvals]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [timesheetIds]
+              properties:
+                timesheetIds:
+                  type: array
+                  items: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Timesheets approved; line items queued for invoicing
+
+  # ---------------------------------------------------------------------------
+  # Invoicing
+  # ---------------------------------------------------------------------------
+  /invoices/generate-drafts:
+    post:
+      summary: Generate Draft Invoices from Approved Timesheets
+      operationId: generateDraftInvoices
+      tags: [Invoicing]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                billingCycleEnd: { type: string, format: date }
+                clientId: { type: string, format: uuid, nullable: true }
+      responses:
+        '200':
+          description: Draft invoices generated with rate card calculations
+
+  /invoices/{id}/dispatch:
+    post:
+      summary: Finalize and Dispatch Invoice to Client & ERP
+      operationId: dispatchInvoice
+      tags: [Invoicing]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: PDF rendered, NetSuite/QuickBooks synced, client notified
+
+  # ---------------------------------------------------------------------------
+  # AI Copilot & Ambient Intelligence
+  # ---------------------------------------------------------------------------
+  /ai/copilot/chat:
+    post:
+      summary: Multi-turn Conversational AI Assistant with Tool Execution
+      operationId: copilotChat
+      tags: [AI]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [prompt]
+              properties:
+                prompt: { type: string }
+                currentRoute: { type: string }
+                role: { type: string }
+      responses:
+        '200':
+          description: AI response with citations and executable UI action cards
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AICopilotResponse'
+
+components:
+  schemas:
+    AttendancePunchResponse:
+      type: object
+      properties:
+        attendanceId: { type: string, format: uuid }
+        status: { type: string }
+        clockInTime: { type: string, format: date-time }
+        activeBreakAllowanceMinutes: { type: integer }
+
+    AICopilotResponse:
+      type: object
+      properties:
+        replyText: { type: string }
+        actionCards:
+          type: array
+          items:
+            type: object
+            properties:
+              title: { type: string }
+              actionType: { type: string }
+              payload: { type: object }
+        citations:
+          type: array
+          items:
+            type: object
+            properties:
+              policyTitle: { type: string }
+              section: { type: string }
+              url: { type: string }
