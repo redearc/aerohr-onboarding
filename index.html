@@ -3722,6 +3722,436 @@
       color: #92400e;
       font-size: 12px;
     }
+
+    /* ======================================================================= */
+    /* CINEMATIC ADD EMPLOYEE SLIDE-OVER WORKSPACE                             */
+    /* ======================================================================= */
+    .aero-slideover-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.68);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .aero-slideover-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .aero-slideover-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 40vw;
+      min-width: 440px;
+      max-width: 640px;
+      height: 100vh;
+      background: #ffffff;
+      z-index: 9999;
+      box-shadow: -16px 0 48px -12px rgba(15, 23, 42, 0.32), -4px 0 16px rgba(15, 23, 42, 0.08);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      border-left: 1px solid rgba(226, 232, 240, 0.9);
+      box-sizing: border-box;
+    }
+    .aero-slideover-panel.open {
+      transform: translateX(0);
+    }
+
+    @media (max-width: 768px) {
+      .aero-slideover-panel {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+      }
+    }
+
+    .aero-slideover-header {
+      padding: 22px 26px 18px 26px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border-bottom: 1px solid #e2e8f0;
+      flex-shrink: 0;
+    }
+
+    .aero-slideover-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #64748b;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .aero-slideover-close-btn:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #cbd5e1;
+      transform: scale(1.05);
+    }
+
+    /* Miniature Horizontal Step-Indicator Ribbon */
+    .aero-step-ribbon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f1f5f9;
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      overflow-x: auto;
+    }
+    .aero-step-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 9px;
+      border-radius: 7px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .aero-step-item:hover {
+      color: #0f172a;
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .aero-step-item.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      font-weight: 700;
+    }
+    .aero-step-item.completed {
+      color: #059669;
+    }
+    .aero-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      font-size: 10px;
+      background: #e2e8f0;
+      color: #475569;
+      font-weight: 800;
+    }
+    .aero-step-item.active .aero-step-num {
+      background: #10b981;
+      color: #ffffff;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+    }
+    .aero-step-item.completed .aero-step-num {
+      background: #10b981;
+      color: #ffffff;
+    }
+    .aero-step-arrow {
+      color: #cbd5e1;
+      font-size: 11px;
+    }
+
+    .aero-slideover-form {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+    .aero-slideover-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 28px;
+    }
+
+    .aero-section-meta-header {
+      margin-bottom: 20px;
+    }
+    .aero-badge-gate {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #4f46e5;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      padding: 2px 7px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    /* Route Cards Grid */
+    .aero-route-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .aero-route-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .aero-route-card:hover {
+      border-color: #94a3b8;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+    .aero-route-card.active {
+      border-color: #10b981;
+      background: #f0fdf4;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15), 0 4px 12px rgba(16, 185, 129, 0.06);
+    }
+    .aero-route-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .aero-route-radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      transition: all 0.2s ease;
+    }
+    .aero-route-card.active .aero-route-radio {
+      border-color: #10b981;
+      background: #10b981;
+    }
+    .aero-radio-inner {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+    .aero-route-features {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .aero-mini-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+    .aero-route-card.active .aero-mini-tag {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+
+    /* Sub-dropdown box for Offshore India Hub */
+    .aero-sub-dropdown-box {
+      background: #ffffff;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
+      animation: aeroFadeSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes aeroFadeSlideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .aero-lock-banner {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* Form Fields & Adaptive Input States */
+    .aero-form-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .aero-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .aero-input-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .aero-required {
+      color: #e11d48;
+      font-weight: 800;
+    }
+    .aero-input-hint {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .aero-slide-input, .aero-slide-select {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 13px;
+      color: #0f172a;
+      background: #ffffff;
+      outline: none;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+    .aero-slide-input:focus, .aero-slide-select:focus {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+      background: #ffffff;
+    }
+
+    .aero-summary-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-top: 6px;
+    }
+    .aero-mini-pulse-pill {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Sticky Bottom Action Tray */
+    .aero-slideover-footer {
+      position: sticky;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid #e2e8f0;
+      padding: 16px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+    .aero-slide-btn-muted {
+      background: transparent;
+      border: none;
+      color: #64748b;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: all 0.18s ease;
+    }
+    .aero-slide-btn-muted:hover {
+      color: #0f172a;
+      background: #f1f5f9;
+    }
+    .aero-slide-btn-back {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 14px;
+      border-radius: 7px;
+      transition: all 0.18s ease;
+    }
+    .aero-slide-btn-back:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+    .aero-slide-btn-next {
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid #0f172a;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 9px 18px;
+      border-radius: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .aero-slide-btn-next:hover {
+      background: #1e293b;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+    }
+    .aero-slide-btn-submit {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: 1px solid #059669;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 9px 20px;
+      border-radius: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+    .aero-slide-btn-submit:hover {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+    .aero-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+      animation: pulseGlow 1.5s infinite;
+    }
   </style>
 </head>
 <body>
@@ -8752,6 +9182,296 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
     </div>
   </div>
 
+  <!-- ======================================================================= -->
+  <!-- CINEMATIC OVERLAY & IMMERSIVE SLIDE-OVER MODAL: ADD EMPLOYEE WORKSPACE  -->
+  <!-- ======================================================================= -->
+  <div id="aeroSlideOverBackdrop" class="aero-slideover-backdrop" onclick="closeAddEmployeeDrawer(event)"></div>
+
+  <aside id="aeroSlideOverDrawer" class="aero-slideover-panel" aria-label="Initialize New Professional Profile">
+    <!-- Slide-Over Header -->
+    <header class="aero-slideover-header">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 7px; background: rgba(16, 185, 129, 0.12); color: #059669; font-size: 14px;">✨</span>
+            <h2 style="font-size: 17px; font-weight: 800; color: #0f172a; margin: 0; letter-spacing: -0.02em;">Initialize New Professional Profile</h2>
+          </div>
+          <p style="font-size: 12px; color: #64748b; margin: 0;">Multi-step HRIS Intake &bull; Automated Resend Webhook &bull; Supabase Vault Pipeline</p>
+        </div>
+        <button type="button" class="aero-slideover-close-btn" onclick="closeAddEmployeeDrawer()" title="Close Drawer (Esc)">
+          ✕
+        </button>
+      </div>
+
+      <!-- Miniature Horizontal Step-Indicator Ribbon: [1. Pipeline Selector ➔ 2. Personal Profile ➔ 3. Contract Mechanics] -->
+      <div class="aero-step-ribbon" id="aeroAddEmpStepRibbon">
+        <div class="aero-step-item active" id="stepPill1" onclick="goToAddEmployeeStep(1)">
+          <span class="aero-step-num" id="stepNum1">1</span>
+          <span class="aero-step-label">1. Pipeline Selector</span>
+        </div>
+        <span class="aero-step-arrow">➔</span>
+        <div class="aero-step-item" id="stepPill2" onclick="goToAddEmployeeStep(2)">
+          <span class="aero-step-num" id="stepNum2">2</span>
+          <span class="aero-step-label">2. Personal Profile</span>
+        </div>
+        <span class="aero-step-arrow">➔</span>
+        <div class="aero-step-item" id="stepPill3" onclick="goToAddEmployeeStep(3)">
+          <span class="aero-step-num" id="stepNum3">3</span>
+          <span class="aero-step-label">3. Contract Mechanics</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Slide-Over Body (Scrollable Multi-Step Container) -->
+    <form id="aeroAddEmployeeForm" onsubmit="handleEmployeeFormSubmit(event)" class="aero-slideover-form">
+      <div class="aero-slideover-body">
+
+        <!-- ================================================================= -->
+        <!-- STEP 1: PIPELINE STRUCTURAL ROUTING GATE (The Core Switch)        -->
+        <!-- ================================================================= -->
+        <section id="aeroAddEmpStepSection1" class="aero-wizard-section">
+          <div class="aero-section-meta-header">
+            <span class="aero-badge-gate">GATE 01 &bull; STRUCTURAL ROUTING</span>
+            <h3 style="font-size: 15px; font-weight: 700; color: #0f172a; margin: 6px 0 4px 0;">Select Onboarding Pipeline Route</h3>
+            <p style="font-size: 12px; color: #64748b; margin: 0;">Determine legal entity, payroll stream, and automated compliance pipeline.</p>
+          </div>
+
+          <!-- Route Cards Grid -->
+          <div class="aero-route-cards-grid">
+            <!-- Route Card A: US Local / Active Onboarding -->
+            <div class="aero-route-card active" id="routeCardUS" onclick="selectAddEmployeeRoute('us_local')">
+              <div class="aero-route-card-top">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 20px;">🇺🇸</span>
+                  <div>
+                    <h4 style="font-size: 13.5px; font-weight: 700; color: #0f172a; margin: 0;">US Local / Active Onboarding</h4>
+                    <span style="font-size: 11px; color: #0284c7; font-weight: 600;">W-2 &bull; 1099 &bull; C2C Domestic</span>
+                  </div>
+                </div>
+                <div class="aero-route-radio" id="routeRadioUS">
+                  <span class="aero-radio-inner"></span>
+                </div>
+              </div>
+              <p style="font-size: 11.5px; color: #475569; margin: 10px 0 0 0; line-height: 1.5;">
+                For W-2, 1099, C2C candidates operating in local US teams. Connects with US payroll tax profiles (I-9, W-4) and Ceipal / Bullhorn ATS synchronization.
+              </p>
+              <div class="aero-route-features">
+                <span class="aero-mini-tag">Ceipal / Bullhorn ATS</span>
+                <span class="aero-mini-tag">US Payroll &amp; Direct Deposit</span>
+              </div>
+            </div>
+
+            <!-- Route Card B: Offshore India Hub -->
+            <div class="aero-route-card" id="routeCardOffshore" onclick="selectAddEmployeeRoute('offshore_india')">
+              <div class="aero-route-card-top">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 20px;">🇮🇳</span>
+                  <div>
+                    <h4 style="font-size: 13.5px; font-weight: 700; color: #0f172a; margin: 0;">Offshore India Hub</h4>
+                    <span style="font-size: 11px; color: #059669; font-weight: 600;">Global Infrastructure &bull; Offshore Delivery</span>
+                  </div>
+                </div>
+                <div class="aero-route-radio" id="routeRadioOffshore">
+                  <span class="aero-radio-inner"></span>
+                </div>
+              </div>
+              <p style="font-size: 11.5px; color: #475569; margin: 10px 0 0 0; line-height: 1.5;">
+                For global infrastructure roles: Bench Sales Recruiters, OPT Recruiters, Offshore Team Leads. Locks profile directly into automated Resend email &amp; Supabase vault.
+              </p>
+              <div class="aero-route-features">
+                <span class="aero-mini-tag">Aadhaar / PAN KYC</span>
+                <span class="aero-mini-tag">candidate-vault Bucket</span>
+                <span class="aero-mini-tag">Automated Resend Webhook</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Backend Trigger Sub-Dropdown: Dynamically Appended when Offshore India Hub is toggled -->
+          <div id="offshoreDesignationContainer" class="aero-sub-dropdown-box" style="display: none;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span style="font-size: 15px;">⚡</span>
+              <label for="offshoreDesignationSelect" style="font-size: 12px; font-weight: 700; color: #0f172a; margin: 0;">
+                Offshore Designation Mapping <span style="color: #e11d48;">*</span>
+              </label>
+            </div>
+            <select id="offshoreDesignationSelect" class="aero-slide-select" onchange="handleOffshoreDesignationChange(this.value)">
+              <option value="bench_sales" selected>Bench Sales Recruiter &bull; (US Staffing Marketing / Night Shift IST)</option>
+              <option value="opt">OPT Recruiter &bull; (US Talent Specialist / F-1 CPT/OPT Compliance)</option>
+              <option value="team_lead">Offshore Team Lead &bull; (Global Delivery &amp; Account Operations)</option>
+            </select>
+
+            <!-- Informative lock badge -->
+            <div class="aero-lock-banner">
+              <span style="font-size: 14px;">🔒</span>
+              <div>
+                <strong>Automated Pipeline Lock:</strong> Selecting this role registers the candidate into Supabase <code>public.offshore_onboarding</code>, provisions an isolated folder in <code>candidate-vault</code>, and triggers the automated Resend email dispatch chain.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- STEP 2: PERSONAL IDENTITY PROFILE                                 -->
+        <!-- ================================================================= -->
+        <section id="aeroAddEmpStepSection2" class="aero-wizard-section" style="display: none;">
+          <div class="aero-section-meta-header">
+            <span class="aero-badge-gate">GATE 02 &bull; IDENTITY PROFILE</span>
+            <h3 style="font-size: 15px; font-weight: 700; color: #0f172a; margin: 6px 0 4px 0;">Personal Identity Profile</h3>
+            <p style="font-size: 12px; color: #64748b; margin: 0;">Personnel records utilized for digital onboarding, contract dispatch, and emergency reachability.</p>
+          </div>
+
+          <div class="aero-form-stack">
+            <!-- Legal Full Name -->
+            <div class="aero-input-group">
+              <label class="aero-input-label" for="addEmpFullName">
+                <span>👤 Legal Full Name</span>
+                <span class="aero-required">*</span>
+              </label>
+              <input type="text" id="addEmpFullName" class="aero-slide-input" placeholder="e.g. Priyanshu Sharma / Johnathan Miller" required value="Priyanshu Sharma">
+              <span class="aero-input-hint">Must match official identification documents (Passport, Aadhaar, SSN).</span>
+            </div>
+
+            <!-- Primary Contact Email Address -->
+            <div class="aero-input-group">
+              <label class="aero-input-label" for="addEmpEmail">
+                <span>📧 Primary Contact Email Address</span>
+                <span class="aero-required">*</span>
+              </label>
+              <input type="email" id="addEmpEmail" class="aero-slide-input" placeholder="e.g. p.sharma@talent-network.com" required value="p.sharma@talent-network.com">
+              <span class="aero-input-hint">Used for dispatching encrypted onboarding link and e-signature contracts.</span>
+            </div>
+
+            <!-- Mobile Phone Number -->
+            <div class="aero-input-group">
+              <label class="aero-input-label" for="addEmpPhone">
+                <span>📱 Mobile Phone Number</span>
+                <span class="aero-required">*</span>
+              </label>
+              <input type="tel" id="addEmpPhone" class="aero-slide-input" placeholder="e.g. +91 98765 43210 or +1 (555) 349-2018" required value="+91 98765 43210">
+            </div>
+
+            <!-- Current Location Residence -->
+            <div class="aero-input-group">
+              <label class="aero-input-label" for="addEmpLocation">
+                <span>📍 Current Location Residence (City, State/Country)</span>
+                <span class="aero-required">*</span>
+              </label>
+              <input type="text" id="addEmpLocation" class="aero-slide-input" placeholder="e.g. Hyderabad, TS, India or Austin, TX, USA" required value="Hyderabad, Telangana, India">
+            </div>
+
+            <!-- Emergency Contact Name & Relation String -->
+            <div class="aero-input-group">
+              <label class="aero-input-label" for="addEmpEmergency">
+                <span>🚨 Emergency Contact Name &amp; Relation String</span>
+                <span class="aero-required">*</span>
+              </label>
+              <input type="text" id="addEmpEmergency" class="aero-slide-input" placeholder="e.g. Sunita Sharma (Mother) • +91 98111 22334" required value="Sunita Sharma (Mother) • +91 98111 22334">
+              <span class="aero-input-hint">Provide full name, familial or personal relation, and emergency phone contact.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- STEP 3: CONTRACT MECHANICS & ASSIGNMENTS                          -->
+        <!-- ================================================================= -->
+        <section id="aeroAddEmpStepSection3" class="aero-wizard-section" style="display: none;">
+          <div class="aero-section-meta-header">
+            <span class="aero-badge-gate">GATE 03 &bull; CONTRACT MECHANICS</span>
+            <h3 style="font-size: 15px; font-weight: 700; color: #0f172a; margin: 6px 0 4px 0;">Contract Mechanics &amp; Assignments</h3>
+            <p style="font-size: 12px; color: #64748b; margin: 0;">Set compensation boundaries, project mapping, and operating shift alignment.</p>
+          </div>
+
+          <div class="aero-form-stack">
+            <!-- Target Start Date & Pay Structure Row -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <div class="aero-input-group">
+                <label class="aero-input-label" for="addEmpStartDate">
+                  <span>📅 Target Start Date</span>
+                  <span class="aero-required">*</span>
+                </label>
+                <input type="date" id="addEmpStartDate" class="aero-slide-input" required>
+              </div>
+
+              <div class="aero-input-group">
+                <label class="aero-input-label" for="addEmpCompensation">
+                  <span id="labelCompensation">💰 Baseline Compensation</span>
+                  <span class="aero-required">*</span>
+                </label>
+                <input type="text" id="addEmpCompensation" class="aero-slide-input" placeholder="e.g. $145,000 / yr" value="$145,000 / yr" required>
+              </div>
+            </div>
+
+            <!-- Initial Client Project Mapping Assignment -->
+            <div class="aero-input-group">
+              <label class="aero-input-label" for="addEmpProject">
+                <span>🏢 Initial Client Project Mapping Assignment</span>
+                <span class="aero-required">*</span>
+              </label>
+              <select id="addEmpProject" class="aero-slide-select">
+                <option value="FinTech Core Banking Systems - Capital One">FinTech Core Banking Systems &bull; Capital One</option>
+                <option value="Healthcare AI Automation - Elevance Health">Healthcare AI Automation &bull; Elevance Health</option>
+                <option value="Enterprise Cloud Infrastructure - AWS Partner Desk">Enterprise Cloud Infrastructure &bull; AWS Partner Desk</option>
+                <option value="Global Internal Talent Acquisition - AeroHR Hub" selected>Global Internal Talent Acquisition &bull; AeroHR Hub</option>
+                <option value="Benchmark Bench Sales Acceleration Squad">Benchmark Bench Sales Acceleration Squad</option>
+                <option value="Cross-Border Enterprise Digital Delivery">Cross-Border Enterprise Digital Delivery</option>
+              </select>
+              <span class="aero-input-hint">Linked to active project billing codes, manager routing, and ATS pipelines.</span>
+            </div>
+
+            <!-- Selected Shift Configurations -->
+            <div class="aero-input-group">
+              <label class="aero-input-label" for="addEmpShift">
+                <span>⏰ Selected Shift Configuration</span>
+                <span class="aero-required">*</span>
+              </label>
+              <select id="addEmpShift" class="aero-slide-select">
+                <option value="Standard US EST Alignment (8:00 AM - 5:00 PM EST)" selected>Standard US EST Alignment (8:00 AM - 5:00 PM EST)</option>
+                <option value="Night Shift (6:30 PM - 3:30 AM IST / US EST Core)">Night Shift (6:30 PM - 3:30 AM IST / US EST Core)</option>
+                <option value="India IST Regular Alignment (9:30 AM - 6:30 PM IST)">India IST Regular Alignment (9:30 AM - 6:30 PM IST)</option>
+                <option value="Hybrid US/India Overlap (4:00 PM - 1:00 AM IST)">Hybrid US/India Overlap (4:00 PM - 1:00 AM IST)</option>
+                <option value="Flexible Pacific PST Coverage (11:00 AM - 8:00 PM EST)">Flexible Pacific PST Coverage (11:00 AM - 8:00 PM EST)</option>
+              </select>
+            </div>
+
+            <!-- Live Pipeline Summary Card -->
+            <div class="aero-summary-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #0284c7; letter-spacing: 0.05em;">Dispatch Automation Summary</span>
+                <span class="aero-mini-pulse-pill" id="addEmpRouteBadge">🇺🇸 US Local Pipeline</span>
+              </div>
+              <div style="font-size: 12px; color: #334155; line-height: 1.6;">
+                <div><strong>Route Pipeline:</strong> <span id="summaryRouteText">US Local / Active Onboarding (Domestic W-2 / C2C)</span></div>
+                <div><strong>Vault Storage Destination:</strong> <code style="color: #0284c7; background: #e0f2fe; padding: 1px 5px; border-radius: 4px;" id="summaryStorageText">hris-records/us-local/*</code></div>
+                <div><strong>Automated Email Dispatch:</strong> <span style="color: #059669; font-weight: 700;" id="summaryDispatchText">Active (Direct ATS Synchronization)</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Sticky Action Tray -->
+      <footer class="aero-slideover-footer">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button type="button" class="aero-slide-btn-muted" onclick="handleDrawerCancel()">Cancel Profile</button>
+          <button type="button" id="btnSlidePrevStep" class="aero-slide-btn-back" onclick="prevAddEmployeeStep()" style="display: none;">
+            ← Back
+          </button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button type="button" id="btnSlideNextStep" class="aero-slide-btn-next" onclick="nextAddEmployeeStep()">
+            <span id="btnSlideNextText">Continue to Personal Profile</span> ➔
+          </button>
+          <button type="submit" id="btnSlideSubmit" class="aero-slide-btn-submit" style="display: none;">
+            <span class="aero-pulse-dot"></span>
+            <span>🚀 Initialize &amp; Dispatch Link</span>
+          </button>
+        </div>
+      </footer>
+    </form>
+  </aside>
+
   <!-- Global Toast -->
   <div class="toast" id="globalToast">Notification</div>
 
@@ -9065,9 +9785,428 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       });
     }
 
+    // =========================================================================
+    // CINEMATIC SLIDE-OVER WORKSPACE CONTROLLER: ADD EMPLOYEE PROFILE
+    // =========================================================================
+    let currentAddEmpStep = 1;
+    let selectedAddEmpRoute = 'us_local'; // 'us_local' or 'offshore_india'
+    let selectedOffshoreRole = 'bench_sales';
+
+    function openAddEmployeeDrawer(preselectedRoute = 'us_local') {
+      const backdrop = document.getElementById('aeroSlideOverBackdrop');
+      const drawer = document.getElementById('aeroSlideOverDrawer');
+      if (!backdrop || !drawer) return;
+
+      // Set default target start date if empty (next Monday)
+      const startDateInput = document.getElementById('addEmpStartDate');
+      if (startDateInput && !startDateInput.value) {
+        const today = new Date();
+        const nextMon = new Date(today);
+        nextMon.setDate(today.getDate() + ((1 + 7 - today.getDay()) % 7 || 7));
+        const yyyy = nextMon.getFullYear();
+        const mm = String(nextMon.getMonth() + 1).padStart(2, '0');
+        const dd = String(nextMon.getDate()).padStart(2, '0');
+        startDateInput.value = `${yyyy}-${mm}-${dd}`;
+      }
+
+      selectAddEmployeeRoute(preselectedRoute);
+      goToAddEmployeeStep(1);
+
+      backdrop.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAddEmployeeDrawer(e) {
+      if (e && e.target && e.target.id !== 'aeroSlideOverBackdrop') {
+        // If clicked inside the drawer panel, don't close
+        return;
+      }
+      const backdrop = document.getElementById('aeroSlideOverBackdrop');
+      const drawer = document.getElementById('aeroSlideOverDrawer');
+      if (backdrop) backdrop.classList.remove('open');
+      if (drawer) drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleDrawerCancel() {
+      closeAddEmployeeDrawer();
+      showToast('Profile initialization canceled.');
+    }
+
+    // Keyboard Esc shortcut
+    document.addEventListener('keydown', function(evt) {
+      if (evt.key === 'Escape') {
+        const drawer = document.getElementById('aeroSlideOverDrawer');
+        if (drawer && drawer.classList.contains('open')) {
+          closeAddEmployeeDrawer();
+        }
+      }
+    });
+
+    // Step Navigation
+    function goToAddEmployeeStep(stepNumber) {
+      currentAddEmpStep = stepNumber;
+
+      // Update Ribbon
+      [1, 2, 3].forEach(step => {
+        const pill = document.getElementById(`stepPill${step}`);
+        const num = document.getElementById(`stepNum${step}`);
+        const section = document.getElementById(`aeroAddEmpStepSection${step}`);
+
+        if (section) {
+          section.style.display = (step === stepNumber) ? 'block' : 'none';
+        }
+
+        if (pill) {
+          pill.classList.remove('active', 'completed');
+          if (step === stepNumber) {
+            pill.classList.add('active');
+            if (num) num.innerText = step;
+          } else if (step < stepNumber) {
+            pill.classList.add('completed');
+            if (num) num.innerText = '✓';
+          } else {
+            if (num) num.innerText = step;
+          }
+        }
+      });
+
+      // Update Action Buttons
+      const btnBack = document.getElementById('btnSlidePrevStep');
+      const btnNext = document.getElementById('btnSlideNextStep');
+      const btnNextText = document.getElementById('btnSlideNextText');
+      const btnSubmit = document.getElementById('btnSlideSubmit');
+
+      if (btnBack) btnBack.style.display = (stepNumber > 1) ? 'inline-flex' : 'none';
+
+      if (stepNumber === 1) {
+        if (btnNext) btnNext.style.display = 'inline-flex';
+        if (btnNextText) btnNextText.innerText = 'Continue to Personal Profile';
+        if (btnSubmit) btnSubmit.style.display = 'none';
+      } else if (stepNumber === 2) {
+        if (btnNext) btnNext.style.display = 'inline-flex';
+        if (btnNextText) btnNextText.innerText = 'Continue to Contract Mechanics';
+        if (btnSubmit) btnSubmit.style.display = 'none';
+      } else if (stepNumber === 3) {
+        if (btnNext) btnNext.style.display = 'none';
+        if (btnSubmit) btnSubmit.style.display = 'inline-flex';
+      }
+    }
+
+    function nextAddEmployeeStep() {
+      if (currentAddEmpStep === 1) {
+        goToAddEmployeeStep(2);
+      } else if (currentAddEmpStep === 2) {
+        // Validate Step 2 fields
+        const name = document.getElementById('addEmpFullName')?.value.trim();
+        const email = document.getElementById('addEmpEmail')?.value.trim();
+        const phone = document.getElementById('addEmpPhone')?.value.trim();
+        const loc = document.getElementById('addEmpLocation')?.value.trim();
+        const emer = document.getElementById('addEmpEmergency')?.value.trim();
+
+        if (!name || !email || !phone || !loc || !emer) {
+          showToast('⚠️ Please fill out all required personal profile fields before proceeding.');
+          return;
+        }
+        goToAddEmployeeStep(3);
+      }
+    }
+
+    function prevAddEmployeeStep() {
+      if (currentAddEmpStep > 1) {
+        goToAddEmployeeStep(currentAddEmpStep - 1);
+      }
+    }
+
+    // Step 1: Pipeline Switch & Trigger
+    function selectAddEmployeeRoute(route) {
+      selectedAddEmpRoute = route;
+
+      const cardUS = document.getElementById('routeCardUS');
+      const cardOffshore = document.getElementById('routeCardOffshore');
+      const subDropdown = document.getElementById('offshoreDesignationContainer');
+      const compLabel = document.getElementById('labelCompensation');
+      const compInput = document.getElementById('addEmpCompensation');
+      const badgeEl = document.getElementById('addEmpRouteBadge');
+      const routeText = document.getElementById('summaryRouteText');
+      const storageText = document.getElementById('summaryStorageText');
+      const dispatchText = document.getElementById('summaryDispatchText');
+
+      if (route === 'offshore_india') {
+        if (cardUS) cardUS.classList.remove('active');
+        if (cardOffshore) cardOffshore.classList.add('active');
+        if (subDropdown) subDropdown.style.display = 'block';
+
+        if (compLabel) compLabel.innerText = '💰 Baseline Compensation (CTC)';
+        if (compInput) {
+          compInput.placeholder = 'e.g. ₹16,50,000 PA';
+          if (!compInput.value || compInput.value.includes('$')) {
+            compInput.value = selectedOffshoreRole === 'team_lead' ? '₹24,00,000 PA' : (selectedOffshoreRole === 'opt' ? '₹14,80,000 PA' : '₹16,50,000 PA');
+          }
+        }
+        if (badgeEl) {
+          badgeEl.innerText = '🇮🇳 Offshore Hub';
+          badgeEl.style.background = '#dcfce7';
+          badgeEl.style.color = '#166534';
+          badgeEl.style.borderColor = '#bbf7d0';
+        }
+        if (routeText) routeText.innerText = `Offshore India Hub • ${getDesignationLabel(selectedOffshoreRole)}`;
+        if (storageText) storageText.innerText = 'candidate-vault/{candidate_id}/*';
+        if (dispatchText) dispatchText.innerText = 'Active (Instant Resend Webhook)';
+      } else {
+        if (cardUS) cardUS.classList.add('active');
+        if (cardOffshore) cardOffshore.classList.remove('active');
+        if (subDropdown) subDropdown.style.display = 'none';
+
+        if (compLabel) compLabel.innerText = '💰 Baseline Compensation (W-2 / 1099)';
+        if (compInput) {
+          compInput.placeholder = 'e.g. $145,000 / yr';
+          if (!compInput.value || compInput.value.includes('₹')) {
+            compInput.value = '$145,000 / yr';
+          }
+        }
+        if (badgeEl) {
+          badgeEl.innerText = '🇺🇸 US Local Pipeline';
+          badgeEl.style.background = '#e0f2fe';
+          badgeEl.style.color = '#0369a1';
+          badgeEl.style.borderColor = '#bae6fd';
+        }
+        if (routeText) routeText.innerText = 'US Local / Active Onboarding (Domestic W-2 / C2C)';
+        if (storageText) storageText.innerText = 'hris-records/us-local/*';
+        if (dispatchText) dispatchText.innerText = 'Active (Direct ATS Synchronization)';
+      }
+    }
+
+    function handleOffshoreDesignationChange(val) {
+      selectedOffshoreRole = val;
+      const compInput = document.getElementById('addEmpCompensation');
+      if (compInput) {
+        compInput.value = val === 'team_lead' ? '₹24,00,000 PA' : (val === 'opt' ? '₹14,80,000 PA' : '₹16,50,000 PA');
+      }
+      const routeText = document.getElementById('summaryRouteText');
+      if (routeText) {
+        routeText.innerText = `Offshore India Hub • ${getDesignationLabel(val)}`;
+      }
+    }
+
+    function getDesignationLabel(val) {
+      if (val === 'team_lead') return 'Offshore Team Lead';
+      if (val === 'opt') return 'OPT Recruiter';
+      return 'Bench Sales Recruiter';
+    }
+
+    // Connect existing openAddEmployeeModal button to open the slide-over
     function openAddEmployeeModal() {
-      showToast('Opening New Employee Personnel Wizard...');
-      switchTab('onboarding');
+      openAddEmployeeDrawer('us_local');
+    }
+
+    // Form Submission & Transmission
+    async function handleEmployeeFormSubmit(e) {
+      if (e) e.preventDefault();
+
+      const nameInput = document.getElementById('addEmpFullName');
+      const emailInput = document.getElementById('addEmpEmail');
+      const phoneInput = document.getElementById('addEmpPhone');
+      const locInput = document.getElementById('addEmpLocation');
+      const emerInput = document.getElementById('addEmpEmergency');
+      const startDateInput = document.getElementById('addEmpStartDate');
+      const compInput = document.getElementById('addEmpCompensation');
+      const projSelect = document.getElementById('addEmpProject');
+      const shiftSelect = document.getElementById('addEmpShift');
+
+      const name = nameInput ? nameInput.value.trim() : 'New Hire';
+      const email = emailInput ? emailInput.value.trim() : 'hire@aero-internal.com';
+      const phone = phoneInput ? phoneInput.value.trim() : '+1 (555) 000-0000';
+      const loc = locInput ? locInput.value.trim() : 'United States';
+      const emer = emerInput ? emerInput.value.trim() : 'Contact • +1 (555) 000-0000';
+      const startDate = startDateInput ? startDateInput.value : '2026-10-15';
+      const comp = compInput ? compInput.value.trim() : '$145,000 / yr';
+      const proj = projSelect ? projSelect.value : 'Global Internal Talent Acquisition';
+      const shift = shiftSelect ? shiftSelect.value : 'Standard Alignment';
+
+      const initials = (function(n) {
+        if (!n) return 'NH';
+        const parts = n.split(/\s+/);
+        if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+        return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+      })(name);
+
+      if (selectedAddEmpRoute === 'offshore_india') {
+        // Execute Offshore pipeline transmission
+        let newRecord = null;
+        let resendPayload = null;
+
+        // 1. Direct Supabase INSERT
+        if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+          try {
+            const { data: sInsert, error: sErr } = await supabaseClient
+              .from('offshore_onboarding')
+              .insert([{
+                full_name: name,
+                email: email,
+                role_type: selectedOffshoreRole,
+                current_step: 'hired',
+                aadhaar_status: 'missing',
+                pan_status: 'missing',
+                experience_doc_status: 'missing'
+              }])
+              .select();
+
+            if (!sErr && sInsert && sInsert[0]) {
+              newRecord = sInsert[0];
+              console.log('⚡ Record inserted directly into Supabase:', newRecord);
+            }
+          } catch (ex) {
+            console.warn('Supabase direct insert notice:', ex);
+          }
+        }
+
+        // 2. Dispatch to local backend server
+        try {
+          const resp = await fetch('/api/offshore/candidates', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              full_name: name,
+              email: email,
+              role_type: selectedOffshoreRole
+            })
+          });
+
+          if (resp.ok) {
+            const resJson = await resp.json();
+            if (!newRecord) newRecord = resJson.record;
+            resendPayload = resJson.resend_webhook;
+          }
+        } catch (err) {
+          console.warn('Server offline; generating local record:', err);
+        }
+
+        if (!newRecord) {
+          const genToken = '018eb512-' + Math.floor(1000 + Math.random() * 9000) + '-7100-b202-' + Date.now().toString(16);
+          newRecord = {
+            id: 'cand_' + Date.now(),
+            created_at: new Date().toISOString(),
+            full_name: name,
+            email: email,
+            role_type: selectedOffshoreRole,
+            current_step: 'hired',
+            aadhaar_status: 'missing',
+            pan_status: 'missing',
+            experience_doc_status: 'missing',
+            secure_token: genToken,
+            ctc: comp,
+            rules: 'ISO-27001 & Client Non-Solicitation',
+            shift: shift,
+            esign: {
+              dispatched: { done: true, meta: 'Just Now via Resend TLS' },
+              opened: { done: false, meta: 'Awaiting candidate open...' },
+              signed: { done: false, meta: 'Awaiting signature...' }
+            }
+          };
+        } else {
+          newRecord.ctc = comp;
+          newRecord.rules = 'ISO-27001 & Client Non-Solicitation';
+          newRecord.shift = shift;
+          newRecord.esign = {
+            dispatched: { done: true, meta: 'Just Now via Resend TLS' },
+            opened: { done: false, meta: 'Awaiting candidate open...' },
+            signed: { done: false, meta: 'Awaiting signature...' }
+          };
+        }
+
+        // Update Offshore state
+        if (typeof OFFSHORE_DB_STATE !== 'undefined') {
+          OFFSHORE_DB_STATE.unshift(newRecord);
+          activeOffshoreCandidateId = newRecord.id;
+        }
+        if (typeof latestResendWebhookTelemetry !== 'undefined') {
+          latestResendWebhookTelemetry = resendPayload;
+        }
+
+        if (typeof updateFilterBadgeCounts === 'function') updateFilterBadgeCounts();
+        if (typeof renderDbRosterTable === 'function') renderDbRosterTable();
+        if (typeof renderOffshoreCandidateData === 'function') renderOffshoreCandidateData();
+        if (typeof setOffshorePhase === 'function') setOffshorePhase(1, true);
+
+        // Also add new card into HRIS Directory Grid
+        addEmployeeCardToDirectoryGrid({
+          name: name,
+          role: getDesignationLabel(selectedOffshoreRole),
+          dept: 'Offshore Hub',
+          badge: 'Offshore Hub • Full-Time',
+          badgeStyle: 'background: rgba(16, 185, 129, 0.12); color: #059669;',
+          email: email,
+          phone: phone,
+          location: loc,
+          manager: 'Sarah Jenkins',
+          salary: comp,
+          avatar: initials,
+          avatarBg: 'linear-gradient(135deg, #10b981 0%, #047857 100%)'
+        });
+
+        closeAddEmployeeDrawer();
+        showToast(`🇮🇳 New Offshore Hire "${name}" [${getDesignationLabel(selectedOffshoreRole)}] initialized! Resend email dispatched.`);
+
+        if (typeof openResendTelemetryModal === 'function') {
+          setTimeout(() => {
+            openResendTelemetryModal();
+          }, 600);
+        }
+      } else {
+        // US Local route
+        addEmployeeCardToDirectoryGrid({
+          name: name,
+          role: proj.split('-')[0].trim(),
+          dept: 'Engineering',
+          badge: 'US Domestic • Full-Time',
+          badgeStyle: 'background: rgba(79, 70, 229, 0.1); color: #4338ca;',
+          email: email,
+          phone: phone,
+          location: loc,
+          manager: 'Sarah Jenkins',
+          salary: comp,
+          avatar: initials,
+          avatarBg: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)'
+        });
+
+        closeAddEmployeeDrawer();
+        showToast(`🇺🇸 Initialized New US Professional Profile: "${name}" [${proj.split('-')[0].trim()}]! ATS & Payroll sync active.`);
+      }
+    }
+
+    function addEmployeeCardToDirectoryGrid(emp) {
+      const grid = document.getElementById('directoryCardsGrid');
+      if (!grid) return;
+
+      const card = document.createElement('div');
+      card.className = 'employee-card';
+      card.setAttribute('data-dept', emp.dept);
+      card.setAttribute('data-name', emp.name);
+      card.innerHTML = `
+        <div class="emp-avatar-large" style="background: ${emp.avatarBg};">${emp.avatar}</div>
+        <div class="emp-name">${emp.name}</div>
+        <div class="emp-role">${emp.role}</div>
+        <span class="emp-badge-dept" style="${emp.badgeStyle}">${emp.badge}</span>
+        <div class="emp-contact-row"><span>📧 ${emp.email}</span></div>
+        <div class="emp-contact-row"><span>📱 ${emp.phone}</span></div>
+        <div class="emp-contact-row"><span>📍 ${emp.location}</span></div>
+        <div class="emp-contact-row" style="margin-bottom: 16px;"><span>👤 Reports to: ${emp.manager}</span></div>
+        <button class="btn btn-outline btn-sm" style="width: 100%;" onclick="openEmployeeRecord('${emp.name}', '${emp.role}', '${emp.dept}', '${emp.email}', '${emp.salary}', '${emp.manager}', '${emp.avatar}')">View Personnel File →</button>
+      `;
+
+      grid.prepend(card);
+
+      // Increment count on 'All' button if found
+      const allFilterBtn = document.querySelector('#hris-directory-container .btn-outline');
+      if (allFilterBtn && allFilterBtn.innerText.includes('All')) {
+        const match = allFilterBtn.innerText.match(/\((\d+)\)/);
+        if (match) {
+          const count = parseInt(match[1], 10) + 1;
+          allFilterBtn.innerText = `All (${count})`;
+        }
+      }
     }
 
     // -------------------------------------------------------------------------
@@ -13427,8 +14566,12 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
 
     // Modal 1: Onboard New Offshore Hire
     function openNewOffshoreCandidateModal() {
-      const m = document.getElementById('modalNewOffshoreCandidate');
-      if (m) m.classList.remove('hidden');
+      if (typeof openAddEmployeeDrawer === 'function') {
+        openAddEmployeeDrawer('offshore_india');
+      } else {
+        const m = document.getElementById('modalNewOffshoreCandidate');
+        if (m) m.classList.remove('hidden');
+      }
     }
 
     function closeNewOffshoreCandidateModal() {
