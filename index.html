@@ -410,6 +410,158 @@
       padding: 14px 12px 6px 12px;
       user-select: none;
     }
+    .nav-section-item {
+      list-style: none;
+      margin-bottom: 6px;
+    }
+    .nav-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-section-header:hover {
+      filter: brightness(0.96);
+      transform: translateX(1px);
+    }
+    body.dark .nav-section-header:hover {
+      filter: brightness(1.2);
+    }
+    .nav-section-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-indigo { background: #6366f1; box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25); }
+    .dot-emerald { background: #10b981; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25); }
+    .dot-sky { background: #0ea5e9; box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25); }
+    .dot-amber { background: #f59e0b; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25); }
+    .dot-purple { background: #a855f7; box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25); }
+
+    .nav-section-indigo {
+      background: rgba(99, 102, 241, 0.08);
+      color: #4338ca;
+      border-left: 3px solid #6366f1;
+    }
+    body.dark .nav-section-indigo {
+      background: rgba(99, 102, 241, 0.16);
+      color: #a5b4fc;
+      border-left-color: #818cf8;
+    }
+
+    .nav-section-emerald {
+      background: rgba(16, 185, 129, 0.08);
+      color: #065f46;
+      border-left: 3px solid #10b981;
+    }
+    body.dark .nav-section-emerald {
+      background: rgba(16, 185, 129, 0.16);
+      color: #6ee7b7;
+      border-left-color: #34d399;
+    }
+
+    .nav-section-sky {
+      background: rgba(14, 165, 233, 0.08);
+      color: #0369a1;
+      border-left: 3px solid #0ea5e9;
+    }
+    body.dark .nav-section-sky {
+      background: rgba(14, 165, 233, 0.16);
+      color: #7dd3fc;
+      border-left-color: #38bdf8;
+    }
+
+    .nav-section-amber {
+      background: rgba(245, 158, 11, 0.08);
+      color: #92400e;
+      border-left: 3px solid #f59e0b;
+    }
+    body.dark .nav-section-amber {
+      background: rgba(245, 158, 11, 0.16);
+      color: #fde68a;
+      border-left-color: #fbbf24;
+    }
+
+    .nav-section-purple {
+      background: rgba(168, 85, 247, 0.08);
+      color: #6b21a8;
+      border-left: 3px solid #a855f7;
+    }
+    body.dark .nav-section-purple {
+      background: rgba(168, 85, 247, 0.16);
+      color: #d8b4fe;
+      border-left-color: #c084fc;
+    }
+
+    .nav-section-chevron {
+      font-size: 11px;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-block;
+      opacity: 0.75;
+    }
+    .nav-section-header.is-collapsed .nav-section-chevron {
+      transform: rotate(-90deg);
+    }
+
+    .nav-sub-group {
+      list-style: none;
+      padding: 3px 0 6px 4px;
+      margin: 0;
+      overflow: hidden;
+      max-height: 400px;
+      opacity: 1;
+      transform: translateY(0);
+      transition: max-height 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease, transform 0.22s ease;
+    }
+    .nav-sub-group.collapsed {
+      max-height: 0 !important;
+      opacity: 0 !important;
+      transform: translateY(-8px) !important;
+      pointer-events: none !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    .sidebar-add-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 13px;
+      border: 1px solid #059669;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: inherit;
+    }
+    .sidebar-add-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+    .sidebar-add-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.22);
+      padding: 1px 6px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
     .nav-item { margin-bottom: 2px; }
     .nav-link {
       display: flex;
@@ -601,6 +753,63 @@
       background: #ef4444;
       border-radius: 50%;
       border: 1.5px solid var(--card-solid);
+    }
+
+    .topbar-divider {
+      width: 1px;
+      height: 22px;
+      background: var(--card-border);
+      margin: 0 4px;
+    }
+    .topbar-pill-btn {
+      width: auto !important;
+      padding: 5px 12px !important;
+      gap: 6px !important;
+      font-size: 11.5px !important;
+      font-weight: 700 !important;
+      border-radius: 999px !important;
+      background: rgba(241, 245, 249, 0.8) !important;
+    }
+    body.dark .topbar-pill-btn {
+      background: rgba(30, 41, 59, 0.7) !important;
+    }
+    .topbar-add-btn {
+      padding: 7px 15px !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+      border-color: #059669 !important;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3) !important;
+      border-radius: 8px !important;
+      gap: 6px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      color: #ffffff !important;
+    }
+    .topbar-add-btn:hover {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
+    }
+    .lang-pill-btn {
+      background: rgba(241, 245, 249, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 5px 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .lang-pill-btn:hover, .lang-pill-btn.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    body.dark .lang-pill-btn {
+      background: rgba(30, 41, 59, 0.6);
     }
 
     /* Executive Profile Menu & Dropdown */
@@ -4362,9 +4571,9 @@
       <header class="topbar">
         <div class="topbar-left">
           <div class="topbar-breadcrumb">
-            <span style="opacity: 0.7;">AeroHR IT Staffing</span>
-            <span style="opacity: 0.4;">/</span>
-            <strong id="topbarBreadcrumbSection">Developer &amp; Contractor Onboarding Velocity</strong>
+            <span style="opacity: 0.65; font-weight: 500;">AeroHR</span>
+            <span style="opacity: 0.35;">/</span>
+            <strong id="topbarBreadcrumbSection" style="color: var(--text-main); font-weight: 700;">Developer &amp; Contractor Onboarding Velocity</strong>
           </div>
           <div class="punch-pill" id="liveShiftIndicator" style="margin-left: 8px;">
             <span class="status-dot"></span>
@@ -4375,17 +4584,23 @@
         <div class="topbar-center">
           <div class="search-box" onclick="focusCopilot()">
             <span style="color: var(--text-muted); font-size: 13px;">🔍</span>
-            <input type="text" id="globalSearch" placeholder="Ask Aero Copilot or search directory, timesheets, payroll... (⌘K)">
+            <input type="text" id="globalSearch" placeholder="Search directory, contracts, timesheets... (⌘K)">
             <span class="search-kbd">⌘K</span>
           </div>
         </div>
 
         <div class="top-actions">
-          <!-- Compact Adaptive Complexity Dropdown Pill -->
+          <!-- Primary CTA: Add Employee Profile -->
+          <button class="btn btn-primary btn-sm topbar-add-btn" id="topbarBtnAddEmployee" onclick="openAddEmployeeModal()" title="Initialize New Professional Profile (US Local or Offshore Hub)">
+            <span>➕</span>
+            <span>Add Employee</span>
+          </button>
+
+          <!-- Adaptive Complexity Dropdown Pill -->
           <div style="position: relative;" id="complexityMenuWrap">
-            <button class="topbar-icon-btn" style="width: auto; padding: 0 10px; gap: 6px; font-size: 12px; font-weight: 700;" onclick="toggleComplexityMenu()" id="complexityMenuBtn" title="Interface Complexity Level">
+            <button class="topbar-icon-btn topbar-pill-btn" onclick="toggleComplexityMenu()" id="complexityMenuBtn" title="Interface Complexity Level">
               <span id="complexityPillBadge">🟡 Standard (SMB)</span>
-              <span style="font-size: 10px; color: var(--text-muted);">▾</span>
+              <span style="font-size: 9px; color: var(--text-muted);">▾</span>
             </button>
             <div id="complexityDropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; width: 220px; background: var(--card-solid); border: 1px solid var(--card-border); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); padding: 6px; z-index: 100;">
               <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); padding: 6px 10px;">Select Complexity Mode</div>
@@ -4393,41 +4608,28 @@
               <a class="exec-dropdown-item" onclick="setComplexityLevel('standard'); toggleComplexityMenu();">🟡 Standard (SMB Sweet Spot)</a>
               <a class="exec-dropdown-item" onclick="setComplexityLevel('advanced'); toggleComplexityMenu();">🟣 Advanced AI (Full Governance)</a>
               <div class="exec-dropdown-divider"></div>
-              <a class="exec-dropdown-item" onclick="openComplexityModal(); toggleComplexityMenu();">ℹ️ Complexity Guide & Framework</a>
+              <a class="exec-dropdown-item" onclick="openComplexityModal(); toggleComplexityMenu();">ℹ️ Complexity Guide &amp; Framework</a>
             </div>
           </div>
 
-          <!-- Direct Quick Access to Onboarding Velocity Tracker -->
-          <button class="btn btn-primary btn-sm" onclick="switchTab('onboarding')" style="font-size: 11px; padding: 5px 12px; gap: 6px; display: inline-flex; align-items: center; font-weight: 700; box-shadow: 0 2px 8px rgba(99,102,241,0.25); white-space: nowrap;" title="Open Candidate Onboarding Journey & Action 1/2 Automation">
-            <span>🚀</span>
-            <span>Onboarding Velocity</span>
-            <span class="card-tag tag-success" style="font-size: 9px; padding: 1px 5px; margin-left: 2px;">Action 1 &amp; 2</span>
-          </button>
+          <div class="topbar-divider"></div>
 
-          <!-- Global Cinematic Add Employee Action Trigger -->
-          <button class="btn btn-primary btn-sm" id="topbarBtnAddEmployee" onclick="openAddEmployeeModal()" style="font-size: 11.5px; padding: 6px 14px; gap: 6px; display: inline-flex; align-items: center; font-weight: 700; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-color: #059669; box-shadow: 0 2px 8px rgba(16,185,129,0.35); white-space: nowrap;" title="Initialize New Professional Profile (US Local or Offshore Hub)">
-            <span>➕</span>
-            <span>Add Employee</span>
-          </button>
-
-          <select id="langSelector" class="theme-toggle-btn" onchange="changeLanguage(this.value)" style="font-weight: 600; cursor: pointer; outline: none; padding: 6px 8px;" title="Interface Language">
-            <option value="en">🇺🇸 EN</option>
-            <option value="es">🇪🇸 ES</option>
-            <option value="fr">🇫🇷 FR</option>
-            <option value="de">🇩🇪 DE</option>
-            <option value="zh">🇨🇳 ZH</option>
-            <option value="ja">🇯🇵 JA</option>
+          <!-- Hidden input for backwards compatibility -->
+          <select id="langSelector" style="display: none;" onchange="changeLanguage(this.value)">
+            <option value="en">EN</option><option value="es">ES</option><option value="fr">FR</option><option value="de">DE</option><option value="zh">ZH</option><option value="ja">JA</option>
           </select>
 
-          <button class="topbar-icon-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button>
+          <!-- Theme Toggle Button -->
+          <button class="topbar-icon-btn" onclick="toggleTheme()" title="Toggle Light / Dark Mode">🌓</button>
           
-          <button class="topbar-icon-btn" onclick="showToast('Executive Alerts: 2 critical sign-offs pending before Friday payroll.')" title="Notifications">
+          <!-- Notifications Alert -->
+          <button class="topbar-icon-btn" onclick="showToast('Executive Alerts: 2 critical sign-offs pending before Friday payroll.')" title="Notifications &amp; Alerts">
             🔔<span class="icon-ping"></span>
           </button>
 
-          <!-- Executive Avatar & Profile Menu -->
+          <!-- Executive Avatar & Controls Menu -->
           <div class="exec-profile-menu-container">
-            <button class="exec-avatar-btn" onclick="toggleExecMenu()" id="topbarAvatarBtn" title="Account & Executive Controls">
+            <button class="exec-avatar-btn" onclick="toggleExecMenu()" id="topbarAvatarBtn" title="Account &amp; Executive Controls">
               <div class="user-avatar-sm" id="topbarAvatar">SJ</div>
               <span class="exec-avatar-name" id="topbarName">Sarah Jenkins</span>
               <span style="font-size: 10px; color: var(--text-muted);">▾</span>
@@ -4437,6 +4639,19 @@
                 <div style="font-weight: 700; font-size: 13px;" id="execMenuUserName">Sarah Jenkins</div>
                 <div style="font-size: 11px; color: var(--text-muted);" id="execMenuUserEmail">sarah.j@acme.corp • <span id="execMenuUserRole">ADMIN</span></div>
               </div>
+              <div class="exec-dropdown-divider"></div>
+
+              <!-- Localization Selector in Profile Menu -->
+              <div class="exec-dropdown-section">Language / Idioma</div>
+              <div style="padding: 4px 10px 8px 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;">
+                <button class="lang-pill-btn active" onclick="changeLanguage('en')">🇺🇸 EN</button>
+                <button class="lang-pill-btn" onclick="changeLanguage('es')">🇪🇸 ES</button>
+                <button class="lang-pill-btn" onclick="changeLanguage('fr')">🇫🇷 FR</button>
+                <button class="lang-pill-btn" onclick="changeLanguage('de')">🇩🇪 DE</button>
+                <button class="lang-pill-btn" onclick="changeLanguage('zh')">🇨🇳 ZH</button>
+                <button class="lang-pill-btn" onclick="changeLanguage('ja')">🇯🇵 JA</button>
+              </div>
+
               <div class="exec-dropdown-divider"></div>
               <div class="exec-dropdown-section">Switch Role Persona</div>
               <a class="exec-dropdown-item" onclick="switchDemoUser('admin'); toggleExecMenu();">👑 Admin (Executive Portal)</a>
@@ -13060,93 +13275,199 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
     let currentActiveTab = 'onboarding';
     let currentWorkerTypeFilter = 'all';
 
-    // Renders the clean 5-group Left Sidebar Navigation
+    // Navigation section expansion state - inner sections hidden by default as requested
+    let navSectionState = {
+      overview: false,
+      onboarding: false,
+      it: false,
+      finance: false,
+      compliance: false
+    };
+
+    // Toggle collapsible navigation section with smooth fade transition
+    function toggleNavSection(sectionKey) {
+      navSectionState[sectionKey] = !navSectionState[sectionKey];
+      const group = document.getElementById(`nav-subgroup-${sectionKey}`);
+      const header = document.getElementById(`nav-header-${sectionKey}`);
+      if (group) {
+        if (navSectionState[sectionKey]) {
+          group.classList.remove('collapsed');
+          if (header) header.classList.remove('is-collapsed');
+        } else {
+          group.classList.add('collapsed');
+          if (header) header.classList.add('is-collapsed');
+        }
+      }
+    }
+
+    // Renders the clean 5-group Left Sidebar Navigation with distinct colored headers and collapsible sub-sections
     function renderStaffingSidebarNav(activeTab = 'onboarding') {
       const nav = document.getElementById('roleNavList');
       if (!nav) return;
 
       nav.innerHTML = `
-        <li style="padding: 10px 14px 12px 14px;">
-          <button onclick="openAddEmployeeModal()" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border-radius: 9px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; font-weight: 700; font-size: 13px; border: 1px solid #059669; box-shadow: 0 2px 8px rgba(16,185,129,0.3); cursor: pointer; transition: all 0.2s ease;">
-            <span style="font-size: 14px;">➕</span>
-            <span>Add Employee</span>
+        <!-- Action Button: Add Employee -->
+        <li style="padding: 6px 10px 10px 10px; list-style: none;">
+          <button class="sidebar-add-btn" onclick="openAddEmployeeModal()" title="Initialize New Placement (Direct API)">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 14px;">➕</span>
+              <span>Add Employee</span>
+            </span>
+            <span class="sidebar-add-badge">DIRECT API</span>
           </button>
         </li>
-        <li class="nav-section-title">Overview</li>
-        <li class="nav-item">
-          <a class="nav-link ${activeTab === 'dashboard' ? 'active' : ''}" id="nav-dashboard" onclick="switchTab('dashboard')">
-            <span>🏠 Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link ${activeTab === 'hris' ? 'active' : ''}" id="nav-roster" onclick="switchTab('hris')">
-            <span>👥 Roster</span>
-            <span class="nav-badge" style="background: #3b82f6; color: white;">28</span>
-          </a>
+
+        <!-- 1. Overview Section (Indigo) -->
+        <li class="nav-section-item">
+          <div class="nav-section-header nav-section-indigo ${!navSectionState.overview ? 'is-collapsed' : ''}" id="nav-header-overview" onclick="toggleNavSection('overview')" title="Click to expand/collapse Overview">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span class="nav-section-dot dot-indigo"></span>
+              <span>Overview</span>
+            </span>
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 10px; opacity: 0.75; font-weight: 700;">3</span>
+              <span class="nav-section-chevron">▼</span>
+            </span>
+          </div>
+          <ul class="nav-sub-group ${!navSectionState.overview ? 'collapsed' : ''}" id="nav-subgroup-overview">
+            <li class="nav-item">
+              <a class="nav-link ${activeTab === 'dashboard' ? 'active' : ''}" id="nav-dashboard" onclick="switchTab('dashboard')">
+                <span>🏠 Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ${activeTab === 'hris' ? 'active' : ''}" id="nav-roster" onclick="switchTab('hris')">
+                <span>👥 Roster</span>
+                <span class="nav-badge" style="background: #4f46e5; color: white;">28</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ${activeTab === 'timeoff' ? 'active' : ''}" id="nav-timeoff" onclick="switchTab('timeoff')">
+                <span>🌴 Time Off</span>
+                <span class="nav-badge" style="background: #6366f1; color: white;">PTO</span>
+              </a>
+            </li>
+          </ul>
         </li>
 
-        <li class="nav-section-title">Onboarding</li>
-        <li class="nav-item">
-          <a class="nav-link ${activeTab === 'onboarding' ? 'active' : ''}" id="nav-active-onboard" onclick="switchStaffingSidebarFilter('active')">
-            <span>🚀 Active Onboardings</span>
-            <span class="nav-badge" style="background: #10b981; color: white;">28</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-offshore" onclick="showOffshoreEngineModule()">
-            <span>🇮🇳 Offshore India Hub</span>
-            <span class="nav-badge" style="background: #0ea5e9; color: white;">LIVE</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-preboarding" onclick="switchStaffingSidebarFilter('preboarding')">
-            <span>📋 Preboarding</span>
-            <span class="nav-badge" style="background: #f59e0b; color: white;">12</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-packets" onclick="switchStaffingSidebarFilter('packets')">
-            <span>📦 New Hire Packets</span>
-          </a>
-        </li>
-
-        <li class="nav-section-title">IT &amp; Access</li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-hardware" onclick="switchStaffingSidebarFilter('hardware')">
-            <span>💻 Hardware Provisioning</span>
-            <span class="nav-badge" style="background: #3b82f6; color: white;">5</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-apps" onclick="switchStaffingSidebarFilter('apps')">
-            <span>🔑 App Access</span>
-            <span class="nav-badge" style="background: #8b5cf6; color: white;">8</span>
-          </a>
-        </li>
-
-        <li class="nav-section-title">Contractor Hub</li>
-        <li class="nav-item">
-          <a class="nav-link ${activeTab === 'timesheets' ? 'active' : ''}" id="nav-timesheets" onclick="switchTab('timesheets')">
-            <span>⏱️ Time &amp; Expense</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link ${activeTab === 'invoices' ? 'active' : ''}" id="nav-invoices" onclick="switchTab('invoices')">
-            <span>📝 Client Approvals</span>
-            <span class="nav-badge" style="background: #ef4444; color: white;">3</span>
-          </a>
+        <!-- 2. Onboarding Engine Section (Emerald) -->
+        <li class="nav-section-item">
+          <div class="nav-section-header nav-section-emerald ${!navSectionState.onboarding ? 'is-collapsed' : ''}" id="nav-header-onboarding" onclick="toggleNavSection('onboarding')" title="Click to expand/collapse Onboarding">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span class="nav-section-dot dot-emerald"></span>
+              <span>Onboarding Engine</span>
+            </span>
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 10px; opacity: 0.75; font-weight: 700;">4</span>
+              <span class="nav-section-chevron">▼</span>
+            </span>
+          </div>
+          <ul class="nav-sub-group ${!navSectionState.onboarding ? 'collapsed' : ''}" id="nav-subgroup-onboarding">
+            <li class="nav-item">
+              <a class="nav-link ${activeTab === 'onboarding' ? 'active' : ''}" id="nav-active-onboard" onclick="switchStaffingSidebarFilter('active')">
+                <span>🚀 Active Onboardings</span>
+                <span class="nav-badge" style="background: #10b981; color: white;">28</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="nav-offshore" onclick="showOffshoreEngineModule()">
+                <span>🇮🇳 Offshore India Hub</span>
+                <span class="nav-badge" style="background: #059669; color: white;">LIVE</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="nav-preboarding" onclick="switchStaffingSidebarFilter('preboarding')">
+                <span>📋 Preboarding Queue</span>
+                <span class="nav-badge" style="background: #34d399; color: #064e3b;">12</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="nav-packets" onclick="switchStaffingSidebarFilter('packets')">
+                <span>📦 New Hire Packets</span>
+              </a>
+            </li>
+          </ul>
         </li>
 
-        <li class="nav-section-title">Compliance</li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-checkr" onclick="switchStaffingSidebarFilter('checkr')">
-            <span>🛡️ Background Checks</span>
-          </a>
+        <!-- 3. IT & Systems Section (Sky Blue) -->
+        <li class="nav-section-item">
+          <div class="nav-section-header nav-section-sky ${!navSectionState.it ? 'is-collapsed' : ''}" id="nav-header-it" onclick="toggleNavSection('it')" title="Click to expand/collapse IT & Systems">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span class="nav-section-dot dot-sky"></span>
+              <span>IT &amp; Access</span>
+            </span>
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 10px; opacity: 0.75; font-weight: 700;">2</span>
+              <span class="nav-section-chevron">▼</span>
+            </span>
+          </div>
+          <ul class="nav-sub-group ${!navSectionState.it ? 'collapsed' : ''}" id="nav-subgroup-it">
+            <li class="nav-item">
+              <a class="nav-link" id="nav-hardware" onclick="switchStaffingSidebarFilter('hardware')">
+                <span>💻 Hardware Provisioning</span>
+                <span class="nav-badge" style="background: #0ea5e9; color: white;">5</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="nav-apps" onclick="switchStaffingSidebarFilter('apps')">
+                <span>🔑 App Access &amp; SCIM</span>
+                <span class="nav-badge" style="background: #0284c7; color: white;">8</span>
+              </a>
+            </li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="nav-legal" onclick="switchStaffingSidebarFilter('legal')">
-            <span>📜 Tax &amp; Legal Docs</span>
-          </a>
+
+        <!-- 4. Time & Invoicing Section (Amber) -->
+        <li class="nav-section-item">
+          <div class="nav-section-header nav-section-amber ${!navSectionState.finance ? 'is-collapsed' : ''}" id="nav-header-finance" onclick="toggleNavSection('finance')" title="Click to expand/collapse Time & Invoicing">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span class="nav-section-dot dot-amber"></span>
+              <span>Time &amp; Invoicing</span>
+            </span>
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 10px; opacity: 0.75; font-weight: 700;">2</span>
+              <span class="nav-section-chevron">▼</span>
+            </span>
+          </div>
+          <ul class="nav-sub-group ${!navSectionState.finance ? 'collapsed' : ''}" id="nav-subgroup-finance">
+            <li class="nav-item">
+              <a class="nav-link ${activeTab === 'timesheets' ? 'active' : ''}" id="nav-timesheets" onclick="switchTab('timesheets')">
+                <span>⏱️ Time &amp; Expense</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ${activeTab === 'invoices' ? 'active' : ''}" id="nav-invoices" onclick="switchTab('invoices')">
+                <span>📝 Client Approvals</span>
+                <span class="nav-badge" style="background: #f59e0b; color: white;">3</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- 5. Compliance Vault Section (Purple) -->
+        <li class="nav-section-item">
+          <div class="nav-section-header nav-section-purple ${!navSectionState.compliance ? 'is-collapsed' : ''}" id="nav-header-compliance" onclick="toggleNavSection('compliance')" title="Click to expand/collapse Compliance">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span class="nav-section-dot dot-purple"></span>
+              <span>Compliance Vault</span>
+            </span>
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 10px; opacity: 0.75; font-weight: 700;">2</span>
+              <span class="nav-section-chevron">▼</span>
+            </span>
+          </div>
+          <ul class="nav-sub-group ${!navSectionState.compliance ? 'collapsed' : ''}" id="nav-subgroup-compliance">
+            <li class="nav-item">
+              <a class="nav-link" id="nav-checkr" onclick="switchStaffingSidebarFilter('checkr')">
+                <span>🛡️ Checkr &amp; E-Verify</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="nav-legal" onclick="switchStaffingSidebarFilter('legal')">
+                <span>📜 Tax &amp; Legal Docs</span>
+              </a>
+            </li>
+          </ul>
         </li>
       `;
     }
@@ -13365,6 +13686,20 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
 
     // Sidebar navigation linking to specific cards
     function switchStaffingSidebarFilter(category) {
+      const sectionMapping = {
+        'active': 'onboarding',
+        'preboarding': 'onboarding',
+        'packets': 'onboarding',
+        'hardware': 'it',
+        'apps': 'it',
+        'checkr': 'compliance',
+        'legal': 'compliance'
+      };
+      const sec = sectionMapping[category];
+      if (sec) {
+        navSectionState[sec] = true;
+      }
+
       switchTab('onboarding');
 
       document.querySelectorAll('#roleNavList .nav-link').forEach(l => l.classList.remove('active'));
@@ -15260,6 +15595,17 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       }
 
       currentActiveTab = tabId;
+      const tabToSection = {
+        'dashboard': 'overview',
+        'hris': 'overview',
+        'timeoff': 'overview',
+        'onboarding': 'onboarding',
+        'timesheets': 'finance',
+        'invoices': 'finance'
+      };
+      if (tabToSection[tabId]) {
+        navSectionState[tabToSection[tabId]] = true;
+      }
       renderStaffingSidebarNav(tabId);
 
       document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
