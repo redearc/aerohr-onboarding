@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>AeroHR — Pure AI Workforce Operating System</title>
   <style>
     :root {
@@ -4346,6 +4349,12 @@
             <span class="card-tag tag-success" style="font-size: 9px; padding: 1px 5px; margin-left: 2px;">Action 1 &amp; 2</span>
           </button>
 
+          <!-- Global Cinematic Add Employee Action Trigger -->
+          <button class="btn btn-primary btn-sm" id="topbarBtnAddEmployee" onclick="openAddEmployeeModal()" style="font-size: 11.5px; padding: 6px 14px; gap: 6px; display: inline-flex; align-items: center; font-weight: 700; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-color: #059669; box-shadow: 0 2px 8px rgba(16,185,129,0.35); white-space: nowrap;" title="Initialize New Professional Profile (US Local or Offshore Hub)">
+            <span>➕</span>
+            <span>Add Employee</span>
+          </button>
+
           <select id="langSelector" class="theme-toggle-btn" onchange="changeLanguage(this.value)" style="font-weight: 600; cursor: pointer; outline: none; padding: 6px 8px;" title="Interface Language">
             <option value="en">🇺🇸 EN</option>
             <option value="es">🇪🇸 ES</option>
@@ -5603,6 +5612,9 @@
                 </button>
                 <button class="aero-btn aero-btn-primary aero-btn-sm" onclick="openNewConsultantPlacementModal()">
                   + Onboard Consultant
+                </button>
+                <button class="aero-btn aero-btn-primary aero-btn-sm" onclick="openAddEmployeeModal()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-color: #059669; box-shadow: 0 2px 8px rgba(16,185,129,0.3);">
+                  ➕ Add Employee
                 </button>
               </div>
             </div>
@@ -12902,6 +12914,12 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       if (!nav) return;
 
       nav.innerHTML = `
+        <li style="padding: 10px 14px 12px 14px;">
+          <button onclick="openAddEmployeeModal()" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border-radius: 9px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; font-weight: 700; font-size: 13px; border: 1px solid #059669; box-shadow: 0 2px 8px rgba(16,185,129,0.3); cursor: pointer; transition: all 0.2s ease;">
+            <span style="font-size: 14px;">➕</span>
+            <span>Add Employee</span>
+          </button>
+        </li>
         <li class="nav-section-title">Overview</li>
         <li class="nav-item">
           <a class="nav-link ${activeTab === 'dashboard' ? 'active' : ''}" id="nav-dashboard" onclick="switchTab('dashboard')">
