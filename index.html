@@ -3730,42 +3730,48 @@
     /* CINEMATIC ADD EMPLOYEE SLIDE-OVER WORKSPACE                             */
     /* ======================================================================= */
     .aero-slideover-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.68);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 9998;
+      position: fixed !important;
+      inset: 0 !important;
+      background: rgba(15, 23, 42, 0.72) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      z-index: 999998 !important;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      display: none;
     }
     .aero-slideover-backdrop.open {
-      opacity: 1;
-      pointer-events: auto;
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
     }
 
     .aero-slideover-panel {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 40vw;
-      min-width: 440px;
-      max-width: 640px;
-      height: 100vh;
-      background: #ffffff;
-      z-index: 9999;
-      box-shadow: -16px 0 48px -12px rgba(15, 23, 42, 0.32), -4px 0 16px rgba(15, 23, 42, 0.08);
-      display: flex;
-      flex-direction: column;
+      position: fixed !important;
+      top: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 42vw !important;
+      min-width: 440px !important;
+      max-width: 640px !important;
+      height: 100vh !important;
+      background: #ffffff !important;
+      z-index: 999999 !important;
+      box-shadow: -16px 0 48px -12px rgba(15, 23, 42, 0.35), -4px 0 16px rgba(15, 23, 42, 0.1) !important;
+      display: none;
+      flex-direction: column !important;
       transform: translateX(100%);
-      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-      border-left: 1px solid rgba(226, 232, 240, 0.9);
-      box-sizing: border-box;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+      border-left: 1px solid rgba(226, 232, 240, 0.9) !important;
+      box-sizing: border-box !important;
     }
     .aero-slideover-panel.open {
-      transform: translateX(0);
+      display: flex !important;
+      transform: translateX(0) !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
 
     @media (max-width: 768px) {
@@ -9805,9 +9811,19 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
     let selectedOffshoreRole = 'bench_sales';
 
     function openAddEmployeeDrawer(preselectedRoute = 'us_local') {
+      console.log('⚡ [AeroHR] openAddEmployeeDrawer invoked with route:', preselectedRoute);
       const backdrop = document.getElementById('aeroSlideOverBackdrop');
       const drawer = document.getElementById('aeroSlideOverDrawer');
-      if (!backdrop || !drawer) return;
+      if (!backdrop || !drawer) {
+        console.error('Missing slideover backdrop or drawer in DOM!');
+        return;
+      }
+
+      // Explicitly set high z-index and display
+      backdrop.style.zIndex = '999998';
+      drawer.style.zIndex = '999999';
+      backdrop.style.display = 'block';
+      drawer.style.display = 'flex';
 
       // Set default target start date if empty (next Monday)
       const startDateInput = document.getElementById('addEmpStartDate');
@@ -9824,20 +9840,36 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       selectAddEmployeeRoute(preselectedRoute);
       goToAddEmployeeStep(1);
 
-      backdrop.classList.add('open');
-      drawer.classList.add('open');
+      requestAnimationFrame(() => {
+        backdrop.classList.add('open');
+        drawer.classList.add('open');
+        backdrop.style.opacity = '1';
+        backdrop.style.pointerEvents = 'auto';
+        drawer.style.transform = 'translateX(0)';
+        drawer.style.visibility = 'visible';
+        drawer.style.opacity = '1';
+      });
+
       document.body.style.overflow = 'hidden';
     }
 
     function closeAddEmployeeDrawer(e) {
-      if (e && e.target && e.target.id !== 'aeroSlideOverBackdrop') {
-        // If clicked inside the drawer panel, don't close
+      if (e && e.target && e.target.id !== 'aeroSlideOverBackdrop' && !e.target.classList.contains('aero-slideover-close-btn') && !e.target.closest('.aero-slideover-close-btn')) {
         return;
       }
       const backdrop = document.getElementById('aeroSlideOverBackdrop');
       const drawer = document.getElementById('aeroSlideOverDrawer');
-      if (backdrop) backdrop.classList.remove('open');
-      if (drawer) drawer.classList.remove('open');
+      if (backdrop) {
+        backdrop.classList.remove('open');
+        backdrop.style.opacity = '0';
+        backdrop.style.pointerEvents = 'none';
+        setTimeout(() => { backdrop.style.display = 'none'; }, 320);
+      }
+      if (drawer) {
+        drawer.classList.remove('open');
+        drawer.style.transform = 'translateX(100%)';
+        setTimeout(() => { drawer.style.display = 'none'; }, 350);
+      }
       document.body.style.overflow = '';
     }
 
@@ -10010,8 +10042,11 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
 
     // Connect existing openAddEmployeeModal button to open the slide-over
     function openAddEmployeeModal() {
+      showToast('Opening Initialize New Professional Profile Wizard...');
       openAddEmployeeDrawer('us_local');
     }
+    window.openAddEmployeeModal = openAddEmployeeModal;
+    window.openAddEmployeeDrawer = openAddEmployeeDrawer;
 
     // Form Submission & Transmission
     async function handleEmployeeFormSubmit(e) {
