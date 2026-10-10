@@ -4186,170 +4186,178 @@
       box-shadow: 0 0 6px #10b981;
     }
 
-    /* Horizontal Navigation Progress Bar */
-    .aero-offshore-tracker {
+    /* ========================================================================= */
+    /* 3. OFFSHORE INDIA ENGINE: STRIPE PROGRESS RIBBON & MONOCHROME SELECTOR    */
+    /* ========================================================================= */
+    /* Ultra-thin Minimalist Stripe-Style Progress Ribbon */
+    .aero-stripe-tracker {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: relative;
-      padding: 12px 0 24px 0;
+      gap: 12px;
+      padding: 14px 20px;
       margin-bottom: 22px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 8px 20px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
     }
-    .aero-offshore-tracker-line {
-      position: absolute;
-      top: 30px;
-      left: 36px;
-      right: 36px;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.1);
-      z-index: 1;
-    }
-    .aero-offshore-tracker-fill {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      background: linear-gradient(90deg, #10b981, #f59e0b);
-      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      border-radius: 3px;
-      box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
-    }
-
-    .aero-phase-step {
-      position: relative;
-      z-index: 2;
+    .aero-stripe-step {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      text-align: center;
+      gap: 9px;
       cursor: pointer;
-      min-width: 120px;
-      transition: transform 0.2s ease;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+      padding: 6px 10px;
+      border-radius: 8px;
     }
-    .aero-phase-step:hover {
-      transform: translateY(-2px);
+    .aero-stripe-step:hover {
+      background: rgba(255, 255, 255, 0.03);
     }
-
-    .aero-phase-node {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
+    /* Done State: Crisp fine green check icon next to white text string */
+    .aero-stripe-step.phase-done .aero-stripe-indicator {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      width: 16px;
+      height: 16px;
+      color: #10b981;
       font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Phase Completed State with Emerald Glow */
-    .aero-phase-step.phase-done .aero-phase-node {
-      background: rgba(16, 185, 129, 0.2);
-      color: #34d399;
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.55), 0 2px 6px rgba(16, 185, 129, 0.3);
-      border: 2px solid #10b981;
-    }
-    .aero-phase-step.phase-done .aero-phase-label {
-      color: #34d399;
-      font-weight: 700;
-      text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
-    }
-
-    /* Phase Active State with Breathing Amber Pulse */
-    .aero-phase-step.phase-active .aero-phase-node {
-      background: rgba(15, 18, 28, 0.9);
-      color: #fbbf24;
-      border: 3px solid #f59e0b;
-      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.25), 0 0 20px rgba(245, 158, 11, 0.55);
-      animation: amberBreathingPulse 2s infinite ease-in-out;
-    }
-    .aero-phase-step.phase-active .aero-phase-label {
-      color: #fbbf24;
       font-weight: 800;
-      text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
     }
-
-    /* Phase Upcoming State with Muted Translucent Gray */
-    .aero-phase-step.phase-upcoming .aero-phase-node {
-      background: rgba(15, 18, 28, 0.5);
-      color: #64748b;
-      border: 2px dashed rgba(255, 255, 255, 0.15);
+    .aero-stripe-step.phase-done .aero-stripe-title {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 12.5px;
+      letter-spacing: -0.01em;
     }
-    .aero-phase-step.phase-upcoming .aero-phase-label {
-      color: #94a3b8;
-      font-weight: 500;
+    /* Active State: Pulsing neon blue ring indicator marking exact current candidate position */
+    .aero-stripe-step.phase-active .aero-stripe-indicator {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #6366f1;
+      border: 2px solid #818cf8;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.55), 0 0 24px rgba(99, 102, 241, 0.3);
+      animation: stripePulseRing 2s infinite ease-in-out;
     }
-
-    .aero-phase-label {
-      font-size: 11.5px;
-      line-height: 1.3;
-      transition: color 0.2s ease;
-    }
-    .aero-phase-sub {
-      font-size: 10px;
-      color: #64748b;
-      margin-top: 2px;
-    }
-
-    @keyframes amberBreathingPulse {
+    @keyframes stripePulseRing {
       0% {
-        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.45), 0 0 10px rgba(245, 158, 11, 0.3);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7), 0 0 12px rgba(99, 102, 241, 0.4);
       }
       50% {
-        box-shadow: 0 0 0 8px rgba(245, 158, 11, 0.15), 0 0 22px rgba(245, 158, 11, 0.65);
+        box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.15), 0 0 18px rgba(99, 102, 241, 0.6);
       }
       100% {
-        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.45), 0 0 10px rgba(245, 158, 11, 0.3);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7), 0 0 12px rgba(99, 102, 241, 0.4);
       }
     }
-
-    /* Context Filter Capsule Chips */
-    .aero-capsule-chips-wrap {
-      display: flex;
+    .aero-stripe-step.phase-active .aero-stripe-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 12.5px;
+      letter-spacing: -0.01em;
+    }
+    /* Future Steps: Muted low-contrast slate-gray text with no bounding boxes or heavy shapes */
+    .aero-stripe-step.phase-upcoming .aero-stripe-indicator {
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
+      justify-content: center;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #334155;
+    }
+    .aero-stripe-step.phase-upcoming .aero-stripe-title {
+      color: #64748b;
+      font-weight: 500;
+      font-size: 12.5px;
+      letter-spacing: -0.01em;
+    }
+    .aero-stripe-sep {
+      color: rgba(255, 255, 255, 0.12);
+      font-size: 11px;
+      font-weight: 400;
+      user-select: none;
+    }
+
+    /* Monochrome Segmented Control Matrix */
+    .aero-offshore-segmented-bar {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 3px 5px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
       flex-wrap: wrap;
+      gap: 2px;
     }
     .aero-capsule-chip {
-      padding: 7px 18px;
-      border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(15, 18, 28, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: transparent;
+      border: 1px solid transparent;
       color: #94a3b8;
       font-size: 12px;
       font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 7px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
     }
     .aero-capsule-chip:hover {
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.12);
       color: #ffffff;
+      background: rgba(255, 255, 255, 0.04);
     }
     .aero-capsule-chip.active {
-      background: rgba(99, 102, 241, 0.2);
+      background: rgba(255, 255, 255, 0.08);
       color: #ffffff;
-      border-color: rgba(99, 102, 241, 0.45);
-      box-shadow: inset 0 0 14px rgba(99, 102, 241, 0.25), 0 0 20px rgba(99, 102, 241, 0.15);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
     .aero-capsule-chip .chip-dot {
-      width: 7px;
-      height: 7px;
+      width: 2px;
+      height: 2px;
+      min-width: 2px;
       border-radius: 50%;
-      background: #94a3b8;
+      background: #ffffff;
+      display: none;
     }
     .aero-capsule-chip.active .chip-dot {
-      background: #10b981;
-      box-shadow: 0 0 6px #10b981;
+      display: inline-block;
+    }
+
+    /* Candidate Context Card */
+    .aero-candidate-context-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 6px 14px;
+    }
+
+    /* Tab Panels Fade Transitions */
+    .offshore-tab-panel {
+      animation: fadeIn 0.25s ease-out;
     }
 
     /* Phase 1 & Phase 2 Panels Layout (Stacked Full-Width Architecture) */
@@ -5046,18 +5054,18 @@
       text-align: left;
     }
     .aero-db-table th {
-      background: rgba(11, 14, 23, 0.8);
-      color: #94a3b8;
+      background: rgba(10, 13, 20, 0.85);
+      color: #64748b;
       font-weight: 700;
       text-transform: uppercase;
-      font-size: 10px;
-      letter-spacing: 0.5px;
-      padding: 10px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 10.5px;
+      letter-spacing: 0.05em;
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
     .aero-db-table td {
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       color: #ffffff;
       vertical-align: middle;
       transition: background 0.2s ease;
@@ -8135,7 +8143,7 @@
                     <div class="aero-card-icon-box">💾</div>
                     <div>
                       <div class="aero-card-title-text">Enterprise Storage Ledger &amp; Live Database</div>
-                      <div class="aero-card-sub-text">public.offshore_onboarding &bull; candidate-vault encrypted repository</div>
+                      <div class="aero-card-sub-text">Global candidate records &bull; Encrypted storage repository</div>
                     </div>
                   </div>
                   <div style="display: flex; align-items: center; gap: 8px;">
@@ -8148,11 +8156,11 @@
                 <div class="aero-card-body" id="card-storage-ledger-body" style="padding: 24px;">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
                     <div>
-                      <span style="font-size: 11.5px; color: #64748b;">Active Supabase RLS Session &bull; Project: <code style="color: #38bdf8;">https://supabase.co</code></span>
+                      <span style="font-size: 11.5px; color: #64748b;">Active Cryptographic Storage Session &bull; Project Sync Enabled</span>
                     </div>
                     <div style="display: flex; gap: 8px;">
-                      <span class="card-tag tag-primary" style="font-size: 10px;">RLS Isolated</span>
-                      <span class="card-tag tag-success" style="font-size: 10px;">candidate-vault Connected</span>
+                      <span class="card-tag tag-primary" style="font-size: 10px;">Security Hardened</span>
+                      <span class="card-tag tag-success" style="font-size: 10px;">Vault Synchronized</span>
                     </div>
                   </div>
                   <div style="overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px;">
@@ -8350,196 +8358,268 @@
             <!-- =============================================================== -->
             <div id="aeroOffshoreIndiaEngine" class="aero-offshore-engine" style="display: none;">
               
-              <!-- 1. Structural Framing & Header -->
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; flex-wrap: wrap; gap: 12px;">
+              <!-- 1. Structural Framing & Premium Enterprise Header -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
                 <div>
-                  <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 24px;">🇮🇳</span>
-                    <h2 style="font-size: 20px; font-weight: 800; color: #ffffff; margin: 0; letter-spacing: -0.4px;">
-                      Offshore India Onboarding Engine
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <h2 style="font-size: 22px; font-weight: 800; color: #ffffff; margin: 0; letter-spacing: -0.02em;">
+                      Global Infrastructure Hub
                     </h2>
-                    <span class="pill-neon-emerald" style="font-size: 11px;" id="supabaseLiveBadge">⚡ SUPABASE LIVE: https://supabase.co</span>
+                    <span class="pill-neon-emerald" style="font-size: 10.5px;">Active Sync</span>
                   </div>
-                  <p style="font-size: 13px; color: #94a3b8; margin: 6px 0 0 0;">
-                    Automated pre-offer document vault (candidate-vault), ISO-27001 bundle synthesis, Resend transactional webhooks, and AeroSign cryptographic contract execution for Bangalore, Hyderabad, &amp; Noida recruitment hubs.
+                  <p style="font-size: 12.5px; color: #94a3b8; margin: 5px 0 0 0; letter-spacing: -0.01em;">
+                    🇮🇳 India Operations Recruiter Network • Active Sync Enabled
                   </p>
                 </div>
                 
-                <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                  <button class="aero-btn aero-btn-outline aero-btn-sm" onclick="switchCohortMode('us')">
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                  <button class="aero-btn aero-btn-outline aero-btn-sm" onclick="switchCohortMode('us')" style="font-size: 12px; padding: 6px 14px;">
                     ← Back to US Hub
                   </button>
-                  <button class="aero-btn aero-btn-outline aero-btn-sm" onclick="openOffshoreSqlSchemaModal()">
-                    💾 SQL &amp; Storage DDL
-                  </button>
-                  <button class="aero-btn aero-btn-outline aero-btn-sm" onclick="openResendTelemetryModal()">
-                    ✉️ Resend Webhook Telemetry
-                  </button>
-                  <button class="aero-btn aero-btn-primary aero-btn-sm" onclick="openNewOffshoreCandidateModal()">
+                  <button class="aero-btn aero-btn-primary aero-btn-sm" onclick="openNewOffshoreCandidateModal()" style="font-size: 12px; padding: 6px 16px; font-weight: 700;">
                     + Onboard New Offshore Hire
                   </button>
                 </div>
               </div>
 
-              <!-- 2. Horizontal Navigation Progress Bar (Milestone Phases) -->
-              <div class="aero-offshore-tracker" id="offshoreTracker">
-                <div class="aero-offshore-tracker-line">
-                  <div class="aero-offshore-tracker-fill" id="offshoreTrackerFill" style="width: 25%;"></div>
+              <!-- 2. Stripe-Style Ultra-Thin Minimalist Progress Ribbon -->
+              <div class="aero-stripe-tracker" id="offshoreTracker">
+                <div class="aero-stripe-step phase-done" id="phaseStep1" onclick="setOffshorePhase('hired')">
+                  <span class="aero-stripe-indicator">✓</span>
+                  <span class="aero-stripe-title">1. Hire Confirmed</span>
                 </div>
-                
-                <!-- Step 1: Hire Confirmed -->
-                <div class="aero-phase-step phase-done" id="phaseStep1" onclick="setOffshorePhase('hired')">
-                  <div class="aero-phase-node">✓</div>
-                  <div class="aero-phase-label">1. Hire Confirmed</div>
-                  <div class="aero-phase-sub">Interview Cleared</div>
+                <span class="aero-stripe-sep">/</span>
+                <div class="aero-stripe-step phase-active" id="phaseStep2" onclick="setOffshorePhase('pre_offer_docs')">
+                  <span class="aero-stripe-indicator"></span>
+                  <span class="aero-stripe-title">2. Pre-Offer Docs</span>
                 </div>
-
-                <!-- Step 2: Pre-Offer Docs -->
-                <div class="aero-phase-step phase-active" id="phaseStep2" onclick="setOffshorePhase('pre_offer_docs')">
-                  <div class="aero-phase-node">2</div>
-                  <div class="aero-phase-label">2. Pre-Offer Docs</div>
-                  <div class="aero-phase-sub" id="phaseSubDocs">Syncing Vault (2/3)</div>
+                <span class="aero-stripe-sep">/</span>
+                <div class="aero-stripe-step phase-upcoming" id="phaseStep3" onclick="setOffshorePhase('contract_generation')">
+                  <span class="aero-stripe-indicator"></span>
+                  <span class="aero-stripe-title">3. Contract Generation</span>
                 </div>
-
-                <!-- Step 3: Contract Generation -->
-                <div class="aero-phase-step phase-upcoming" id="phaseStep3" onclick="setOffshorePhase('contract_generation')">
-                  <div class="aero-phase-node">3</div>
-                  <div class="aero-phase-label">3. Contract Generation</div>
-                  <div class="aero-phase-sub" id="phaseSubContract">Bundle Queued</div>
+                <span class="aero-stripe-sep">/</span>
+                <div class="aero-stripe-step phase-upcoming" id="phaseStep4" onclick="setOffshorePhase('e_sign_execution')">
+                  <span class="aero-stripe-indicator"></span>
+                  <span class="aero-stripe-title">4. E-Sign Execution</span>
                 </div>
-
-                <!-- Step 4: E-Sign Execution -->
-                <div class="aero-phase-step phase-upcoming" id="phaseStep4" onclick="setOffshorePhase('e_sign_execution')">
-                  <div class="aero-phase-node">4</div>
-                  <div class="aero-phase-label">4. E-Sign Execution</div>
-                  <div class="aero-phase-sub" id="phaseSubEsign">AeroSign Ready</div>
-                </div>
-
-                <!-- Step 5: Server Archived -->
-                <div class="aero-phase-step phase-upcoming" id="phaseStep5" onclick="setOffshorePhase('server_archived')">
-                  <div class="aero-phase-node">5</div>
-                  <div class="aero-phase-label">5. Server Archived</div>
-                  <div class="aero-phase-sub" id="phaseSubArchived">Ledger Sealed</div>
+                <span class="aero-stripe-sep">/</span>
+                <div class="aero-stripe-step phase-upcoming" id="phaseStep5" onclick="setOffshorePhase('server_archived')">
+                  <span class="aero-stripe-indicator"></span>
+                  <span class="aero-stripe-title">5. Server Archived</span>
                 </div>
               </div>
 
-              <!-- 3. Context Filter Chips with Floating Hover Animations -->
-              <div class="aero-capsule-chips-wrap">
-                <span style="font-size: 11.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px;">Role Filter:</span>
-                <button class="aero-capsule-chip" id="chipRoleAll" onclick="setOffshoreRoleFilter('all', this)">
-                  <span class="chip-dot"></span>
-                  <span>All Roles</span>
-                  <span style="font-size: 10px; background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 6px;" id="badgeCountAll">3</span>
-                </button>
-                <button class="aero-capsule-chip active" id="chipRoleBench" onclick="setOffshoreRoleFilter('bench_sales', this)">
-                  <span class="chip-dot"></span>
-                  <span>Bench Sales</span>
-                  <span style="font-size: 10px; background: rgba(255,255,255,0.2); padding: 1px 6px; border-radius: 6px;" id="badgeCountBench">1</span>
-                </button>
-                <button class="aero-capsule-chip" id="chipRoleOpt" onclick="setOffshoreRoleFilter('opt', this)">
-                  <span class="chip-dot"></span>
-                  <span>OPT Recruiters</span>
-                  <span style="font-size: 10px; background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 6px;" id="badgeCountOpt">1</span>
-                </button>
-                <button class="aero-capsule-chip" id="chipRoleLeads" onclick="setOffshoreRoleFilter('team_lead', this)">
-                  <span class="chip-dot"></span>
-                  <span>Team Leads</span>
-                  <span style="font-size: 10px; background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 6px;" id="badgeCountLeads">1</span>
-                </button>
+              <!-- 3. Monochrome Control Matrix & Candidate Context -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
+                <div class="aero-offshore-segmented-bar">
+                  <button class="aero-capsule-chip active" id="chipRoleAll" onclick="setOffshoreRoleFilter('all', this)">
+                    <span class="chip-dot"></span>
+                    <span>All Roles</span>
+                    <span style="font-size: 10px; color: #64748b; margin-left: 2px;" id="badgeCountAll">3</span>
+                  </button>
+                  <button class="aero-capsule-chip" id="chipRoleBench" onclick="setOffshoreRoleFilter('bench_sales', this)">
+                    <span class="chip-dot"></span>
+                    <span>Bench Sales</span>
+                    <span style="font-size: 10px; color: #64748b; margin-left: 2px;" id="badgeCountBench">1</span>
+                  </button>
+                  <button class="aero-capsule-chip" id="chipRoleOpt" onclick="setOffshoreRoleFilter('opt', this)">
+                    <span class="chip-dot"></span>
+                    <span>OPT Recruiters</span>
+                    <span style="font-size: 10px; color: #64748b; margin-left: 2px;" id="badgeCountOpt">1</span>
+                  </button>
+                  <button class="aero-capsule-chip" id="chipRoleLeads" onclick="setOffshoreRoleFilter('team_lead', this)">
+                    <span class="chip-dot"></span>
+                    <span>Team Leads</span>
+                    <span style="font-size: 10px; color: #64748b; margin-left: 2px;" id="badgeCountLeads">1</span>
+                  </button>
+                </div>
 
-                <div style="margin-left: auto; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                  <span class="card-tag tag-primary" id="offshoreCandidateRoleTag" style="font-size: 11px;">Active Candidate: Rahul Sharma (Bench Sales)</span>
-                  <span class="card-tag tag-info" id="offshoreCandidateShiftTag" style="font-size: 11px;">Shift: Night Shift (6:30 PM - 3:30 AM IST)</span>
+                <div class="aero-candidate-context-card" id="offshoreCandidateContextCard">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
+                    <span style="font-size: 12.5px; font-weight: 700; color: #ffffff;" id="offshoreCandidateRoleTag">Rahul Sharma</span>
+                    <span style="color: rgba(255,255,255,0.15); font-size: 11px;">•</span>
+                    <span style="font-size: 12px; color: #64748b;" id="offshoreCandidateShiftTag">Bench Sales • Night Shift (6:30 PM - 3:30 AM IST)</span>
+                  </div>
                 </div>
               </div>
 
-              <!-- 4. Live Database Ledger: public.offshore_onboarding -->
-              <div class="aero-db-roster-box">
-                <div class="aero-db-roster-header">
-                  <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 16px;">🗄️</span>
-                    <div>
-                      <strong style="font-size: 13px; color: #ffffff;">Live Database Ledger: public.offshore_onboarding</strong>
-                      <span style="font-size: 11px; color: #94a3b8; margin-left: 8px;">Supabase Project: <code style="color: #38bdf8;">https://supabase.co</code> &bull; Bucket: <code style="color: #34d399;">candidate-vault</code> &bull; Key: <code style="color: #cbd5e1;">sb_publishable_pjt...</code></span>
+              <!-- 4. The Interlocking Bottom Panel Matrix -->
+              <div class="aero-stage-filter-bar" style="margin-bottom: 20px;">
+                <div class="aero-stage-pills-wrap" role="tablist" style="margin-bottom: 0;">
+                  <button class="aero-stage-pill active" id="tabBtnDossier" role="tab" aria-selected="true" onclick="switchOffshoreWorkspaceTab('dossier', this)">
+                    <span>📑</span>
+                    <span>Candidate Dossier</span>
+                  </button>
+                  <button class="aero-stage-pill" id="tabBtnKyc" role="tab" aria-selected="false" onclick="switchOffshoreWorkspaceTab('kyc', this)">
+                    <span>🪪</span>
+                    <span>Identity KYC Verification</span>
+                  </button>
+                  <button class="aero-stage-pill" id="tabBtnProvisioning" role="tab" aria-selected="false" onclick="switchOffshoreWorkspaceTab('provisioning', this)">
+                    <span>🔑</span>
+                    <span>Infrastructure Provisioning</span>
+                  </button>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <span id="activeOffshoreTabIndicator" style="font-size: 11px; color: #64748b; font-weight: 600;">Active Section: Candidate Dossier</span>
+                </div>
+              </div>
+
+              <!-- PANEL 1: Candidate Dossier (Live Database Ledger & Background Automation Protocols) -->
+              <div id="offshorePanelDossier" class="offshore-tab-panel" style="display: block;">
+                <!-- Live Database Ledger Table Box -->
+                <div class="aero-db-roster-box">
+                  <div class="aero-db-roster-header">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <span style="font-size: 16px;">🗄️</span>
+                      <div>
+                        <strong style="font-size: 13.5px; color: #ffffff; font-weight: 700; letter-spacing: -0.01em;">Global Talent Records &amp; Candidate Ledger</strong>
+                        <span style="font-size: 11.5px; color: #64748b; margin-left: 8px;">Real-time synchronized candidate registry &bull; Active sync enabled</span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span class="pill-neon-emerald" style="font-size: 10px;">Postgres Synchronized</span>
+                      <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 11px; padding: 4px 12px;" onclick="fetchAndRenderDbCandidates()">🔄 Refresh Table</button>
                     </div>
                   </div>
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <span class="pill-neon-emerald" style="font-size: 10px;">Postgres Synchronized</span>
-                    <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 11px; padding: 3px 10px;" onclick="fetchAndRenderDbCandidates()">🔄 Refresh Table</button>
+
+                  <div style="overflow-x: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;">
+                    <table class="aero-db-table">
+                      <thead>
+                        <tr>
+                          <th>Candidate Name &amp; Email</th>
+                          <th>Role Type</th>
+                          <th>Current Step</th>
+                          <th>Aadhaar KYC</th>
+                          <th>PAN Card</th>
+                          <th>Experience Doc</th>
+                          <th>Secure Token Drop-Link</th>
+                          <th>Pipeline Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="offshoreDbRosterBody">
+                        <!-- Populated dynamically from live database -->
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
-                <div style="overflow-x: auto;">
-                  <table class="aero-db-table">
-                    <thead>
-                      <tr>
-                        <th>Candidate Name &amp; Email</th>
-                        <th>Role Type (offshore_role)</th>
-                        <th>Current Step (onboarding_step)</th>
-                        <th>Aadhaar KYC</th>
-                        <th>PAN Card</th>
-                        <th>Experience Doc</th>
-                        <th>Secure Token Drop-Link</th>
-                        <th>Pipeline Action</th>
-                      </tr>
-                    </thead>
-                    <tbody id="offshoreDbRosterBody">
-                      <!-- Populated dynamically from live database -->
-                    </tbody>
-                  </table>
+                <!-- Invisible Background Automation Protocols (Expand-on-hover Footer Tray) -->
+                <div class="aero-rules-footer" id="offshoreRulesFooter" onclick="this.classList.toggle('expanded')" style="margin-top: 20px;">
+                  <div class="aero-rules-footer-header">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <span style="font-size: 16px;">🛡️</span>
+                      <div>
+                        <strong style="font-size: 12.5px; color: #ffffff;">Invisible Background Automation Protocols</strong>
+                        <span style="font-size: 11px; color: #94a3b8; margin-left: 8px;">2 Active Cron &amp; Middleware Protocols &bull; Click or hover to inspect</span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span class="card-tag tag-success" style="font-size: 10px;">SLA &amp; OAuth Guard Armed</span>
+                      <span style="font-size: 12px; color: #94a3b8;">▼</span>
+                    </div>
+                  </div>
+
+                  <div class="aero-rules-footer-body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                      
+                      <!-- Toggle 1: Document SLA Chaser Scheduler -->
+                      <div style="background: rgba(11, 14, 23, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 14px;">📲</span>
+                            <strong style="font-size: 12px; color: #ffffff;">Document SLA Chaser Scheduler</strong>
+                          </div>
+                          <label class="aero-switch" onclick="event.stopPropagation()">
+                            <input type="checkbox" checked id="toggleDocSlaChaser">
+                            <span class="aero-slider"></span>
+                          </label>
+                        </div>
+                        <p style="font-size: 11px; color: #94a3b8; margin: 0 0 8px 0; line-height: 1.4;">
+                          Daily cron job that queries PostgreSQL for rows marked as <code>pre_offer_docs</code>. If uploads remain pending after 24 hours, automatically fires automated reminders via Resend / SMS.
+                        </p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 6px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                          <span style="font-size: 10px; color: #34d399; font-weight: 700;">Interval: Every 24h</span>
+                          <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 10px; padding: 2px 8px;" onclick="event.stopPropagation(); triggerSlaChaserCron()">⚡ Run SLA Chaser Now</button>
+                        </div>
+                      </div>
+
+                      <!-- Toggle 2: E-Sign Guardrail Middleware Protocol -->
+                      <div style="background: rgba(11, 14, 23, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 14px;">🔐</span>
+                            <strong style="font-size: 12px; color: #ffffff;">E-Sign Guardrail Middleware Protocol</strong>
+                          </div>
+                          <label class="aero-switch" onclick="event.stopPropagation()">
+                            <input type="checkbox" checked id="toggleEsignGuardrail">
+                            <span class="aero-slider"></span>
+                          </label>
+                        </div>
+                        <p style="font-size: 11px; color: #94a3b8; margin: 0 0 8px 0; line-height: 1.4;">
+                          Hard-locks all corporate software access, email accounts, and ATS/CRM platform provisioning keys (Ceipal / Bullhorn / JobDiva) until the candidate's status hits <code>server_archived</code>.
+                        </p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 6px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                          <span style="font-size: 10px; color: #f87171; font-weight: 700;" id="guardrailLockStatusBadge">ATS Lock: Enforced</span>
+                          <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 10px; padding: 2px 8px;" onclick="event.stopPropagation(); testOffshoreMiddlewareLock()">⚡ Test Middleware Lock</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <!-- 5. Phase 1 & Phase 2 Panels Layout (2 Columns) -->
-              <div class="aero-offshore-grid">
-                
-                <!-- PHASE 1 PANEL: Minimalist Document Upload & Server Sync -->
+              <!-- PANEL 2: Identity KYC Verification & Document Vault -->
+              <div id="offshorePanelKyc" class="offshore-tab-panel" style="display: none;">
+                <!-- PHASE 1 PANEL: Minimalist Document Collection & Verification Grid -->
                 <div class="aero-offshore-subcard">
                   <div class="aero-offshore-subcard-header">
                     <div>
                       <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 16px;">📂</span>
+                        <span style="font-size: 16px;">🪪</span>
                         <h3 style="font-size: 14px; font-weight: 800; color: #ffffff; margin: 0;">
-                          Phase 1: Document Collection &amp; Verification Grid
+                          Identity KYC Verification &amp; Document Vault
                         </h3>
                       </div>
-                      <div style="font-size: 11px; color: #94a3b8; margin-top: 3px;">
-                        Candidate pre-offer KYC credentials syncing straight to Supabase private 'candidate-vault'
+                      <div style="font-size: 11.5px; color: #64748b; margin-top: 3px;">
+                        Pre-offer verification credentials &amp; cryptographic document compliance
                       </div>
                     </div>
-                    <span class="pill-neon-emerald" style="font-size: 10px;">RLS Isolated</span>
+                    <span class="pill-neon-emerald" style="font-size: 10px;">Encrypted Storage</span>
                   </div>
 
                   <!-- Initiation State: Automated Onboarding Link Dispatched Indicator -->
-                  <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-                    <div style="display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: #34d399;">
-                      <span style="font-size: 15px;">✉️</span>
-                      <span><strong style="color: #6ee7b7;">Onboarding Link Email (Resend Webhook):</strong> Dispatched to <span id="offshoreCandidateEmail" style="font-family: monospace; font-weight: 700; color: #ffffff;">rahul.sharma@aero-offshore.internal</span></span>
+                  <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: #34d399;">
+                      <span style="font-size: 16px;">✉️</span>
+                      <span><strong style="color: #6ee7b7;">Verification Link Dispatched:</strong> Direct invitation sent to <span id="offshoreCandidateEmail" style="font-family: monospace; font-weight: 700; color: #ffffff;">rahul.sharma@aero-offshore.internal</span></span>
                     </div>
-                    <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 10px; padding: 2px 8px; background: rgba(15, 20, 32, 0.8); border-color: rgba(16, 185, 129, 0.3); color: #34d399;" onclick="openResendTelemetryModal()">Inspect Payload</button>
+                    <span class="card-tag tag-success" style="font-size: 10.5px;">Auto-Notification Active</span>
                   </div>
 
                   <!-- Unique Link Manager: Immutable Text Input + Copy Secure Link Button -->
-                  <div style="margin-bottom: 18px;">
-                    <label style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; display: block; margin-bottom: 6px;">
-                      Unique Candidate Drop-Link (public.offshore_onboarding.secure_token)
+                  <div style="margin-bottom: 20px;">
+                    <label style="font-size: 11.5px; font-weight: 600; color: #94a3b8; display: block; margin-bottom: 6px;">
+                      Candidate Direct Upload Link
                     </label>
                     <div style="display: flex; gap: 8px;">
                       <div style="flex: 1; position: relative;">
-                        <input type="text" id="offshorePortalUrlInput" class="form-input" readonly value="https://yourdashboard.com/portal/upload/018eb512-9041-7100-b202-000000009041" style="background: rgba(11, 14, 23, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); font-family: ui-monospace, monospace; font-size: 12px; color: #818cf8; font-weight: 600; padding: 8px 12px; width: 100%; border-radius: 8px;">
+                        <input type="text" id="offshorePortalUrlInput" class="form-input" readonly value="https://yourdashboard.com/portal/upload/018eb512-9041-7100-b202-000000009041" style="background: rgba(10, 13, 20, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); font-family: ui-monospace, monospace; font-size: 12px; color: #818cf8; font-weight: 600; padding: 10px 14px; width: 100%; border-radius: 8px;">
                       </div>
-                      <button class="aero-btn aero-btn-primary aero-btn-sm" id="btnCopyOffshoreLink" onclick="copyOffshorePortalLink()" style="border-radius: 9999px; padding: 0 16px; font-weight: 700; white-space: nowrap;">
-                        📋 Copy Secure Link
+                      <button class="aero-btn aero-btn-primary aero-btn-sm" id="btnCopyOffshoreLink" onclick="copyOffshorePortalLink()" style="border-radius: 8px; padding: 0 16px; font-weight: 700; white-space: nowrap; height: 38px;">
+                        📋 Copy Link
                       </button>
-                      <a href="candidate_portal_demo.html" target="_blank" class="aero-btn aero-btn-outline aero-btn-sm" id="btnOpenCandidatePortal" style="border-radius: 9999px; padding: 0 16px; font-weight: 700; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                        🚀 Open Candidate Portal &rarr;
+                      <a href="candidate_portal_demo.html" target="_blank" class="aero-btn aero-btn-outline aero-btn-sm" id="btnOpenCandidatePortal" style="border-radius: 8px; padding: 0 16px; font-weight: 700; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; height: 38px;">
+                        🚀 Open Portal &rarr;
                       </a>
                     </div>
                   </div>
 
                   <!-- Local Server File-Vault Status Grid with Live Glowing Neon-Pulse Status Badges -->
                   <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                    <span>Private File-Vault Checklist (candidate-vault)</span>
+                    <span>Verified Document Vault Checklist</span>
                     <span style="font-size: 10.5px; color: #94a3b8;">5MB Max &bull; PDF / PNG / JPEG</span>
                   </div>
 
@@ -8586,13 +8666,16 @@
                     <div style="display: flex; align-items: center; gap: 8px;">
                       <span class="pill-neon-crimson" id="vaultStatusRelieving">Missing</span>
                       <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 10.5px; padding: 4px 10px; font-weight: 700;" onclick="openUploadVaultDocModal('experience')">
-                        ⬆️ Upload (candidate-vault)
+                        ⬆️ Upload Document
                       </button>
                     </div>
                   </div>
 
                 </div>
+              </div>
 
+              <!-- PANEL 3: Infrastructure Provisioning -->
+              <div id="offshorePanelProvisioning" class="offshore-tab-panel" style="display: none;">
                 <!-- PHASE 2 PANEL: Dynamic Agreement Generation & Interactive PDF Workspace -->
                 <div class="aero-workspace-container" id="phase2CardContainer">
                   
@@ -9005,72 +9088,6 @@
                     </div>
                   </div>
 
-                </div>
-
-              </div>
-
-              <!-- 6. Invisible Background Automation Protocols (Expand-on-hover Footer Tray) -->
-              <div class="aero-rules-footer" id="offshoreRulesFooter" onclick="this.classList.toggle('expanded')">
-                <div class="aero-rules-footer-header">
-                  <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 16px;">🛡️</span>
-                    <div>
-                      <strong style="font-size: 12.5px; color: #ffffff;">Invisible Background Automation Protocols</strong>
-                      <span style="font-size: 11px; color: #94a3b8; margin-left: 8px;">2 Active Cron &amp; Middleware Protocols &bull; Click or hover to inspect</span>
-                    </div>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <span class="card-tag tag-success" style="font-size: 10px;">SLA &amp; OAuth Guard Armed</span>
-                    <span style="font-size: 12px; color: #94a3b8;">▼</span>
-                  </div>
-                </div>
-
-                <div class="aero-rules-footer-body">
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                    
-                    <!-- Toggle 1: Document SLA Chaser Scheduler -->
-                    <div style="background: rgba(11, 14, 23, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between;">
-                      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                          <span style="font-size: 14px;">📲</span>
-                          <strong style="font-size: 12px; color: #ffffff;">Document SLA Chaser Scheduler</strong>
-                        </div>
-                        <label class="aero-switch" onclick="event.stopPropagation()">
-                          <input type="checkbox" checked id="toggleDocSlaChaser">
-                          <span class="aero-slider"></span>
-                        </label>
-                      </div>
-                      <p style="font-size: 11px; color: #94a3b8; margin: 0 0 8px 0; line-height: 1.4;">
-                        Daily cron job that queries PostgreSQL for rows marked as <code>pre_offer_docs</code>. If uploads remain pending after 24 hours, automatically fires automated reminders via Resend / SMS.
-                      </p>
-                      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 6px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
-                        <span style="font-size: 10px; color: #34d399; font-weight: 700;">Interval: Every 24h</span>
-                        <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 10px; padding: 2px 8px;" onclick="event.stopPropagation(); triggerSlaChaserCron()">⚡ Run SLA Chaser Now</button>
-                      </div>
-                    </div>
-
-                    <!-- Toggle 2: E-Sign Guardrail Middleware Protocol -->
-                    <div style="background: rgba(11, 14, 23, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between;">
-                      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                          <span style="font-size: 14px;">🔐</span>
-                          <strong style="font-size: 12px; color: #ffffff;">E-Sign Guardrail Middleware Protocol</strong>
-                        </div>
-                        <label class="aero-switch" onclick="event.stopPropagation()">
-                          <input type="checkbox" checked id="toggleEsignGuardrail">
-                          <span class="aero-slider"></span>
-                        </label>
-                      </div>
-                      <p style="font-size: 11px; color: #94a3b8; margin: 0 0 8px 0; line-height: 1.4;">
-                        Hard-locks all corporate software access, email accounts, and ATS/CRM platform provisioning keys (Ceipal / Bullhorn / JobDiva) until the candidate's status hits <code>server_archived</code>.
-                      </p>
-                      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 6px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
-                        <span style="font-size: 10px; color: #f87171; font-weight: 700;" id="guardrailLockStatusBadge">ATS Lock: Enforced</span>
-                        <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 10px; padding: 2px 8px;" onclick="event.stopPropagation(); testOffshoreMiddlewareLock()">⚡ Test Middleware Lock</button>
-                      </div>
-                    </div>
-
-                  </div>
                 </div>
               </div>
 
@@ -16281,6 +16298,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
           badge.className = 'pill-neon-amber';
           badge.textContent = 'Offshore India Practice';
         }
+        switchOffshoreWorkspaceTab(currentOffshoreTab || 'dossier');
         fetchAndRenderDbCandidates();
       } else {
         if (tabUS) tabUS.classList.add('active');
@@ -16303,7 +16321,62 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       showToast('🇮🇳 Switched to Offshore India Recruitment Onboarding Engine');
     }
 
-    // Set horizontal milestone progress bar phase
+    // Interlocking Bottom Panel Matrix for Global Infrastructure Hub
+    let currentOffshoreTab = 'dossier';
+    function switchOffshoreWorkspaceTab(tabKey, btn) {
+      const tabs = {
+        dossier: { id: 'offshorePanelDossier', label: 'Candidate Dossier', btnId: 'tabBtnDossier' },
+        kyc: { id: 'offshorePanelKyc', label: 'Identity KYC Verification', btnId: 'tabBtnKyc' },
+        provisioning: { id: 'offshorePanelProvisioning', label: 'Infrastructure Provisioning', btnId: 'tabBtnProvisioning' }
+      };
+
+      const selected = tabs[tabKey] ? tabKey : 'dossier';
+      currentOffshoreTab = selected;
+
+      // Update button active state
+      document.querySelectorAll('#aeroOffshoreIndiaEngine .aero-stage-pill').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      if (btn) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+      } else {
+        const targetBtn = document.getElementById(tabs[selected].btnId);
+        if (targetBtn) {
+          targetBtn.classList.add('active');
+          targetBtn.setAttribute('aria-selected', 'true');
+        }
+      }
+
+      // Update label
+      const ind = document.getElementById('activeOffshoreTabIndicator');
+      if (ind) {
+        ind.textContent = `Active Section: ${tabs[selected].label}`;
+      }
+
+      // Toggle display of panels
+      Object.keys(tabs).forEach(k => {
+        const panel = document.getElementById(tabs[k].id);
+        if (panel) {
+          if (k === selected) {
+            panel.style.display = 'block';
+            panel.classList.remove('fade-out');
+            panel.classList.add('fade-in');
+          } else {
+            panel.style.display = 'none';
+            panel.classList.remove('fade-in');
+            panel.classList.add('fade-out');
+          }
+        }
+      });
+
+      if (selected === 'dossier' && typeof fetchAndRenderDbCandidates === 'function') {
+        fetchAndRenderDbCandidates();
+      }
+    }
+
+    // Set horizontal milestone progress bar phase (Stripe-style Ribbon)
     function setOffshorePhase(targetPhase, notify = true) {
       let phaseNum = 1;
       if (typeof targetPhase === 'number') {
@@ -16320,7 +16393,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       for (let i = 1; i <= 5; i++) {
         const stepEl = document.getElementById(`phaseStep${i}`);
         if (!stepEl) continue;
-        const node = stepEl.querySelector('.aero-phase-node');
+        const node = stepEl.querySelector('.aero-stripe-indicator') || stepEl.querySelector('.aero-phase-node');
         
         stepEl.classList.remove('phase-done', 'phase-active', 'phase-upcoming');
         if (i < phaseNum) {
@@ -16328,10 +16401,10 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
           if (node) node.innerHTML = '✓';
         } else if (i === phaseNum) {
           stepEl.classList.add('phase-active');
-          if (node) node.innerHTML = `${i}`;
+          if (node) node.innerHTML = '';
         } else {
           stepEl.classList.add('phase-upcoming');
-          if (node) node.innerHTML = `${i}`;
+          if (node) node.innerHTML = '';
         }
       }
 
@@ -16343,6 +16416,9 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         '5. Server Archived'
       ];
       if (notify) {
+        if (phaseNum === 1) switchOffshoreWorkspaceTab('dossier');
+        else if (phaseNum === 2) switchOffshoreWorkspaceTab('kyc');
+        else if (phaseNum >= 3) switchOffshoreWorkspaceTab('provisioning');
         showToast(`Milestone Phase: ${phaseLabels[phaseNum - 1]}`);
       }
     }
@@ -16511,13 +16587,13 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         const roleLabel = formatOffshoreRoleName(c.role_type);
         
         html += `
-          <tr style="cursor: pointer; transition: background 0.15s ease; ${isActive ? 'background: #f0fdf4; border-left: 3px solid #10b981;' : ''}" onclick="selectActiveOffshoreCandidate('${c.id}')">
+          <tr style="cursor: pointer; transition: background 0.15s ease; ${isActive ? 'background: rgba(99, 102, 241, 0.08); border-left: 3px solid #6366f1;' : ''}" onclick="selectActiveOffshoreCandidate('${c.id}')">
             <td>
-              <div style="font-weight: 700; color: #0f172a; font-size: 13px;">${escapeHtmlSafe(c.full_name)}</div>
-              <div style="font-size: 11px; color: #64748b; font-family: monospace;">${escapeHtmlSafe(c.email)}</div>
+              <div style="font-weight: 700; color: #ffffff; font-size: 13.5px; letter-spacing: -0.01em;">${escapeHtmlSafe(c.full_name)}</div>
+              <div style="font-size: 11.5px; color: #64748b; font-family: monospace; margin-top: 3px;">${escapeHtmlSafe(c.email)}</div>
             </td>
             <td>
-              <span class="card-tag tag-primary" style="font-size: 10px; font-weight: 700;">${escapeHtmlSafe(c.role_type.replace('_', ' ').toUpperCase())}</span>
+              <span style="display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; color: #e2e8f0; background: rgba(255, 255, 255, 0.06); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.08);">${escapeHtmlSafe(c.role_type.replace('_', ' ').toUpperCase())}</span>
             </td>
             <td>
               ${getStepStatusBadge(c.current_step)}
@@ -16537,7 +16613,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
               </button>
             </td>
             <td>
-              <button class="aero-btn aero-btn-sm ${isActive ? 'aero-btn-primary' : 'aero-btn-outline'}" style="font-size: 10.5px; padding: 3px 10px; font-weight: 700;" onclick="event.stopPropagation(); selectActiveOffshoreCandidate('${c.id}')">
+              <button class="aero-btn aero-btn-sm ${isActive ? 'aero-btn-primary' : 'aero-btn-outline'}" style="font-size: 10.5px; padding: 4px 12px; font-weight: 700;" onclick="event.stopPropagation(); selectActiveOffshoreCandidate('${c.id}')">
                 ${isActive ? '✓ Active' : 'Select'}
               </button>
             </td>
@@ -16556,6 +16632,9 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       renderOffshoreCandidateData();
       const cand = OFFSHORE_DB_STATE.find(c => c.id === id);
       if (cand) {
+        if (cand.current_step) {
+          setOffshorePhase(cand.current_step, false);
+        }
         showToast(`🇮🇳 Loaded ${cand.full_name} (${formatOffshoreRoleName(cand.role_type)}) into Active Workspace`);
       }
     }
@@ -16576,8 +16655,8 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       // Header tags
       const roleTag = document.getElementById('offshoreCandidateRoleTag');
       const shiftTag = document.getElementById('offshoreCandidateShiftTag');
-      if (roleTag) roleTag.innerText = `Active Candidate: ${cand.full_name} (${formatOffshoreRoleName(cand.role_type)})`;
-      if (shiftTag) shiftTag.innerText = `Shift: ${cand.shift || 'Night Shift (6:30 PM - 3:30 AM IST)'}`;
+      if (roleTag) roleTag.innerText = cand.full_name;
+      if (shiftTag) shiftTag.innerText = `${formatOffshoreRoleName(cand.role_type)} • ${cand.shift || 'Night Shift (6:30 PM - 3:30 AM IST)'}`;
 
       // Email & Portal URL
       const emailEl = document.getElementById('offshoreCandidateEmail');
@@ -16613,7 +16692,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         if (cand.pan_status === 'verified') {
           btnApprovePan.className = 'aero-btn aero-btn-outline aero-btn-sm';
           btnApprovePan.innerHTML = '✓ PAN Approved';
-          btnApprovePan.style.color = '#059669';
+          btnApprovePan.style.color = '#10b981';
           btnApprovePan.style.borderColor = '#10b981';
         } else {
           btnApprovePan.className = 'aero-btn aero-btn-primary aero-btn-sm';
@@ -16633,10 +16712,10 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       if (vMetaRelieving) {
         if (cand.experience_doc_status === 'verified') {
           vMetaRelieving.innerText = 'Relieving_Experience_Letter_2026.pdf (1.8 MB) • Server Verified';
-          vMetaRelieving.style.color = '#059669';
+          vMetaRelieving.style.color = '#10b981';
         } else {
           vMetaRelieving.innerText = 'Pending candidate upload • Required to unlock Phase 2';
-          vMetaRelieving.style.color = '#b91c1c';
+          vMetaRelieving.style.color = '#f87171';
         }
       }
 
