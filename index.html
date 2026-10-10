@@ -897,22 +897,25 @@
       background: rgba(30, 41, 59, 0.7) !important;
     }
     .topbar-add-btn {
-      padding: 7px 15px !important;
+      padding: 6px 14px !important;
       font-size: 12px !important;
-      font-weight: 700 !important;
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-      border: 1px solid rgba(5, 150, 105, 0.8) !important;
-      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      font-weight: 600 !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.16) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
       border-radius: 8px !important;
       gap: 6px !important;
       display: inline-flex !important;
       align-items: center !important;
       color: #ffffff !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      cursor: pointer !important;
     }
     .topbar-add-btn:hover {
-      background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+      background: rgba(255, 255, 255, 0.15) !important;
+      border-color: rgba(255, 255, 255, 0.28) !important;
       transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
     }
     .lang-pill-btn {
       background: rgba(241, 245, 249, 0.8);
@@ -3318,7 +3321,7 @@
     .aero-staffing-hub {
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 16px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
@@ -3329,10 +3332,10 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
-      padding-bottom: 4px;
+      padding-bottom: 2px;
     }
     .aero-hub-title h1 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: #ffffff;
@@ -3340,9 +3343,10 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
     .aero-minimal-badge {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
       color: #64748b;
       background: rgba(255, 255, 255, 0.04);
@@ -3352,10 +3356,144 @@
       letter-spacing: 0.02em;
       text-transform: uppercase;
     }
+    .aero-version-pill {
+      font-size: 10px;
+      font-weight: 700;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .aero-version-pill::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 6px #34d399;
+    }
     .aero-hub-title p {
-      font-size: 13px;
+      font-size: 12.5px;
       color: #64748b;
-      margin: 4px 0 0 0;
+      margin: 3px 0 0 0;
+    }
+
+    /* Unified Enterprise Scope & Placement Control Dock */
+    .aero-placement-dock {
+      background: rgba(10, 13, 20, 0.85);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .aero-placement-dock:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .aero-dock-tier {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .aero-dock-primary-tier {
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .aero-consultant-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .aero-consultant-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+      flex-shrink: 0;
+    }
+    .aero-consultant-details {
+      min-width: 0;
+    }
+    .aero-consultant-headline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .aero-consultant-headline strong {
+      font-size: 14px;
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .aero-consultant-subtext {
+      font-size: 11.5px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    .aero-placement-selector-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .aero-control-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .aero-dock-select {
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 8px;
+      background: rgba(15, 20, 30, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      cursor: pointer;
+    }
+    .aero-dock-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .aero-search-wrapper {
+      position: relative;
+      width: 240px;
+    }
+    .aero-search-wrapper input {
+      padding: 6px 12px;
+      font-size: 12px;
+      width: 100%;
+      background: rgba(15, 20, 30, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      color: #ffffff;
     }
 
     /* Top Filters Bar - Mobbin Obsidian Surface */
@@ -3368,7 +3506,7 @@
       background: rgba(10, 13, 20, 0.8);
       backdrop-filter: blur(24px) saturate(170%);
       -webkit-backdrop-filter: blur(24px) saturate(170%);
-      padding: 24px;
+      padding: 16px 20px;
       border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
@@ -3377,14 +3515,14 @@
     .aero-worker-pills {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
     .aero-filter-pill {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
-      padding: 7px 16px;
-      border-radius: 8px;
+      padding: 6px 14px;
+      border-radius: 7px;
       border: 1px solid rgba(255, 255, 255, 0.06);
       background: rgba(255, 255, 255, 0.03);
       color: #94a3b8;
@@ -3397,9 +3535,9 @@
       border-color: rgba(255, 255, 255, 0.14);
     }
     .aero-filter-pill.active {
-      background: rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.1);
       color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.18);
     }
 
     /* WIDESCREEN KPI RIBBON CONTAINER (COMPRESSED MIDDLE MODULES - MOBBIN METRICS RIBBON) */
@@ -3407,14 +3545,14 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
-      background: rgba(10, 13, 20, 0.8);
+      background: rgba(10, 13, 20, 0.85);
       backdrop-filter: blur(24px) saturate(170%);
       -webkit-backdrop-filter: blur(24px) saturate(170%);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 12px 18px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 8px 20px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      margin-bottom: 14px;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .aero-kpi-ribbon:hover {
@@ -3424,17 +3562,17 @@
     @media (max-width: 1100px) {
       .aero-kpi-ribbon {
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px 0;
+        gap: 16px 0;
       }
     }
     @media (max-width: 640px) {
       .aero-kpi-ribbon {
         grid-template-columns: 1fr;
-        gap: 20px 0;
+        gap: 14px 0;
       }
     }
     .aero-ribbon-cell {
-      padding: 0 24px;
+      padding: 0 18px;
       display: flex;
       flex-direction: column;
       border-right: 1px solid rgba(255, 255, 255, 0.06);
@@ -3456,17 +3594,17 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 4px;
     }
     .aero-ribbon-label {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
     .aero-ribbon-value {
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 800;
       letter-spacing: -0.03em !important;
       color: #ffffff;
@@ -3488,10 +3626,13 @@
       letter-spacing: -0.02em;
     }
     .aero-ribbon-detail {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #64748b;
-      margin-top: 8px;
-      line-height: 1.45;
+      margin-top: 4px;
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Mobbin 2px solid monochrome dot and state tag */
@@ -3576,26 +3717,26 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      margin: 18px 0 18px 0;
-      padding: 8px 12px;
-      background: rgba(10, 13, 20, 0.8);
+      margin: 0 0 14px 0;
+      padding: 6px 10px;
+      background: rgba(10, 13, 20, 0.85);
       backdrop-filter: blur(24px) saturate(170%);
       -webkit-backdrop-filter: blur(24px) saturate(170%);
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 8px 20px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     }
     .aero-stage-pills {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       flex-wrap: wrap;
     }
     .aero-stage-pill {
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
-      padding: 10px 20px;
-      min-height: 44px;
+      padding: 8px 16px;
+      min-height: 38px;
       border-radius: 8px;
       border: 1px solid transparent;
       background: transparent;
@@ -3610,13 +3751,13 @@
     }
     .aero-stage-pill:hover {
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
     }
     .aero-stage-pill.active {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.1);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
     /* Main Stage Modular Flow Cards: Full-Width Progressive Tab Container */
@@ -3625,22 +3766,22 @@
       width: 100%;
     }
     .aero-flow-card {
-      background: rgba(10, 13, 20, 0.8);
+      background: rgba(10, 13, 20, 0.85);
       backdrop-filter: blur(24px) saturate(170%);
       -webkit-backdrop-filter: blur(24px) saturate(170%);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 20px 45px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
       display: flex;
       flex-direction: column;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
       width: 100%;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .aero-flow-card:hover {
       border-color: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 16px 32px -4px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 0 15px rgba(255, 255, 255, 0.03);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 24px 50px -8px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.09);
     }
     .aero-flow-card.fade-card-exit {
       opacity: 0;
@@ -3652,7 +3793,7 @@
       transform: scale(1);
     }
     .aero-card-head {
-      padding: 24px;
+      padding: 16px 20px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       justify-content: space-between;
@@ -5864,8 +6005,8 @@
           </button>
 
           <!-- Primary CTA: Add Employee Profile -->
-          <button class="btn btn-primary btn-sm topbar-add-btn" id="topbarBtnAddEmployee" onclick="openAddEmployeeModal()" title="Initialize New Professional Profile (US Local or Offshore Hub)">
-            <span>➕</span>
+          <button class="topbar-add-btn" id="topbarBtnAddEmployee" onclick="openAddEmployeeModal()" title="Initialize New Professional Profile (US Local or Offshore Hub)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             <span>Add Employee</span>
           </button>
 
@@ -7662,6 +7803,7 @@
                 <h1>
                   <span>Developer &amp; Contractor Onboarding Velocity</span>
                   <span class="aero-minimal-badge">Enterprise Engine</span>
+                  <span class="aero-version-pill" id="dashboardLiveVersion">v2.5 Live</span>
                 </h1>
                 <p>
                   Unified placement engine for W-2 Employees, 1099 Contractors, and C2C Consultants across Enterprise Client Engagements.
@@ -7682,7 +7824,7 @@
                   </button>
                   <button class="aero-segment-btn" id="btnOnboardConsultant" onclick="openNewConsultantPlacementModal()" title="Onboard New Consultant Placement">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                    <span>+ Onboard Consultant</span>
+                    <span>Onboard Consultant</span>
                   </button>
                 </div>
 
@@ -7691,13 +7833,13 @@
                 <!-- Primary + Add Employee Action Button (Dark Slate Surface, Inner Accent Ring) -->
                 <button class="aero-toolbar-btn aero-toolbar-primary" id="btnUniversalAddEmployee" onclick="openAddEmployeeModal()" title="Initialize New Professional Profile (US Local vs. Offshore India Hub)">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                  <span>+ Add Employee</span>
+                  <span>Add Employee</span>
                 </button>
               </div>
             </div>
 
             <!-- Cohort Switcher Navigation: US Placements vs Offshore India Recruitment Engine -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 10px;">
               <div class="aero-cohort-switcher">
                 <button id="cohortTabUS" class="aero-cohort-btn active" onclick="switchCohortMode('us')">
                   <span>🇺🇸</span>
@@ -7712,67 +7854,69 @@
                 </button>
               </div>
 
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 11.5px; color: #94a3b8;">Active Operating Hub:</span>
-                <span class="pill-neon-emerald" id="activeCohortBadge" style="font-size: 11px;">US Commercial Practice</span>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 11px; color: #94a3b8;">Active Operating Hub:</span>
+                <span class="pill-neon-emerald" id="activeCohortBadge" style="font-size: 10.5px;">US Commercial Practice</span>
               </div>
             </div>
 
             <!-- US STAFFING HUB WRAPPER -->
             <div id="usStaffingSection">
 
-            <!-- 2. Header & Top Filters -->
-            <div class="aero-filter-bar">
-              <!-- Worker Type Filters -->
-              <div class="aero-worker-pills" id="staffingWorkerPills">
-                <button class="aero-filter-pill active" onclick="setStaffingWorkerFilter('all', this)">All Placements (28)</button>
-                <button class="aero-filter-pill" onclick="setStaffingWorkerFilter('w2', this)">W-2 Employees (12)</button>
-                <button class="aero-filter-pill" onclick="setStaffingWorkerFilter('1099', this)">1099 Contractors (9)</button>
-                <button class="aero-filter-pill" onclick="setStaffingWorkerFilter('c2c', this)">C2C Consultants (7)</button>
-              </div>
+            <!-- Unified Enterprise Scope & Placement Control Dock (Consolidated Placement Selector & Filter Deck) -->
+            <div class="aero-placement-dock" id="aeroPlacementDock">
+              <!-- Tier 1: Active Placement Highlight & Switcher -->
+              <div class="aero-dock-tier aero-dock-primary-tier">
+                <div class="aero-consultant-identity">
+                  <div class="aero-consultant-avatar" id="activeConsultantAvatar">DS</div>
+                  <div class="aero-consultant-details">
+                    <div class="aero-consultant-headline">
+                      <strong id="activeConsultantName">Devon Sanders</strong>
+                      <span class="card-tag tag-primary" style="font-size: 10px;" id="activeConsultantTypeBadge">1099 Contractor</span>
+                      <span class="pill-ready" style="font-size: 10px;" id="activeConsultantRateBadge">$135.00/hr</span>
+                    </div>
+                    <div class="aero-consultant-subtext" id="activeConsultantSubMeta">
+                      Senior Fullstack Cloud Architect • Client: <strong style="color: #ffffff;">Acme Corp</strong> • Start Date: <strong style="color: #ffffff;">Oct 14, 2026</strong>
+                    </div>
+                  </div>
+                </div>
 
-              <!-- Search & Client Project Dropdown -->
-              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; flex: 1; justify-content: flex-end;">
-                <div style="position: relative;">
-                  <select class="form-input" id="filterClientProjectSelect" style="padding: 6px 10px; font-size: 12px; font-weight: 600; width: auto; cursor: pointer;" onchange="filterStaffingPlacements()">
-                    <option value="all">🏢 All Client Projects</option>
-                    <option value="acme" selected>Acme Corp (Cloud Platform)</option>
-                    <option value="horizon">Horizon Cloud (FinTech API)</option>
-                    <option value="healthscale">HealthScale AI (Kubernetes Platform)</option>
-                    <option value="fintech">FinTech Prime (Quant Core)</option>
+                <div class="aero-placement-selector-group">
+                  <label for="activeConsultantSelect" class="aero-control-label">Placement Record:</label>
+                  <select class="form-input aero-dock-select" id="activeConsultantSelect" onchange="switchStaffingConsultant(this.value)">
+                    <option value="devon">Devon Sanders (1099 - Sr. Cloud Architect @ Acme Corp - $135/hr)</option>
+                    <option value="rachel">Rachel Wu (W-2 - Lead Frontend Engineer @ Horizon Cloud - $165k/yr)</option>
+                    <option value="carlos">Carlos Mendoza (C2C - Staff DevOps &amp; SRE @ HealthScale - $140/hr)</option>
+                    <option value="elena">Elena Rostova (W-2 - Principal ML Engineer @ FinTech Prime - $190k/yr)</option>
                   </select>
                 </div>
-
-                <div style="position: relative; max-width: 260px; width: 100%;">
-                  <input type="text" id="staffingSearchInput" class="form-input" placeholder="🔍 Search developer, skill (React, Go, AWS)..." style="padding: 6px 12px; font-size: 12px; width: 100%;" oninput="filterStaffingPlacements()">
-                </div>
-              </div>
-            </div>
-
-            <!-- Active Placement Quick Selector Card -->
-            <div style="background: rgba(13, 16, 23, 0.85); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 14px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05); margin-bottom: 20px;">
-              <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
-                <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35); flex-shrink: 0;" id="activeConsultantAvatar">DS</div>
-                <div style="min-width: 0;">
-                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                    <strong style="font-size: 14px; color: #ffffff;" id="activeConsultantName">Devon Sanders</strong>
-                    <span class="card-tag tag-primary" style="font-size: 10px;" id="activeConsultantTypeBadge">1099 Contractor</span>
-                    <span class="pill-ready" style="font-size: 10px;" id="activeConsultantRateBadge">$135.00/hr</span>
-                  </div>
-                  <div style="font-size: 11.5px; color: #94a3b8; margin-top: 3px;" id="activeConsultantSubMeta">
-                    Senior Fullstack Cloud Architect • Client: <strong style="color: #ffffff;">Acme Corp</strong> • Start Date: <strong style="color: #ffffff;">Oct 14, 2026</strong>
-                  </div>
-                </div>
               </div>
 
-              <div style="display: flex; gap: 8px; align-items: center;">
-                <span style="font-size: 11.5px; font-weight: 600; color: #94a3b8;">Switch Placement:</span>
-                <select class="form-input" id="activeConsultantSelect" style="padding: 6px 12px; font-size: 12px; width: auto; font-weight: 600;" onchange="switchStaffingConsultant(this.value)">
-                  <option value="devon">Devon Sanders (1099 - Sr. Cloud Architect @ Acme Corp - $135/hr)</option>
-                  <option value="rachel">Rachel Wu (W-2 - Lead Frontend Engineer @ Horizon Cloud - $165k/yr)</option>
-                  <option value="carlos">Carlos Mendoza (C2C - Staff DevOps &amp; SRE @ HealthScale - $140/hr)</option>
-                  <option value="elena">Elena Rostova (W-2 - Principal ML Engineer @ FinTech Prime - $190k/yr)</option>
-                </select>
+              <!-- Tier 2: Inline Filter Chips & Search Bar -->
+              <div class="aero-dock-tier aero-dock-filter-tier">
+                <!-- Worker Type Filters -->
+                <div class="aero-worker-pills" id="staffingWorkerPills">
+                  <button class="aero-filter-pill active" onclick="setStaffingWorkerFilter('all', this)">All Placements (28)</button>
+                  <button class="aero-filter-pill" onclick="setStaffingWorkerFilter('w2', this)">W-2 Employees (12)</button>
+                  <button class="aero-filter-pill" onclick="setStaffingWorkerFilter('1099', this)">1099 Contractors (9)</button>
+                  <button class="aero-filter-pill" onclick="setStaffingWorkerFilter('c2c', this)">C2C Consultants (7)</button>
+                </div>
+
+                <div class="aero-dock-tools">
+                  <div style="position: relative;">
+                    <select class="form-input aero-dock-select" id="filterClientProjectSelect" onchange="filterStaffingPlacements()">
+                      <option value="all">🏢 All Client Projects</option>
+                      <option value="acme" selected>Acme Corp (Cloud Platform)</option>
+                      <option value="horizon">Horizon Cloud (FinTech API)</option>
+                      <option value="healthscale">HealthScale AI (Kubernetes Platform)</option>
+                      <option value="fintech">FinTech Prime (Quant Core)</option>
+                    </select>
+                  </div>
+
+                  <div class="aero-search-wrapper">
+                    <input type="text" id="staffingSearchInput" class="form-input" placeholder="🔍 Search developer, skill (React, Go, AWS)..." oninput="filterStaffingPlacements()">
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -15607,7 +15751,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
           <button class="sidebar-add-btn" onclick="openAddEmployeeModal()" title="Initialize New Placement (40% Slide-Over Wizard)">
             <span style="display: flex; align-items: center; gap: 8px;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              <span>+ Add Employee</span>
+              <span>Add Employee</span>
             </span>
             <span class="sidebar-add-badge">WIZARD</span>
           </button>
