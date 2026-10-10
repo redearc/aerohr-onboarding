@@ -3223,19 +3223,24 @@
       color: #ffffff;
       transform: translateY(-1px);
     }
-    /* Solid charcoal submit button with micro-bevel and inset top white accent path */
+    /* Premium High-Contrast Call-to-Action Layout for + Add Employee */
     .aero-toolbar-btn.aero-toolbar-primary {
-      background: #181d28;
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #ffffff;
+      color: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.9);
       font-weight: 700;
       letter-spacing: -0.01em;
-      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 4px 14px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 4px 14px rgba(255, 255, 255, 0.18);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .aero-toolbar-btn.aero-toolbar-primary svg {
+      stroke: #090d16;
     }
     .aero-toolbar-btn.aero-toolbar-primary:hover {
-      background: #222938;
-      border-color: rgba(255, 255, 255, 0.18);
-      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 2px 4px 0 rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.55);
+      background: #f8fafc;
+      color: #000000;
+      border-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(255, 255, 255, 0.28);
       transform: translateY(-1px);
     }
 
@@ -7858,22 +7863,6 @@
                 <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-compliance', this)">
                   <span>🪪</span>
                   <span>Identity &amp; Compliance</span>
-                </button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-hardware', this)">
-                  <span>💻</span>
-                  <span>Hardware</span>
-                </button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-apps', this)">
-                  <span>🔑</span>
-                  <span>Apps &amp; SCIM</span>
-                </button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-timetrack', this)">
-                  <span>⏱️</span>
-                  <span>Time Sync</span>
-                </button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-assignment', this)">
-                  <span>👥</span>
-                  <span>Client Assignment</span>
                 </button>
                 <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-storage-ledger', this)">
                   <span>💾</span>
