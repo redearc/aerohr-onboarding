@@ -3114,27 +3114,27 @@
       display: inline-block;
     }
 
-    /* Universal Action Hub Toolbar */
+    /* Universal Action Hub Toolbar - Mobbin Enterprise Skin */
     .aero-universal-toolbar {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(15, 18, 28, 0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 10px;
+      background: rgba(13, 16, 23, 0.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 12px;
       padding: 5px 8px;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     }
     .aero-toolbar-segment {
       display: inline-flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 8px;
-      padding: 2px;
-      gap: 2px;
+      padding: 3px;
+      gap: 3px;
     }
     .aero-segment-btn {
       display: inline-flex;
@@ -3144,26 +3144,28 @@
       border-radius: 6px;
       border: none;
       background: transparent;
-      color: #64748b;
+      color: #94a3b8;
       font-size: 11.5px;
       font-weight: 600;
+      letter-spacing: -0.01em;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
+      white-space: nowrap;
     }
     .aero-segment-btn:hover {
       color: #ffffff;
       background: rgba(255, 255, 255, 0.06);
     }
     .aero-segment-btn.active {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.1);
       color: #ffffff;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     }
     .aero-toolbar-divider {
       width: 1px;
       height: 22px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.06);
       margin: 0 2px;
     }
     .aero-toolbar-btn {
@@ -3172,31 +3174,35 @@
       gap: 6px;
       padding: 7px 14px;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.04);
-      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.03);
+      color: #94a3b8;
       font-size: 12px;
       font-weight: 600;
+      letter-spacing: -0.01em;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       white-space: nowrap;
     }
     .aero-toolbar-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
       transform: translateY(-1px);
     }
     .aero-toolbar-btn.aero-toolbar-primary {
-      background: #ffffff;
-      color: #090a0f;
-      border-color: #ffffff;
+      background: #1e293b;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       font-weight: 700;
-      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
+      letter-spacing: -0.01em;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     .aero-toolbar-btn.aero-toolbar-primary:hover {
-      background: #e2e8f0;
-      border-color: #e2e8f0;
-      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+      background: #334155;
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.3);
+      transform: translateY(-1px);
     }
 
     /* Modern action buttons */
@@ -3313,26 +3319,26 @@
       margin: 4px 0 0 0;
     }
 
-    /* Top Filters Bar */
+    /* Top Filters Bar - Mobbin Surface */
     .aero-filter-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
-      background: rgba(15, 18, 28, 0.75);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      padding: 16px 24px;
+      gap: 16px;
+      background: rgba(13, 16, 23, 0.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      padding: 18px 24px;
       border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .aero-worker-pills {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
     }
     .aero-filter-pill {
@@ -3340,38 +3346,41 @@
       font-weight: 600;
       padding: 7px 16px;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(15, 18, 28, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: #64748b;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.03);
+      color: #94a3b8;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .aero-filter-pill:hover {
       background: rgba(255, 255, 255, 0.06);
       color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.14);
     }
     .aero-filter-pill.active {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.09);
       color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.16);
     }
 
-    /* WIDESCREEN KPI RIBBON CONTAINER (COMPRESSED MIDDLE MODULES) */
+    /* WIDESCREEN KPI RIBBON CONTAINER (COMPRESSED MIDDLE MODULES - MOBBIN METRICS RIBBON) */
     .aero-kpi-ribbon {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
-      background: rgba(15, 18, 28, 0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(13, 16, 23, 0.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 14px;
-      padding: 24px 32px;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      padding: 24px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
       margin-bottom: 24px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .aero-kpi-ribbon:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 16px 32px -4px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
     }
     @media (max-width: 1100px) {
       .aero-kpi-ribbon {
@@ -3389,7 +3398,7 @@
       padding: 0 24px;
       display: flex;
       flex-direction: column;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
     }
     .aero-ribbon-cell:first-child {
       padding-left: 0;
@@ -3408,12 +3417,12 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .aero-ribbon-label {
       font-size: 11px;
       font-weight: 700;
-      color: #64748b;
+      color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
@@ -3430,20 +3439,40 @@
     .aero-ribbon-delta {
       font-size: 11px;
       font-weight: 600;
-      color: #10b981;
+      color: #94a3b8;
       letter-spacing: -0.02em;
     }
     .aero-ribbon-sub {
       font-size: 11px;
-      color: #64748b;
+      color: #94a3b8;
       font-weight: 600;
       letter-spacing: -0.02em;
     }
     .aero-ribbon-detail {
       font-size: 11.5px;
-      color: #64748b;
+      color: #94a3b8;
       margin-top: 8px;
       line-height: 1.45;
+    }
+
+    /* Mobbin 2px solid monochrome dot and state tag */
+    .mobbin-state-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #94a3b8;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .mobbin-dot {
+      width: 2px;
+      height: 2px;
+      min-width: 2px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: inline-block;
     }
 
     /* Backwards compatibility for KPI card classes */
@@ -3453,20 +3482,20 @@
       gap: 16px;
     }
     .aero-kpi-card-modern {
-      background: rgba(15, 18, 28, 0.75);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(13, 16, 23, 0.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 14px;
-      padding: 20px 24px;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      transition: all 0.2s ease;
+      padding: 24px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
     }
     .aero-kpi-card-modern:hover {
-      transform: translateY(-2px);
       border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 16px 32px -4px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
     }
     .aero-kpi-top {
       display: flex;
@@ -3479,7 +3508,7 @@
     .aero-kpi-label {
       font-size: 11px;
       font-weight: 700;
-      color: #64748b;
+      color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       white-space: nowrap;
@@ -3496,7 +3525,7 @@
     }
     .aero-kpi-detail {
       font-size: 11.5px;
-      color: #64748b;
+      color: #94a3b8;
       margin-top: 6px;
       line-height: 1.45;
     }
@@ -3510,17 +3539,17 @@
       gap: 12px;
       margin: 18px 0 18px 0;
       padding: 6px 8px;
-      background: rgba(15, 18, 28, 0.75);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      background: rgba(13, 16, 23, 0.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     }
     .aero-stage-pills {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       flex-wrap: wrap;
     }
     .aero-stage-pill {
@@ -3530,7 +3559,7 @@
       border-radius: 8px;
       border: 1px solid transparent;
       background: transparent;
-      color: #64748b;
+      color: #94a3b8;
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       display: inline-flex;
@@ -3556,21 +3585,22 @@
       width: 100%;
     }
     .aero-flow-card {
-      background: rgba(15, 18, 28, 0.75);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(13, 16, 23, 0.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 16px;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
       display: flex;
       flex-direction: column;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
       width: 100%;
+      margin-bottom: 24px;
     }
     .aero-flow-card:hover {
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 16px 32px -4px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 0 15px rgba(255, 255, 255, 0.03);
     }
     .aero-flow-card.fade-card-exit {
       opacity: 0;
@@ -3582,12 +3612,12 @@
       transform: scale(1);
     }
     .aero-card-head {
-      padding: 24px 32px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       flex-wrap: wrap;
       background: transparent;
       cursor: pointer;
@@ -3600,15 +3630,15 @@
       flex: 1;
     }
     .aero-card-icon-box {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 16px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       color: #ffffff;
       flex-shrink: 0;
     }
@@ -3621,25 +3651,25 @@
     }
     .aero-card-sub-text {
       font-size: 12px;
-      color: #64748b;
+      color: #94a3b8;
       margin-top: 2px;
     }
     .aero-card-body {
-      padding: 32px;
+      padding: 24px;
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
       transition: opacity 0.3s ease;
     }
     .aero-card-foot {
-      padding: 20px 32px;
-      background: rgba(11, 14, 23, 0.6);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      background: rgba(9, 11, 17, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
@@ -5065,16 +5095,16 @@
       min-width: 420px !important;
       max-width: 640px !important;
       height: 100vh !important;
-      background: rgba(9, 10, 15, 0.96) !important;
-      backdrop-filter: blur(28px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+      background: rgba(13, 16, 23, 0.96) !important;
+      backdrop-filter: blur(20px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
       z-index: 999999 !important;
-      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.8) !important;
+      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
       display: none;
       flex-direction: column !important;
       transform: translateX(100%);
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
-      border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-left: 1px solid rgba(255, 255, 255, 0.06) !important;
       box-sizing: border-box !important;
       color: #ffffff !important;
     }
@@ -5094,11 +5124,11 @@
     }
 
     .aero-slideover-header {
-      padding: 32px 32px 24px 32px;
-      background: rgba(15, 18, 28, 0.85);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      background: rgba(13, 16, 23, 0.92);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       flex-shrink: 0;
     }
 
@@ -7478,9 +7508,9 @@
                 </p>
               </div>
 
-              <!-- Universal Action Hub (Unified Horizontal Toolbar in Top-Right Corner) -->
-              <div class="aero-universal-toolbar" id="aeroUniversalToolbar">
-                <!-- Viewport Segment Switcher (Desktop Hub vs Mobile App Preview) -->
+              <!-- Universal Action Hub (Consolidated Segmented Control Dropdown Bar in Upper-Right Control Dock) -->
+              <div class="aero-universal-toolbar" id="aeroUniversalToolbar" role="toolbar" aria-label="Upper-Right Control Dock">
+                <!-- Segmented Control Group -->
                 <div class="aero-toolbar-segment" role="group" aria-label="Viewport Switcher">
                   <button class="aero-segment-btn active" id="btnModeDesktop" onclick="setStaffingViewportMode('desktop')" title="Desktop Hub View">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
@@ -7488,28 +7518,26 @@
                   </button>
                   <button class="aero-segment-btn" id="btnModeMobile" onclick="setStaffingViewportMode('mobile')" title="Mobile App Preview">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
-                    <span>Mobile Preview</span>
+                    <span>Mobile App Preview</span>
+                  </button>
+                  <button class="aero-segment-btn" id="btnOnboardConsultant" onclick="openNewConsultantPlacementModal()" title="Onboard New Consultant Placement">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    <span>+ Onboard Consultant</span>
                   </button>
                 </div>
 
                 <div class="aero-toolbar-divider"></div>
 
-                <!-- Onboard Consultant Action Item -->
-                <button class="aero-toolbar-btn" onclick="openNewConsultantPlacementModal()" title="Onboard New Consultant Placement">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                  <span>Onboard Consultant</span>
-                </button>
-
-                <!-- Consolidated + Add Employee Action Item (Triggers 40% Width Slide-Over Panel) -->
+                <!-- Primary + Add Employee Action Button (Dark Slate Surface, Inner Accent Ring) -->
                 <button class="aero-toolbar-btn aero-toolbar-primary" id="btnUniversalAddEmployee" onclick="openAddEmployeeModal()" title="Initialize New Professional Profile (US Local vs. Offshore India Hub)">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                  <span>Add Employee</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  <span>+ Add Employee</span>
                 </button>
               </div>
             </div>
 
             <!-- Cohort Switcher Navigation: US Placements vs Offshore India Recruitment Engine -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 14px;">
               <div class="aero-cohort-switcher">
                 <button id="cohortTabUS" class="aero-cohort-btn active" onclick="switchCohortMode('us')">
                   <span>🇺🇸</span>
@@ -7562,7 +7590,7 @@
             </div>
 
             <!-- Active Placement Quick Selector Card -->
-            <div style="background: rgba(15, 18, 28, 0.75); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08); margin-bottom: 4px;">
+            <div style="background: rgba(13, 16, 23, 0.85); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 14px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05); margin-bottom: 20px;">
               <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
                 <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35); flex-shrink: 0;" id="activeConsultantAvatar">DS</div>
                 <div style="min-width: 0;">
@@ -7571,14 +7599,14 @@
                     <span class="card-tag tag-primary" style="font-size: 10px;" id="activeConsultantTypeBadge">1099 Contractor</span>
                     <span class="pill-ready" style="font-size: 10px;" id="activeConsultantRateBadge">$135.00/hr</span>
                   </div>
-                  <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 3px;" id="activeConsultantSubMeta">
+                  <div style="font-size: 11.5px; color: #94a3b8; margin-top: 3px;" id="activeConsultantSubMeta">
                     Senior Fullstack Cloud Architect • Client: <strong style="color: #ffffff;">Acme Corp</strong> • Start Date: <strong style="color: #ffffff;">Oct 14, 2026</strong>
                   </div>
                 </div>
               </div>
 
               <div style="display: flex; gap: 8px; align-items: center;">
-                <span style="font-size: 11.5px; font-weight: 600; color: #cbd5e1;">Switch Placement:</span>
+                <span style="font-size: 11.5px; font-weight: 600; color: #94a3b8;">Switch Placement:</span>
                 <select class="form-input" id="activeConsultantSelect" style="padding: 6px 12px; font-size: 12px; width: auto; font-weight: 600;" onchange="switchStaffingConsultant(this.value)">
                   <option value="devon">Devon Sanders (1099 - Sr. Cloud Architect @ Acme Corp - $135/hr)</option>
                   <option value="rachel">Rachel Wu (W-2 - Lead Frontend Engineer @ Horizon Cloud - $165k/yr)</option>
@@ -7588,14 +7616,17 @@
               </div>
             </div>
 
-            <!-- 3. Compressed Widescreen KPI Ribbon Container (Monochrome Precision) -->
+            <!-- 3. Compressed Widescreen KPI Ribbon Container (Mobbin Metrics Grid Ribbon) -->
             <div class="aero-kpi-ribbon" id="staffingKpiRow">
               
               <!-- KPI 1: Day 1 Readiness (98%) -->
               <div class="aero-ribbon-cell">
                 <div class="aero-ribbon-top">
                   <span class="aero-ribbon-label">Day 1 Readiness</span>
-                  <span class="pill-ready">98% On Track</span>
+                  <div class="mobbin-state-tag">
+                    <span class="mobbin-dot"></span>
+                    <span>98% On Track</span>
+                  </div>
                 </div>
                 <div class="aero-ribbon-value">
                   <span>98%</span>
@@ -7610,7 +7641,10 @@
               <div class="aero-ribbon-cell">
                 <div class="aero-ribbon-top">
                   <span class="aero-ribbon-label">Pending Documents</span>
-                  <span class="pill-inprogress">3 Urgent (&lt;24h)</span>
+                  <div class="mobbin-state-tag">
+                    <span class="mobbin-dot"></span>
+                    <span>3 Urgent (&lt;24h)</span>
+                  </div>
                 </div>
                 <div class="aero-ribbon-value">
                   <span>12</span>
@@ -7625,7 +7659,10 @@
               <div class="aero-ribbon-cell">
                 <div class="aero-ribbon-top">
                   <span class="aero-ribbon-label">Hardware In-Transit</span>
-                  <span class="pill-ready">FedEx &amp; UPS Active</span>
+                  <div class="mobbin-state-tag">
+                    <span class="mobbin-dot"></span>
+                    <span>FedEx &amp; UPS</span>
+                  </div>
                 </div>
                 <div class="aero-ribbon-value">
                   <span>5</span>
@@ -7640,7 +7677,10 @@
               <div class="aero-ribbon-cell">
                 <div class="aero-ribbon-top">
                   <span class="aero-ribbon-label">Active Access Requests</span>
-                  <span class="pill-inprogress">8 Pending Sync</span>
+                  <div class="mobbin-state-tag">
+                    <span class="mobbin-dot"></span>
+                    <span>Pending Sync</span>
+                  </div>
                 </div>
                 <div class="aero-ribbon-value">
                   <span>8</span>
@@ -7653,17 +7693,28 @@
 
             </div>
 
-            <!-- Progressive Disclosure Tabbed Panel Matrix Navigation -->
+            <!-- Progressive Disclosure Tabbed Panel Matrix Navigation (The Interactive Bottom Tabs Viewport) -->
             <div class="aero-stage-filter-bar">
               <div class="aero-stage-pills" role="tablist" aria-label="Onboarding Stage Tabs">
-                <button class="aero-stage-pill active" role="tab" aria-selected="true" onclick="filterStaffingStage('card-contract', this)">Contracts &amp; NDA</button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-compliance', this)">Identity &amp; Compliance</button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-hardware', this)">Hardware</button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-apps', this)">App Access</button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-timetrack', this)">Time Sync</button>
+                <button class="aero-stage-pill active" role="tab" aria-selected="true" onclick="filterStaffingStage('card-contract', this)">
+                  <span>📑</span>
+                  <span>Contracts &amp; NDA</span>
+                </button>
+                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-compliance', this)">
+                  <span>🪪</span>
+                  <span>Identity &amp; Compliance</span>
+                </button>
+                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-hardware', this)">
+                  <span>💻</span>
+                  <span>Hardware Assignment</span>
+                </button>
+                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-apps', this)">
+                  <span>🔑</span>
+                  <span>App Access</span>
+                </button>
               </div>
               <div style="display: flex; gap: 8px; align-items: center;">
-                <span id="activeMatrixTabIndicator" style="font-size: 11px; color: #64748b; font-weight: 600;">Active Section: Contracts &amp; NDA</span>
+                <span id="activeMatrixTabIndicator" style="font-size: 11px; color: #94a3b8; font-weight: 600;">Active Section: Contracts &amp; NDA</span>
               </div>
             </div>
 
@@ -15655,7 +15706,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       const stageLabels = {
         'card-contract': 'Contracts & NDA',
         'card-compliance': 'Identity & Compliance',
-        'card-hardware': 'Hardware',
+        'card-hardware': 'Hardware Assignment',
         'card-apps': 'App Access',
         'card-timetrack': 'Time Sync',
         'card-assignment': 'Client Assignment'
