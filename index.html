@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AeroHR — Workforce Overview &amp; Enterprise Command Center</title>
-  <meta name="description" content="Your workforce, in focus. AeroHR brings people, performance, and workforce intelligence into one operating system.">
+  <title>AeroHR — Executive Workforce &amp; Placement Operations System</title>
+  <meta name="description" content="Unified enterprise workforce operating system, contractor onboarding velocity engine, and talent placement suite.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --background: #0f121a;
-      --foreground: #f1f3f7;
-      --card: #151923;
+      --background: #090c15;
+      --foreground: #f8fafc;
+      --card: #0f1422;
+      --card-border: rgba(255, 255, 255, 0.07);
       --primary: #10b981;
       --primary-rgb: 16, 185, 129;
       --primary-foreground: #042f1f;
-      --secondary: #1a202c;
-      --muted-foreground: #828c9e;
-      --accent: #232b3c;
-      --border: #262e3d;
+      --secondary: #161b2b;
+      --muted-foreground: #94a3b8;
+      --accent: #1e263c;
+      --border: rgba(255, 255, 255, 0.08);
       --destructive: #ef4444;
       --warning: #f59e0b;
-      --violet: #8b5cf6;
-      --glass: rgba(21, 25, 35, 0.72);
-      --subtle: #121620;
-      --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+      --violet: #818cf8;
+      --glass: rgba(15, 20, 34, 0.78);
+      --subtle: #0d111c;
+      --shadow: 0 16px 45px rgba(0, 0, 0, 0.45);
       --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
@@ -43,6 +44,7 @@
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
     button, input, select {
@@ -58,309 +60,472 @@
       color: var(--primary-foreground);
     }
 
-    /* App Shell Layout */
+    /* Main App Layout */
     .app-shell {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 212px minmax(0, 1fr);
+      grid-template-columns: 228px minmax(0, 1fr);
     }
 
-    /* Sidebar Navigation */
+    /* ----------------------------------------------------------- */
+    /* LEFT SIDEBAR NAVIGATION (Matching Previous Authentic Design) */
+    /* ----------------------------------------------------------- */
     .sidebar {
       position: fixed;
-      width: 212px;
+      width: 228px;
       height: 100vh;
-      padding: 30px 17px 20px;
+      background: #0b0f19;
       border-right: 1px solid var(--border);
-      background: var(--subtle);
       display: flex;
       flex-direction: column;
       z-index: 30;
       overflow-y: auto;
+      padding: 0;
     }
 
+    /* Top Brand Header */
     .brand {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 24px;
-      font-weight: 750;
-      padding: 0 12px;
-      letter-spacing: -0.02em;
+      padding: 18px 16px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-    .brand-mark {
-      width: 27px;
-      height: 29px;
-      color: var(--primary);
-      flex-shrink: 0;
-    }
-
-    .workspace {
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 10px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px;
-      margin: 30px 0 23px;
-      background: var(--glass);
-      cursor: pointer;
-      transition: background 0.2s;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.45);
+      flex-shrink: 0;
     }
-    .workspace:hover {
-      background: var(--secondary);
+    .brand-text {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
     }
-    .workspace-icon {
-      display: grid;
-      place-items: center;
-      width: 30px;
-      height: 30px;
-      background: var(--secondary);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      color: var(--primary);
-    }
-
-    .nav-label {
-      padding: 12px;
-      color: var(--muted-foreground);
-      font-size: 9px;
-      font-weight: 650;
+    .brand-badge {
+      font-size: 9.5px;
+      font-weight: 700;
+      background: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      padding: 2px 7px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      letter-spacing: 1.6px;
     }
 
-    .nav-item {
+    /* Primary Action CTA Button: Add Employee */
+    .sidebar-action-wrap {
+      padding: 14px 14px 10px;
+    }
+    .sidebar-add-btn {
       width: 100%;
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 0 12px;
-      color: var(--muted-foreground);
-      height: 41px;
-      font-size: 12px;
-      margin: 2px 0;
-      font-weight: 500;
-      border-radius: 6px;
-      transition: all 0.15s ease;
-      position: relative;
-      text-align: left;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 12.5px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .nav-item:hover {
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--foreground);
+    .sidebar-add-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-1px);
     }
-    .nav-item[data-active="true"] {
-      background: var(--secondary);
-      color: var(--foreground);
-    }
-    .nav-item[data-active="true"]::before {
-      content: '';
-      width: 3px;
-      height: 17px;
-      background: var(--primary);
-      position: absolute;
-      left: 0;
-      border-radius: 0 3px 3px 0;
-    }
-    .nav-item svg {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-      opacity: 0.85;
+    .sidebar-add-badge {
+      font-size: 9px;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
     }
 
-    .sidebar-bottom {
-      margin-top: auto;
-      padding-top: 16px;
+    /* Sidebar Navigation Links */
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 6px 10px;
+      flex: 1;
     }
-    .system-status {
-      border-top: 1px solid var(--border);
-      margin-top: 14px;
-      padding: 20px 12px 0;
+    .nav-link {
       display: flex;
       align-items: center;
-      gap: 7px;
-      color: var(--muted-foreground);
-      font-size: 10px;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      border-left: 2px solid transparent;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
-    .status-dot {
-      display: inline-block;
+    .nav-link:hover {
+      background: rgba(99, 102, 241, 0.08);
+      color: #ffffff;
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-left: 2px solid rgba(99, 102, 241, 0.6);
+      transform: translateX(2px);
+    }
+    .nav-link.active {
+      background: rgba(99, 102, 241, 0.16);
+      color: #ffffff;
+      font-weight: 700;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-left: 2px solid #818cf8;
+      box-shadow: inset 0 0 16px rgba(99, 102, 241, 0.2), 0 0 16px rgba(99, 102, 241, 0.12);
+    }
+    .nav-link svg {
+      width: 15px;
+      height: 15px;
+      opacity: 0.85;
       flex-shrink: 0;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--primary);
-      box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
     }
 
-    /* Main Content Area */
+    /* Badges in navigation */
+    .pill-ready {
+      background: rgba(16, 185, 129, 0.14);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .pill-ready::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #34d399;
+    }
+    .pill-inprogress {
+      background: rgba(245, 158, 11, 0.14);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .pill-inprogress::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #fbbf24;
+    }
+
+    /* Sidebar Footer User Card */
+    .sidebar-footer {
+      padding: 12px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-top: auto;
+    }
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 9px;
+      background: rgba(15, 20, 32, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .user-meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .user-meta-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .user-meta-role {
+      font-size: 9px;
+      font-weight: 600;
+      color: #64748b;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ----------------------------------------------------------- */
+    /* MAIN VIEWPORT & TOPBAR                                      */
+    /* ----------------------------------------------------------- */
     .main-shell {
       grid-column: 2;
       min-width: 0;
     }
 
-    /* Topbar */
     .topbar {
-      height: 76px;
-      padding: 0 34px;
+      height: 64px;
+      padding: 0 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border);
       gap: 15px;
-      background: rgba(15, 18, 26, 0.85);
+      background: rgba(11, 15, 25, 0.85);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
       z-index: 20;
     }
-    .breadcrumb {
+    .topbar-left {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      color: var(--muted-foreground);
+      gap: 12px;
     }
-    .breadcrumb span:last-child {
-      color: var(--foreground);
+    .breadcrumb-title {
+      font-size: 12px;
       font-weight: 600;
-    }
-    .mobile-menu-btn {
-      display: none;
-      padding: 6px;
       color: var(--muted-foreground);
-      border-radius: 6px;
-    }
-
-    .top-tools {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .search-trigger {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      color: var(--muted-foreground);
-      font-size: 11px;
-      padding: 7px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: var(--subtle);
-      transition: all 0.2s;
-    }
-    .search-trigger:hover {
-      border-color: rgba(255, 255, 255, 0.16);
-      color: var(--foreground);
-    }
-    .search-trigger kbd {
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2px 5px;
-      font-size: 9px;
-      margin-left: 28px;
-      color: var(--muted-foreground);
-    }
-    .divider {
-      height: 22px;
-      width: 1px;
-      background: var(--border);
-    }
-
-    .avatar {
-      width: 31px;
-      height: 31px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 10px;
-      font-weight: 650;
-      background: var(--accent);
-      color: var(--foreground);
-      border: 1px solid var(--border);
-    }
-    .avatar.mint {
-      color: var(--primary);
-      background: rgba(16, 185, 129, 0.15);
-      border-color: rgba(16, 185, 129, 0.3);
-    }
-    .avatar.violet {
-      color: var(--violet);
-      background: rgba(139, 92, 246, 0.15);
-      border-color: rgba(139, 92, 246, 0.3);
-    }
-    .avatar.amber {
-      color: var(--warning);
-      background: rgba(245, 158, 11, 0.15);
-      border-color: rgba(245, 158, 11, 0.3);
-    }
-
-    /* Content Body */
-    .content {
-      max-width: 1600px;
-      padding: 32px 34px 22px;
-      margin: auto;
-    }
-
-    .page-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 27px;
-      gap: 20px;
-    }
-    .eyebrow {
-      color: var(--muted-foreground);
-      font-size: 9px;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-    h1 {
-      font-size: 28px;
-      font-weight: 650;
-      line-height: 1.2;
-      margin: 0 0 6px;
-      letter-spacing: -0.02em;
-    }
-    .subtitle {
-      color: var(--muted-foreground);
-      font-size: 11.5px;
-      margin: 0;
-    }
-
-    .actions {
       display: flex;
       align-items: center;
       gap: 8px;
     }
+    .breadcrumb-title strong {
+      color: #ffffff;
+    }
+    .shift-pill {
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #34d399;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .shift-pill::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #34d399;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 7px;
+      font-size: 11.5px;
+      color: var(--muted-foreground);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .search-box:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+    .search-box kbd {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 9px;
+      margin-left: 10px;
+    }
+
+    .topbar-hcm-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: 7px;
+      background: rgba(99, 102, 241, 0.14);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .topbar-hcm-pill:hover {
+      background: rgba(99, 102, 241, 0.24);
+    }
+    .topbar-pill-badge {
+      background: #4f46e5;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .topbar-add-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      border-radius: 7px;
+      background: #10b981;
+      color: #042f1f;
+      font-weight: 700;
+      font-size: 11.5px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+      transition: all 0.2s;
+    }
+    .topbar-add-btn:hover {
+      background: #34d399;
+      transform: translateY(-1px);
+    }
+
+    .complexity-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    /* ----------------------------------------------------------- */
+    /* VIEW CONTAINERS                                             */
+    /* ----------------------------------------------------------- */
+    .view-panel {
+      display: none;
+      padding: 24px 28px;
+      max-width: 1560px;
+      margin: 0 auto;
+    }
+    .view-panel.active {
+      display: block;
+      animation: viewFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes viewFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Page Header */
+    .page-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .page-title-wrap h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 5px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .badge-minimal {
+      font-size: 10px;
+      font-weight: 700;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .page-title-wrap p {
+      font-size: 12.5px;
+      color: var(--muted-foreground);
+      margin: 0;
+    }
+
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       height: 34px;
-      padding: 0 14px;
-      border-radius: 6px;
-      font-size: 11px;
+      padding: 0 13px;
+      border-radius: 7px;
+      font-size: 11.5px;
       font-weight: 600;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       white-space: nowrap;
     }
     .btn-outline {
       border: 1px solid var(--border);
-      background: var(--glass);
-      color: var(--foreground);
+      background: rgba(255, 255, 255, 0.03);
+      color: #ffffff;
     }
     .btn-outline:hover {
-      background: var(--secondary);
+      background: rgba(255, 255, 255, 0.08);
       border-color: rgba(255, 255, 255, 0.16);
       transform: translateY(-1px);
     }
     .btn-primary {
-      background: var(--primary);
-      color: var(--primary-foreground);
+      background: #10b981;
+      color: #042f1f;
       font-weight: 700;
       box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
     }
@@ -370,309 +535,217 @@
       box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45);
     }
 
-    /* Main Tab Navigation */
-    .main-tabs {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 23px;
-      min-height: 40px;
-    }
-    .main-tab {
-      color: var(--muted-foreground);
-      border-radius: 0;
-      padding: 0 0 14px;
-      font-size: 11.5px;
-      font-weight: 500;
-      position: relative;
-      background: transparent;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.15s;
-    }
-    .main-tab:hover {
-      color: var(--foreground);
-    }
-    .main-tab[data-active="true"] {
-      color: var(--foreground);
-      font-weight: 600;
-    }
-    .main-tab[data-active="true"]::after {
-      position: absolute;
-      content: '';
-      bottom: -1px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--primary);
-    }
-    .tab-count {
-      padding: 1px 6px;
-      background: var(--secondary);
-      color: var(--muted-foreground);
-      font-size: 8.5px;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-    .live-label {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 9.5px;
-      color: var(--muted-foreground);
-    }
-
-    /* 4-Column Metrics Grid */
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    .metric {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 18px 20px 16px;
-      background: var(--glass);
-      backdrop-filter: blur(18px);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.25s ease;
-    }
-    .metric:hover {
-      border-color: rgba(255, 255, 255, 0.12);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    }
-    .metric-label {
-      color: var(--muted-foreground);
-      font-size: 10.5px;
-      font-weight: 500;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .metric-label svg {
-      width: 14px;
-      height: 14px;
-      opacity: 0.7;
-    }
-    .metric-value {
-      font-size: 30px;
-      font-weight: 600;
-      margin-top: 10px;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-    }
-    .metric-value small {
-      font-size: 18px;
-      color: var(--muted-foreground);
-      font-weight: 400;
-    }
-    .metric-footer {
-      margin-top: 10px;
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      font-size: 9.5px;
-      color: var(--muted-foreground);
-    }
-    .metric-footer strong {
-      font-weight: 600;
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      gap: 2px;
-    }
-    .sparkline {
-      position: absolute;
-      right: 16px;
-      bottom: 16px;
-      width: 60px;
-      height: 22px;
-      opacity: 0.75;
-    }
-
-    /* Enterprise Panel */
+    /* Glass Panels */
     .panel {
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 12px;
       background: var(--glass);
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       box-shadow: var(--shadow);
     }
     .panel-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 22px 16px;
+      padding: 16px 20px;
       gap: 12px;
+      flex-wrap: wrap;
     }
     .panel-header h2 {
       margin: 0;
       font-size: 13.5px;
-      font-weight: 600;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 8px;
+      color: #ffffff;
     }
     .panel-subtitle {
-      font-size: 10.5px;
+      font-size: 11px;
       color: var(--muted-foreground);
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
-    .segmented {
-      display: inline-flex;
-      padding: 3px;
-      gap: 2px;
-      border: 1px solid var(--border);
-      background: var(--subtle);
-      border-radius: 6px;
-    }
-    .segmented button {
-      height: 25px;
-      font-size: 9.5px;
-      padding: 0 10px;
-      border-radius: 4px;
-      color: var(--muted-foreground);
-      font-weight: 500;
-      transition: all 0.15s;
-    }
-    .segmented button[data-active="true"] {
-      background: var(--accent);
-      color: var(--foreground);
-      font-weight: 600;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-    }
-
-    /* SVG Timeline Chart */
-    .chart-options {
+    /* Cohort Navigation Strip */
+    .cohort-switcher {
       display: flex;
       align-items: center;
-      gap: 21px;
-      margin: 0 21px;
-      padding: 13px 0;
-      border-top: 1px solid var(--border);
-      font-size: 9.5px;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 3px;
     }
-    .legend {
-      display: flex;
-      gap: 17px;
-      color: var(--muted-foreground);
-    }
-    .legend span {
-      display: flex;
+    .cohort-btn {
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-    }
-    .legend i {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--primary);
-      display: inline-block;
-    }
-    .legend span:last-child i {
-      background: var(--violet);
-    }
-    .chart-wrap {
-      padding: 0 19px 8px 10px;
-      height: 210px;
-      position: relative;
-    }
-    .timeline-svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-    .chart-grid {
-      stroke: var(--border);
-      stroke-dasharray: 3 5;
-      stroke-width: 0.7;
-    }
-    .chart-text {
-      fill: var(--muted-foreground);
-      font-size: 9.5px;
-      font-family: var(--font-sans);
-    }
-    .chart-primary {
-      stroke: var(--primary);
-      fill: none;
-      stroke-width: 2.2;
-    }
-    .chart-secondary {
-      stroke: var(--violet);
-      fill: none;
-      stroke-width: 1.6;
-      stroke-dasharray: 5 5;
-      opacity: 0.7;
-    }
-    .chart-tooltip {
-      fill: var(--secondary);
-      stroke: var(--border);
-    }
-    .chart-tooltip-text {
-      fill: var(--foreground);
-      font-size: 10px;
-      font-family: var(--font-sans);
-    }
-    .chart-footer {
-      padding: 12px 21px;
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid var(--border);
-      font-size: 9.5px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
       color: var(--muted-foreground);
+      transition: all 0.15s;
+    }
+    .cohort-btn:hover {
+      color: #ffffff;
+    }
+    .cohort-btn.active {
+      background: rgba(255, 255, 255, 0.09);
+      color: #ffffff;
     }
 
-    /* Lower Grid (Workforce Table + Insights Sidebar) */
-    .lower-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 280px;
-      gap: 18px;
-      margin-top: 20px;
-      align-items: start;
-    }
-    .table-tabs {
+    /* Placement Control Deck */
+    .placement-dock {
+      background: rgba(13, 17, 28, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
       display: flex;
-      gap: 22px;
-      padding: 0 20px;
-      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      gap: 12px;
     }
-    .table-tabs .main-tab {
-      font-size: 10.5px;
-      padding-bottom: 12px;
-    }
-    .table-tools {
+    .dock-tier {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 13px 19px;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .table-search {
+    .dock-tier-primary {
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .consultant-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .avatar-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+      flex-shrink: 0;
+    }
+    .consultant-headline {
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
+    }
+    .consultant-headline strong {
+      font-size: 14px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .consultant-subtext {
+      font-size: 11.5px;
       color: var(--muted-foreground);
-      background: var(--subtle);
+      margin-top: 2px;
+    }
+
+    /* KPI Ribbon */
+    .kpi-ribbon {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      background: rgba(13, 17, 28, 0.85);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 5px 10px;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 14px;
     }
-    .table-search input {
-      background: transparent;
-      border: none;
-      outline: none;
-      width: 180px;
-      font-size: 10.5px;
-      color: var(--foreground);
+    .ribbon-cell {
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .table-container {
+    .ribbon-cell:first-child { padding-left: 0; }
+    .ribbon-cell:last-child { border-right: none; padding-right: 0; }
+    .ribbon-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3px;
+    }
+    .ribbon-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .ribbon-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      line-height: 1.2;
+    }
+    .ribbon-detail {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* 3-Tab Bottom Matrix Viewport */
+    .stage-tabs-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 10px;
+      background: rgba(13, 17, 28, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .stage-pills {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .stage-pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 7px;
+      color: #94a3b8;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .stage-pill:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .stage-pill.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* Table Styles */
+    .table-wrap {
       overflow-x: auto;
     }
     table {
@@ -682,161 +755,23 @@
       white-space: nowrap;
     }
     th {
-      color: var(--muted-foreground);
+      color: #94a3b8;
       font-size: 9.5px;
-      font-weight: 500;
-      background: var(--subtle);
-      padding: 11px 19px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 10px 16px;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
     td {
-      padding: 12px 19px;
-      border-bottom: 1px solid rgba(38, 46, 61, 0.65);
-      font-size: 11px;
+      padding: 11px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 11.5px;
     }
-    .employee-row {
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .employee-row:hover {
-      background: var(--secondary);
-    }
-    .employee-cell {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .employee-name {
-      font-weight: 600;
-      font-size: 11px;
-    }
-    .employee-role {
-      color: var(--muted-foreground);
-      font-size: 9px;
-      margin-top: 2px;
-    }
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 9px;
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      background: rgba(16, 185, 129, 0.08);
-      color: var(--primary);
-      padding: 3px 7px;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-    .status.away {
-      color: var(--warning);
-      background: rgba(245, 158, 11, 0.08);
-      border-color: rgba(245, 158, 11, 0.25);
-    }
-    .status.away .status-dot {
-      background: var(--warning);
-      box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
-    }
-    .table-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 19px;
-      color: var(--muted-foreground);
-      font-size: 9.5px;
-    }
-
-    /* Right Column Insights */
-    .insights .panel-header {
-      padding: 18px 20px 14px;
-    }
-    .insight-item {
-      margin: 0 18px;
-      padding: 15px 0;
-      border-top: 1px solid var(--border);
-      display: flex;
-      gap: 10px;
-    }
-    .insight-icon {
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      display: grid;
-      place-items: center;
-      color: var(--primary);
-      background: var(--secondary);
-      flex-shrink: 0;
-    }
-    .insight-item h3 {
-      font-size: 10.5px;
-      font-weight: 600;
-      margin: 0;
-    }
-    .insight-item p {
-      color: var(--muted-foreground);
-      font-size: 9.5px;
-      line-height: 1.6;
-      margin: 4px 0 6px;
-    }
-    .insight-link {
-      font-size: 9.5px;
-      font-weight: 600;
-      padding: 0;
-      height: auto;
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .insight-link:hover {
-      text-decoration: underline;
-    }
-
-    /* Office Card */
-    .office-card {
-      margin-top: 15px;
-      height: 140px;
-      overflow: hidden;
-      position: relative;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    }
-    .office-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.65;
-    }
-    .office-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(15, 18, 26, 0.95) 0%, rgba(15, 18, 26, 0.3) 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 15px;
-    }
-    .office-overlay h3 {
-      font-size: 12.5px;
-      font-weight: 600;
-      margin: 0;
-    }
-    .office-overlay p {
-      font-size: 9.5px;
-      color: var(--muted-foreground);
-      margin: 4px 0 0;
-    }
-
-    .page-footer {
-      display: flex;
-      justify-content: space-between;
-      padding: 24px 0 10px;
-      color: var(--muted-foreground);
-      font-size: 9.5px;
+    .table-row-hover:hover {
+      background: rgba(255, 255, 255, 0.03);
     }
 
     /* Modals & Dialogs */
@@ -847,642 +782,418 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: rgba(7, 9, 13, 0.75);
+      background: rgba(6, 9, 15, 0.8);
       backdrop-filter: blur(8px);
       padding: 20px;
     }
     .dialog-card {
-      width: 460px;
+      width: 480px;
       max-width: 95vw;
       max-height: 85vh;
       overflow-y: auto;
-      background: var(--card);
+      background: #0f1422;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 25px;
+      border-radius: 12px;
+      padding: 24px;
       box-shadow: var(--shadow);
-      position: relative;
     }
-    .dialog-heading {
+    .dialog-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
+      align-items: center;
+      margin-bottom: 18px;
     }
-    .dialog-heading h2 {
+    .dialog-header h2 {
       margin: 0;
-      font-size: 18px;
-      font-weight: 650;
-    }
-    .dialog-close {
-      color: var(--muted-foreground);
-      padding: 4px;
-      border-radius: 4px;
-    }
-    .dialog-close:hover {
-      color: var(--foreground);
+      font-size: 17px;
+      font-weight: 700;
     }
     .detail-line {
       display: flex;
       justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 11px;
+      align-items: center;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11.5px;
     }
     .detail-line span:first-child {
-      color: var(--muted-foreground);
+      color: #94a3b8;
     }
-    .form-field {
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-group label {
       display: block;
-      margin: 14px 0;
       font-size: 11px;
-      color: var(--muted-foreground);
-      font-weight: 500;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 6px;
     }
-    .form-field input, .form-field select {
-      display: block;
+    .form-control {
       width: 100%;
-      margin-top: 6px;
-      padding: 9px 12px;
-      background: var(--secondary);
-      color: var(--foreground);
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 7px;
+      color: #ffffff;
+      font-size: 12px;
       outline: none;
-      font-size: 11.5px;
     }
-    .form-field input:focus, .form-field select:focus {
-      border-color: var(--primary);
+    .form-control:focus {
+      border-color: #10b981;
     }
 
-    /* Floating Toast Notice */
-    .notice {
+    /* Toast Notice */
+    .toast-notice {
       position: fixed;
-      bottom: 25px;
-      right: 25px;
+      bottom: 24px;
+      right: 24px;
       padding: 12px 18px;
+      background: #161b2b;
       border: 1px solid var(--border);
-      background: var(--secondary);
-      z-index: 70;
-      border-radius: 6px;
-      font-size: 11.5px;
+      border-radius: 8px;
+      font-size: 12px;
       box-shadow: var(--shadow);
+      z-index: 70;
       display: flex;
       align-items: center;
       gap: 8px;
-      animation: slideUp 0.3s ease-out;
-    }
-    @keyframes slideUp {
-      from { transform: translateY(15px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* Embedded Recruitment / Onboarding Velocity Engine Frame View */
-    .recruitment-container {
-      display: none;
-    }
-    .recruitment-container.active {
-      display: block;
     }
 
     /* Responsive */
-    @media(max-width: 1150px) {
-      .sidebar { width: 180px; padding-left: 12px; padding-right: 12px; }
-      .app-shell { grid-template-columns: 180px minmax(0, 1fr); }
-      .content { padding: 25px 24px; }
-      .topbar { padding: 0 24px; }
-      .lower-grid { grid-template-columns: minmax(0, 1fr) 240px; }
-      .sparkline { display: none; }
+    @media(max-width: 1100px) {
+      .kpi-ribbon { grid-template-columns: repeat(2, 1fr); gap: 14px 0; }
     }
-    @media(max-width: 950px) {
-      .lower-grid { grid-template-columns: 1fr; }
-      .right-column { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-      .office-card { margin-top: 0; height: 100%; min-height: 180px; }
-      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media(max-width: 700px) {
+    @media(max-width: 800px) {
       .app-shell { grid-template-columns: 1fr; }
-      .main-shell { grid-column: 1; }
-      .sidebar { transform: translateX(-100%); transition: transform 0.2s; width: 220px; }
-      .sidebar.open { transform: translateX(0); box-shadow: var(--shadow); }
-      .mobile-menu-btn { display: inline-flex; }
-      .topbar { height: 62px; padding: 0 16px; }
-      .search-trigger { display: none; }
-      .content { padding: 20px 16px; }
-      .page-title-row { flex-direction: column; align-items: flex-start; gap: 14px; }
-      .metrics { grid-template-columns: 1fr; }
-      .right-column { grid-template-columns: 1fr; }
-      .page-footer span:last-child { display: none; }
+      .sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+      .sidebar.open { transform: translateX(0); }
+      .kpi-ribbon { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="app-shell">
-    <!-- Sidebar Navigation -->
+    <!-- =============================================================== -->
+    <!-- LEFT SIDEBAR NAVIGATION (Matching Previous Authentic Design)    -->
+    <!-- =============================================================== -->
     <aside class="sidebar" id="appSidebar">
+      <!-- 1. Brand Header -->
       <div class="brand">
-        <svg class="brand-mark" viewBox="0 0 28 30" aria-hidden="true" fill="currentColor">
-          <path d="M14 1L27 28H20L14 14L8 28H1L14 1Z"/>
-          <path d="M10 24H19L22 29H7Z"/>
-        </svg>
-        <span>AeroHR</span>
-        <span style="color: var(--muted-foreground); font-size: 11px; font-weight: 400; margin-left: 2px;">®</span>
+        <div class="brand-logo">A</div>
+        <div class="brand-text">AeroHR</div>
+        <span class="brand-badge">ADMIN</span>
       </div>
 
-      <div class="workspace" onclick="openModal('Your profile')">
-        <span class="workspace-icon">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
-        </span>
-        <div>
-          <div style="font-size: 11px; font-weight: 600;">Acme Corporation</div>
-          <div style="font-size: 9px; color: var(--muted-foreground); margin-top: 2px;">Enterprise workspace</div>
-        </div>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: auto; color: var(--muted-foreground);"><path d="m6 9 6 6 6-6"/></svg>
+      <!-- 2. Primary Action Button (+ Add Employee WIZARD) -->
+      <div class="sidebar-action-wrap">
+        <button class="sidebar-add-btn" onclick="openModal('Add employee')" title="Initialize New Placement (Slide-Over Wizard)">
+          <span style="display: flex; align-items: center; gap: 8px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>+ Add Employee</span>
+          </span>
+          <span class="sidebar-add-badge">WIZARD</span>
+        </button>
       </div>
 
-      <div class="nav-label">Workspace</div>
-      <nav>
-        <button class="nav-item" data-active="true" id="nav-overview" onclick="switchNav('Overview')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-          <span>Overview</span>
-        </button>
-        <button class="nav-item" id="nav-people" onclick="switchNav('People')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>People</span>
-        </button>
-        <button class="nav-item" id="nav-recruitment" onclick="switchNav('Recruitment')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
-          <span>Recruitment</span>
-          <span class="tab-count" style="margin-left: auto;">8</span>
-        </button>
-        <button class="nav-item" id="nav-attendance" onclick="openModal('Attendance')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-          <span>Time &amp; attendance</span>
-        </button>
-        <button class="nav-item" id="nav-payroll" onclick="openModal('Payroll')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>
-          <span>Payroll</span>
-        </button>
-        <button class="nav-item" id="nav-performance" onclick="openModal('Performance')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-          <span>Performance</span>
-        </button>
-        <button class="nav-item" id="nav-documents" onclick="openModal('Documents')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
-          <span>Documents</span>
-        </button>
+      <!-- 3. Core Organized Navigation Items (No Unwanted Elements) -->
+      <nav class="sidebar-nav">
+        <!-- 1. Onboarding Velocity -->
+        <a class="nav-link active" id="nav-onboarding" onclick="switchNav('onboarding')" title="Developer &amp; Contractor Onboarding Velocity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>Onboarding Velocity</span>
+          <span class="pill-ready" style="margin-left: auto;">28</span>
+        </a>
+
+        <!-- 2. Offshore India Hub -->
+        <a class="nav-link" id="nav-offshore" onclick="switchNav('offshore')" title="Offshore India Recruitment &amp; KYC Engine">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>Offshore India Hub</span>
+          <span class="pill-ready" style="margin-left: auto;">Live</span>
+        </a>
+
+        <!-- 3. Roster & HRIS (Workforce Overview & Talent Matrix) -->
+        <a class="nav-link" id="nav-hris" onclick="switchNav('hris')" title="IT Staffing Consultant Roster &amp; Workforce Overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Roster &amp; HRIS</span>
+          <span class="pill-ready" style="margin-left: auto;">Active</span>
+        </a>
+
+        <!-- 4. Time & Invoicing -->
+        <a class="nav-link" id="nav-timesheets" onclick="switchNav('timesheets')" title="Time Tracking, Approvals &amp; Client Invoices">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Time &amp; Invoicing</span>
+          <span class="pill-inprogress" style="margin-left: auto;">3 Due</span>
+        </a>
+
+        <!-- 5. HCM Product Suite (4 Pillars) -->
+        <a class="nav-link" id="nav-catalog" onclick="switchNav('catalog')" title="Rippling-Tier Modular HCM Product Suite (4 Pillars)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>HCM Product Suite</span>
+          <span class="pill-ready" style="margin-left: auto;">4 Pillars</span>
+        </a>
+
+        <!-- 6. Reports & AI -->
+        <a class="nav-link" id="nav-reports" onclick="switchNav('reports')" title="AI Intelligence &amp; Telemetry Analytics">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>Reports &amp; AI</span>
+          <span class="pill-ready" style="margin-left: auto;">Telemetry</span>
+        </a>
       </nav>
 
-      <div class="nav-label" style="margin-top: 20px;">Intelligence</div>
-      <button class="nav-item" id="nav-analytics" onclick="switchNav('Analytics')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
-        <span>Analytics</span>
-      </button>
-      <button class="nav-item" id="nav-compliance" onclick="openModal('Compliance')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-        <span>Compliance</span>
-        <span class="status-dot" style="margin-left: auto;"></span>
-      </button>
-
-      <div class="sidebar-bottom">
-        <button class="nav-item" onclick="openModal('Settings')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-          <span>Settings</span>
-        </button>
-        <button class="nav-item" onclick="openModal('Help & support')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-          <span>Help &amp; support</span>
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: auto;"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </button>
-        <div class="system-status">
-          <span class="status-dot"></span>
-          <span>All systems operational</span>
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: auto;"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+      <!-- 4. Bottom User Profile Card (Sarah Jenkins) -->
+      <div class="sidebar-footer">
+        <div class="user-pill">
+          <div class="user-avatar">SJ</div>
+          <div class="user-meta">
+            <div class="user-meta-name">Sarah Jenkins</div>
+            <div class="user-meta-role">SUPER ADMIN</div>
+          </div>
+          <button onclick="openModal('Your profile')" title="Super Admin Account" style="background: transparent; border: none; color: #94a3b8; cursor: pointer; font-size: 13px; margin-left: auto;">🛡️</button>
         </div>
       </div>
     </aside>
 
-    <!-- Main Content Viewport -->
+    <!-- =============================================================== -->
+    <!-- MAIN APPLICATION VIEWPORT                                       -->
+    <!-- =============================================================== -->
     <div class="main-shell">
-      <!-- Topbar Header -->
+      <!-- Universal Topbar -->
       <header class="topbar">
-        <div class="breadcrumb">
-          <button class="mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="Toggle Navigation">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-          </button>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/></svg>
-          <span>Workspace</span>
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-          <span id="breadcrumbCurrent">Overview</span>
+        <div class="topbar-left">
+          <div class="breadcrumb-title">
+            <span>AeroHR</span>
+            <span>/</span>
+            <strong id="topbarBreadcrumbTitle">Developer &amp; Contractor Onboarding Velocity</strong>
+          </div>
+          <div class="shift-pill">Shift Active (04h 18m)</div>
         </div>
 
-        <div class="top-tools">
-          <button class="search-trigger" onclick="openModal('Search')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <span>Search anything</span>
-            <kbd>⌘ K</kbd>
+        <div class="top-actions">
+          <div class="search-box" onclick="openModal('Search')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span>Search directory, contracts...</span>
+            <kbd>⌘K</kbd>
+          </div>
+
+          <button class="topbar-hcm-pill" onclick="switchNav('catalog')">
+            <span>✨</span>
+            <span>HCM Suite</span>
+            <span class="topbar-pill-badge">4 PILLARS</span>
           </button>
-          <div class="divider"></div>
-          <button onclick="openModal('Notifications')" title="Notifications" aria-label="Notifications" style="padding: 6px; color: var(--muted-foreground);">
+
+          <button class="topbar-add-btn" onclick="openModal('Add employee')">
+            <span>+</span>
+            <span>Add Employee</span>
+          </button>
+
+          <div class="complexity-badge">
+            <span>🟡 Standard (SMB)</span>
+          </div>
+
+          <button onclick="openModal('Notifications')" style="padding: 6px; color: var(--muted-foreground);" title="Notifications">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
           </button>
-          <button onclick="openModal('Your profile')" title="Your Profile" aria-label="Profile">
-            <span class="avatar">JD</span>
+
+          <button onclick="openModal('Your profile')" title="Sarah Jenkins Profile">
+            <div class="user-avatar" style="width: 30px; height: 30px; font-size: 11px;">SJ</div>
           </button>
         </div>
       </header>
 
-      <!-- Main Dashboard Overview Container -->
-      <main class="content" id="overviewDashboardView">
+      <!-- ============================================================= -->
+      <!-- VIEW 1: DEVELOPER & CONTRACTOR ONBOARDING VELOCITY (DEFAULT)  -->
+      <!-- ============================================================= -->
+      <main class="view-panel active" id="view-onboarding">
+        <!-- Header -->
         <div class="page-title-row">
-          <div>
-            <div class="eyebrow">YOUR PEOPLE. YOUR PERSPECTIVE.</div>
-            <h1 id="pageHeadingTitle">Workforce overview</h1>
-            <p class="subtitle" id="pageHeadingSubtitle">A clear picture of your people, and what comes next.</p>
+          <div class="page-title-wrap">
+            <h1>
+              <span>Developer &amp; Contractor Onboarding Velocity</span>
+              <span class="badge-minimal">Enterprise Engine</span>
+              <span class="pill-ready" style="font-size: 10px;">v2.8 Live</span>
+            </h1>
+            <p>Unified placement engine for W-2 Employees, 1099 Contractors, and C2C Consultants across Enterprise Client Engagements.</p>
           </div>
-          <div class="actions">
-            <button class="btn btn-outline" onclick="openModal('Date range')">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-              <span>Oct 1 – Oct 31, 2026</span>
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <button class="btn btn-outline" onclick="exportWorkforceReport()">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg>
-              <span>Export</span>
-            </button>
+
+          <div style="display: flex; gap: 8px;">
+            <div class="cohort-switcher">
+              <button class="cohort-btn active" id="btnModeDesktop">Desktop Hub</button>
+              <button class="cohort-btn" id="btnModeMobile">Mobile Preview</button>
+            </div>
             <button class="btn btn-primary" onclick="openModal('Add employee')">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              <span>Add employee</span>
+              <span>+ Add Employee</span>
             </button>
           </div>
         </div>
 
-        <!-- Main Tab Navigation -->
-        <div class="main-tabs">
-          <button class="main-tab" data-active="true" id="tab-overview" onclick="setMainTab('Overview')">Overview</button>
-          <button class="main-tab" id="tab-people" onclick="setMainTab('People')">People</button>
-          <button class="main-tab" id="tab-analytics" onclick="setMainTab('Analytics')">Analytics</button>
-          <button class="main-tab" id="tab-activity" onclick="setMainTab('Activity')">
-            <span>Activity</span>
-            <span class="tab-count">12</span>
-          </button>
-          <span class="live-label">
-            <span class="status-dot"></span>
-            <span>Live workspace <span style="color: var(--muted-foreground); margin: 0 2px;">/</span> Demo data</span>
-          </span>
-        </div>
-
-        <!-- 4 KPI Metrics -->
-        <section class="metrics" aria-label="Workforce metrics">
-          <div class="metric">
-            <div class="metric-label">
-              <span>Total headcount</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            </div>
-            <div class="metric-value">1,284</div>
-            <div class="metric-footer">
-              <strong>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-                +8.2%
-              </strong>
-              <span>vs. last month</span>
-            </div>
-            <svg class="sparkline" viewBox="0 0 60 25">
-              <path d="M1 22L9 17L17 19L26 13L34 16L43 8L50 10L59 2" fill="none" stroke="var(--primary)" stroke-width="1.3"/>
-            </svg>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              <span>Active employees</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
-            </div>
-            <div class="metric-value">1,218</div>
-            <div class="metric-footer">
-              <strong>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-                +6.4%
-              </strong>
-              <span>vs. last month</span>
-            </div>
-            <svg class="sparkline" viewBox="0 0 60 25">
-              <path d="M1 22L9 17L17 19L26 13L34 16L43 8L50 10L59 2" fill="none" stroke="var(--primary)" stroke-width="1.3"/>
-            </svg>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              <span>Open positions</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
-            </div>
-            <div class="metric-value">32</div>
-            <div class="metric-footer">
-              <strong>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-                +4
-              </strong>
-              <span>new this month</span>
-            </div>
-            <svg class="sparkline" viewBox="0 0 60 25">
-              <path d="M1 22L10 18L18 18L26 12L35 14L43 8L53 8L59 2" fill="none" stroke="var(--primary)" stroke-width="1.3"/>
-            </svg>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              <span>Retention rate</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-            </div>
-            <div class="metric-value">96.8<small>%</small></div>
-            <div class="metric-footer">
-              <strong>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-                +2.1%
-              </strong>
-              <span>vs. last quarter</span>
-            </div>
-            <svg class="sparkline" viewBox="0 0 60 25">
-              <path d="M1 22L9 17L17 19L26 13L34 16L43 8L50 10L59 2" fill="none" stroke="var(--primary)" stroke-width="1.3"/>
-            </svg>
-          </div>
-        </section>
-
-        <!-- Dynamic Chart or Activity Container -->
-        <section class="panel" id="chartSectionPanel">
-          <div class="panel-header">
-            <div>
-              <h2 id="chartPanelHeading">Workforce growth</h2>
-              <div class="panel-subtitle">Your organization’s trajectory, at a glance.</div>
-            </div>
-            <div class="segmented" aria-label="Timeline period">
-              <button data-active="false" onclick="setChartPeriod('30 days', this)">30 days</button>
-              <button data-active="false" onclick="setChartPeriod('90 days', this)">90 days</button>
-              <button data-active="true" onclick="setChartPeriod('12 months', this)">12 months</button>
-            </div>
-          </div>
-
-          <div class="chart-options">
-            <div class="segmented" aria-label="Timeline metric">
-              <button data-active="true" onclick="setChartMetric('Headcount', this)">Headcount</button>
-              <button data-active="false" onclick="setChartMetric('Retention', this)">Retention</button>
-            </div>
-            <div class="legend">
-              <span><i id="legendDotPrimary"></i><span id="legendTextPrimary">Total headcount</span></span>
-              <span><i style="background: var(--violet);"></i><span>Previous period</span></span>
-            </div>
-            <button onclick="openModal('Departments')" style="margin-left: auto; font-size: 9.5px; color: var(--muted-foreground); display: flex; align-items: center; gap: 5px;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-              <span>All locations</span>
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        <!-- Cohort Switcher Navigation -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 10px;">
+          <div class="cohort-switcher">
+            <button class="cohort-btn active" id="cohortTabUS" onclick="switchCohortMode('us')">
+              <span>🇺🇸</span>
+              <span>US Placements &amp; Contractors</span>
+              <span class="pill-ready" style="font-size: 9px; margin-left: 4px;">28 Active</span>
+            </button>
+            <button class="cohort-btn" id="cohortTabIndia" onclick="switchCohortMode('india')">
+              <span>🇮🇳</span>
+              <span>Offshore India Onboarding Engine</span>
+              <span class="pill-ready" style="font-size: 9px; margin-left: 4px;">Live Vault</span>
             </button>
           </div>
 
-          <div class="chart-wrap" id="chartSvgWrapper">
-            <!-- Rendered interactively via JS -->
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 11px; color: #94a3b8;">Active Operating Hub:</span>
+            <span class="pill-ready" id="activeCohortBadge" style="font-size: 10.5px;">US Commercial Practice</span>
           </div>
+        </div>
 
-          <div class="chart-footer">
-            <span style="display: flex; align-items: center; gap: 8px;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-              <span><strong style="color: var(--foreground); font-weight: 600;">240 employees</strong> added over the last 12 months</span>
-            </span>
-            <span>Updated just now</span>
-          </div>
-        </section>
-
-        <!-- Lower Grid: Workforce Table & People Insights -->
-        <div class="lower-grid">
-          <!-- Workforce Table Panel -->
-          <section class="panel">
-            <div class="panel-header">
+        <!-- Consolidated Scope & Placement Control Dock -->
+        <div class="placement-dock" id="aeroPlacementDock">
+          <!-- Tier 1: Active Placement Highlight & Switcher -->
+          <div class="dock-tier dock-tier-primary">
+            <div class="consultant-identity">
+              <div class="avatar-box" id="activeConsultantAvatar">DS</div>
               <div>
-                <h2>Your workforce <span class="tab-count" style="margin-left: 8px;">1,284</span></h2>
-                <div class="panel-subtitle">The people moving your organization forward.</div>
-              </div>
-              <div class="segmented" aria-label="Workforce action">
-                <button data-active="true" onclick="setWorkforceAction('Manage', this)">Manage</button>
-                <button data-active="false" onclick="setWorkforceAction('Review', this)">Review</button>
-              </div>
-            </div>
-
-            <div class="table-tabs">
-              <button class="main-tab" data-active="true" onclick="setTableSubtab('All employees', this)">
-                <span>All employees</span>
-                <span class="tab-count">1,284</span>
-              </button>
-              <button class="main-tab" data-active="false" onclick="setTableSubtab('New joiners', this)">
-                <span>New joiners</span>
-                <span class="tab-count">18</span>
-              </button>
-              <button class="main-tab" data-active="false" onclick="setTableSubtab('On leave', this)">
-                <span>On leave</span>
-                <span class="tab-count">66</span>
-              </button>
-            </div>
-
-            <div class="table-tools">
-              <label class="table-search">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                <input placeholder="Search employees..." id="employeeSearchInput" oninput="filterEmployeeTable()">
-              </label>
-              <button class="btn btn-outline" onclick="openModal('Departments')" style="height: 28px; font-size: 9.5px;" id="filterDeptBtn">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-                <span id="filterDeptLabel">Filters</span>
-              </button>
-            </div>
-
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width: 24px;">
-                      <input type="checkbox" onchange="toggleSelectAllEmployees(this.checked)" aria-label="Select all employees">
-                    </th>
-                    <th>Employee ▾</th>
-                    <th>Department</th>
-                    <th id="thLocationHeader">Location</th>
-                    <th>Status</th>
-                    <th style="width: 32px;"></th>
-                  </tr>
-                </thead>
-                <tbody id="employeeTableBody">
-                  <!-- Rendered dynamically -->
-                </tbody>
-              </table>
-              <div id="tableEmptyState" style="display: none; padding: 35px; text-align: center; color: var(--muted-foreground);">
-                No employees match your search.
-              </div>
-            </div>
-
-            <div class="table-footer">
-              <span id="tableShowingCount">Showing 6 of 1,284 demo employees</span>
-              <button onclick="resetTableFilters()" style="color: var(--foreground); font-size: 9.5px; display: inline-flex; align-items: center; gap: 4px;">
-                <span>View all employees</span>
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </button>
-            </div>
-          </section>
-
-          <!-- Right Column: People Insights & Glass Headquarters -->
-          <div class="right-column">
-            <section class="panel insights">
-              <div class="panel-header">
-                <h2>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
-                  <span>People insights</span>
-                </h2>
-                <span class="tab-count">3</span>
-              </div>
-
-              <div class="insight-item">
-                <span class="insight-icon">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
-                </span>
-                <div>
-                  <h3>Hiring momentum</h3>
-                  <p>8 roles are ready for your review. Keep your next chapter moving.</p>
-                  <button class="insight-link" onclick="switchNav('Recruitment')">
-                    <span>Review positions</span>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  </button>
+                <div class="consultant-headline">
+                  <strong id="activeConsultantName">Devon Sanders</strong>
+                  <span class="pill-ready" style="font-size: 9.5px;" id="activeConsultantTypeBadge">1099 Contractor</span>
+                  <span class="pill-ready" style="font-size: 9.5px;" id="activeConsultantRateBadge">$135.00/hr</span>
                 </div>
-              </div>
-
-              <div class="insight-item">
-                <span class="insight-icon">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-                </span>
-                <div>
-                  <h3>Upcoming anniversaries</h3>
-                  <p>12 teammates celebrate a work anniversary this month.</p>
-                  <button class="insight-link" onclick="openModal('Anniversaries')">
-                    <span>See milestones</span>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  </button>
-                </div>
-              </div>
-
-              <div class="insight-item">
-                <span class="insight-icon">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-                </span>
-                <div>
-                  <h3>Compliance, on track</h3>
-                  <p>98% of employee documents are up to date. 6 need attention.</p>
-                  <button class="insight-link" onclick="openModal('Documents')">
-                    <span>View documents</span>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  </button>
-                </div>
-              </div>
-            </section>
-
-            <div class="office-card">
-              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Acme Glass Headquarters" loading="lazy">
-              <div class="office-overlay">
-                <div class="eyebrow" style="color: var(--primary); margin-bottom: 2px;">One connected organization</div>
-                <h3>Great people. Greater possibilities.</h3>
-                <p>6 offices · 12 countries · One team</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="page-footer">
-          <span>AeroHR <span style="margin: 0 6px;">/</span> Built around your people.</span>
-          <span>Enterprise workspace <span style="margin: 0 6px;">·</span> All times in UTC <span style="margin: 0 6px;">·</span> v.2.8 Enterprise Live</span>
-        </footer>
-      </main>
-
-      <!-- Embedded Recruitment / Onboarding Velocity Engine (Full Screen View for 'Recruitment') -->
-      <main class="content recruitment-container" id="recruitmentEngineView">
-        <div class="page-title-row">
-          <div>
-            <div class="eyebrow">ENTERPRISE ONBOARDING ENGINE</div>
-            <h1>Developer &amp; Contractor Onboarding Velocity</h1>
-            <p class="subtitle">Unified placement engine for W-2 Employees, 1099 Contractors, and C2C Consultants across Enterprise Client Engagements.</p>
-          </div>
-          <div class="actions">
-            <button class="btn btn-outline" onclick="switchNav('Overview')">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-              <span>Back to Overview</span>
-            </button>
-            <button class="btn btn-primary" onclick="openModal('Add employee')">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              <span>+ Add Employee Wizard</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Active Placement Quick Selector Card -->
-        <div class="panel" style="padding: 20px; margin-bottom: 20px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-            <div style="display: flex; align-items: center; gap: 14px;">
-              <div class="avatar violet" style="width: 40px; height: 40px; font-size: 13px; font-weight: 700;">DS</div>
-              <div>
-                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                  <strong style="font-size: 14px; font-weight: 700;">Devon Sanders</strong>
-                  <span class="status" style="font-size: 9.5px;">1099 Contractor</span>
-                  <span class="status" style="font-size: 9.5px; border-color: rgba(16,185,129,0.3); color: var(--primary);">$135.00/hr</span>
-                </div>
-                <div style="font-size: 11px; color: var(--muted-foreground); margin-top: 3px;">
+                <div class="consultant-subtext" id="activeConsultantSubMeta">
                   Senior Fullstack Cloud Architect • Client: <strong style="color: #ffffff;">Acme Corp</strong> • Start Date: <strong style="color: #ffffff;">Oct 14, 2026</strong>
                 </div>
               </div>
             </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
-              <span style="font-size: 11px; color: var(--muted-foreground);">Switch Placement:</span>
-              <select class="btn btn-outline" style="height: 32px; padding: 0 10px; font-size: 11px;">
-                <option>Devon Sanders (1099 - Sr. Cloud Architect @ Acme Corp - $135/hr)</option>
-                <option>Rachel Wu (W-2 - Lead Frontend Engineer @ Horizon Cloud - $165k/yr)</option>
-                <option>Carlos Mendoza (C2C - Staff DevOps &amp; SRE @ HealthScale - $140/hr)</option>
+
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 11px; color: #94a3b8;">Placement Record:</span>
+              <select class="form-control" id="activeConsultantSelect" style="width: auto; padding: 5px 10px;" onchange="switchStaffingConsultant(this.value)">
+                <option value="devon">Devon Sanders (1099 - Sr. Cloud Architect @ Acme Corp - $135/hr)</option>
+                <option value="rachel">Rachel Wu (W-2 - Lead Frontend Engineer @ Horizon Cloud - $165k/yr)</option>
+                <option value="carlos">Carlos Mendoza (C2C - Staff DevOps &amp; SRE @ HealthScale - $140/hr)</option>
+                <option value="elena">Elena Rostova (W-2 - Principal ML Engineer @ FinTech Prime - $190k/yr)</option>
               </select>
+            </div>
+          </div>
+
+          <!-- Tier 2: Filters & Search -->
+          <div class="dock-tier">
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="staffingWorkerPills">
+              <button class="cohort-btn active" onclick="setStaffingWorkerFilter('all', this)">All Placements (28)</button>
+              <button class="cohort-btn" onclick="setStaffingWorkerFilter('w2', this)">W-2 (12)</button>
+              <button class="cohort-btn" onclick="setStaffingWorkerFilter('1099', this)">1099 (9)</button>
+              <button class="cohort-btn" onclick="setStaffingWorkerFilter('c2c', this)">C2C (7)</button>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <select class="form-control" id="filterClientProjectSelect" style="width: auto; padding: 5px 10px;" onchange="filterStaffingPlacements()">
+                <option value="all">🏢 All Client Projects</option>
+                <option value="acme" selected>Acme Corp (Cloud Platform)</option>
+                <option value="horizon">Horizon Cloud (FinTech API)</option>
+                <option value="healthscale">HealthScale AI (Kubernetes Platform)</option>
+              </select>
+              <input type="text" id="staffingSearchInput" class="form-control" placeholder="🔍 Search developer, skill..." style="width: 200px; padding: 5px 10px;" oninput="filterStaffingPlacements()">
             </div>
           </div>
         </div>
 
-        <!-- 3-Tab Bottom Matrix Viewport -->
-        <div class="panel" style="padding: 20px;">
-          <div class="main-tabs" style="margin-bottom: 18px;">
-            <button class="main-tab" data-active="true" id="rec-tab-contracts" onclick="switchRecTab('contracts')">📑 Contracts &amp; NDA</button>
-            <button class="main-tab" data-active="false" id="rec-tab-compliance" onclick="switchRecTab('compliance')">🪪 Identity &amp; Compliance</button>
-            <button class="main-tab" data-active="false" id="rec-tab-ledger" onclick="switchRecTab('ledger')">💾 Storage Ledger</button>
+        <!-- Compressed Widescreen KPI Ribbon -->
+        <div class="kpi-ribbon" id="staffingKpiRow">
+          <div class="ribbon-cell">
+            <div class="ribbon-top">
+              <span class="ribbon-label">Day 1 Readiness</span>
+              <span class="pill-ready" style="font-size: 9px;">98% On Track</span>
+            </div>
+            <div class="ribbon-value">98% <span style="font-size: 11px; color: #34d399;">▲ +4.2%</span></div>
+            <div class="ribbon-detail">28 of 29 placements ready for Day 1 kickoff.</div>
           </div>
 
-          <div id="rec-pane-contracts" style="display: block;">
+          <div class="ribbon-cell">
+            <div class="ribbon-top">
+              <span class="ribbon-label">Pending Documents</span>
+              <span class="pill-inprogress" style="font-size: 9px;">3 Urgent</span>
+            </div>
+            <div class="ribbon-value">12 <span style="font-size: 11px; color: #94a3b8;">▼ -5 vs last wk</span></div>
+            <div class="ribbon-detail">Form I-9 photos (4) • COI (5) • W-9 forms (3).</div>
+          </div>
+
+          <div class="ribbon-cell">
+            <div class="ribbon-top">
+              <span class="ribbon-label">Hardware In-Transit</span>
+              <span class="pill-ready" style="font-size: 9px;">100% on schedule</span>
+            </div>
+            <div class="ribbon-value">5 <span style="font-size: 11px; color: #94a3b8;">FedEx &amp; UPS</span></div>
+            <div class="ribbon-detail">Apple MacBook Pro M3 Max units • Jamf MDM depot.</div>
+          </div>
+
+          <div class="ribbon-cell">
+            <div class="ribbon-top">
+              <span class="ribbon-label">Active Access Requests</span>
+              <span class="pill-ready" style="font-size: 9px;">Syncing</span>
+            </div>
+            <div class="ribbon-value">8 <span style="font-size: 11px; color: #94a3b8;">Okta SCIM: 12m</span></div>
+            <div class="ribbon-detail">GitHub Org (3) • AWS GovCloud (2) • Client VPN (3).</div>
+          </div>
+        </div>
+
+        <!-- 3-Tab Bottom Matrix Viewport -->
+        <div class="stage-tabs-bar">
+          <div class="stage-pills" role="tablist">
+            <button class="stage-pill active" id="tabBtnContracts" onclick="filterStaffingStage('card-contract', this)">
+              <span>📑</span>
+              <span>Contracts &amp; NDA</span>
+            </button>
+            <button class="stage-pill" id="tabBtnCompliance" onclick="filterStaffingStage('card-compliance', this)">
+              <span>🪪</span>
+              <span>Identity &amp; Compliance</span>
+            </button>
+            <button class="stage-pill" id="tabBtnLedger" onclick="filterStaffingStage('card-storage-ledger', this)">
+              <span>💾</span>
+              <span>Storage Ledger</span>
+            </button>
+          </div>
+          <span style="font-size: 11px; color: #94a3b8; font-weight: 600;" id="activeMatrixTabIndicator">Active Section: Contracts &amp; NDA</span>
+        </div>
+
+        <!-- Card Container Matrix -->
+        <div class="panel" style="padding: 20px;">
+          <!-- Pane 1: Contracts & NDA -->
+          <div id="card-contract" style="display: block;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 16px;">
               <div class="panel" style="padding: 14px;">
-                <div style="color: var(--muted-foreground); font-size: 10px;">Contract Type</div>
-                <strong style="font-size: 12px; margin-top: 4px; display: block;">Subcontractor (1099)</strong>
+                <div style="color: #94a3b8; font-size: 10.5px;">Contract Type</div>
+                <strong style="color: #ffffff; font-size: 12.5px; margin-top: 4px; display: block;" id="card1ContractType">Subcontractor (1099)</strong>
               </div>
               <div class="panel" style="padding: 14px;">
-                <div style="color: var(--muted-foreground); font-size: 10px;">Bill Rate &amp; Terms</div>
-                <strong style="font-size: 12px; margin-top: 4px; display: block; color: var(--primary);">$135.00/hr • Net 15</strong>
+                <div style="color: #94a3b8; font-size: 10.5px;">Bill Rate &amp; Terms</div>
+                <strong style="color: #34d399; font-size: 12.5px; margin-top: 4px; display: block;" id="card1RateTerms">$135.00/hr • Net 15</strong>
               </div>
               <div class="panel" style="padding: 14px;">
-                <div style="color: var(--muted-foreground); font-size: 10px;">Scope of Work (SOW)</div>
-                <strong style="font-size: 12px; margin-top: 4px; display: block;">Cloud Modernization &amp; Architecture</strong>
+                <div style="color: #94a3b8; font-size: 10.5px;">Scope of Work (SOW)</div>
+                <strong style="color: #ffffff; font-size: 12.5px; margin-top: 4px; display: block;" id="card1SowTitle">Cloud Modernization &amp; Architecture</strong>
               </div>
             </div>
-            <div class="detail-line"><span>✓ Master Services Agreement (MSA) Flowdown</span><span class="status">Signed &amp; Sealed</span></div>
-            <div class="detail-line"><span>✓ Proprietary Inventions &amp; IP Assignment</span><span class="status">Signed &amp; Sealed</span></div>
-            <div class="detail-line"><span>✓ Client Non-Solicit &amp; Data Security Addendum</span><span class="status">Signed &amp; Sealed</span></div>
+            <div class="detail-line"><span>✓ Master Services Agreement (MSA) Flowdown</span><span class="pill-ready">Signed &amp; Sealed</span></div>
+            <div class="detail-line"><span>✓ Proprietary Inventions &amp; IP Assignment</span><span class="pill-ready">Signed &amp; Sealed</span></div>
+            <div class="detail-line"><span>✓ Client Non-Solicit &amp; Data Security Addendum</span><span class="pill-ready">Signed &amp; Sealed</span></div>
           </div>
 
-          <div id="rec-pane-compliance" style="display: none;">
-            <div class="detail-line"><span>Form I-9 &amp; DHS E-Verify (Case #2026-EV-90218)</span><span class="status">✓ Certified</span></div>
-            <div class="detail-line"><span>Checkr County Criminal (7 Yr Trace)</span><span class="status">0 Records (Clear)</span></div>
-            <div class="detail-line"><span>Checkr 10-Panel Drug Screen</span><span class="status">Passed</span></div>
-            <div class="detail-line"><span>Certificate of Insurance (COI) $2M Policy</span><span class="status">COI Valid</span></div>
+          <!-- Pane 2: Identity & Compliance -->
+          <div id="card-compliance" style="display: none;">
+            <div class="detail-line"><span>Form I-9 &amp; DHS E-Verify (Case #2026-EV-90218)</span><span class="pill-ready">✓ E-Verify Certified</span></div>
+            <div class="detail-line"><span>Checkr County Criminal (7 Yr Trace)</span><span class="pill-ready">0 Records (Clear)</span></div>
+            <div class="detail-line"><span>Checkr 10-Panel Drug Screen</span><span class="pill-ready">Passed</span></div>
+            <div class="detail-line"><span>Certificate of Insurance (COI) $2M Policy</span><span class="pill-ready">COI Valid</span></div>
           </div>
 
-          <div id="rec-pane-ledger" style="display: none;">
+          <!-- Pane 3: Storage Ledger -->
+          <div id="card-storage-ledger" style="display: none;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <span style="font-size: 11px; color: var(--muted-foreground);">Supabase PostgreSQL Candidate Ledger &bull; Encrypted Storage</span>
-              <span class="status">Postgres Synchronized</span>
+              <span style="font-size: 11.5px; color: #94a3b8;">Supabase PostgreSQL Candidate Ledger &bull; Encrypted Storage</span>
+              <span class="pill-ready">Postgres Synchronized</span>
             </div>
-            <div class="table-container">
+            <div class="table-wrap">
               <table>
                 <thead>
                   <tr>
@@ -1494,26 +1205,26 @@
                   </tr>
                 </thead>
                 <tbody id="dbCandidatesTableBody">
-                  <tr>
+                  <tr class="table-row-hover">
                     <td><strong>Devon Sanders</strong></td>
-                    <td style="color: var(--muted-foreground);">devon.sanders@acme-cloud.io</td>
+                    <td style="color: #94a3b8;">devon.sanders@acme-cloud.io</td>
                     <td>Sr. Cloud Architect</td>
-                    <td>US Commercial</td>
-                    <td><span class="status">Hired</span></td>
+                    <td>US Commercial Practice</td>
+                    <td><span class="pill-ready">Hired</span></td>
                   </tr>
-                  <tr>
+                  <tr class="table-row-hover">
                     <td><strong>Priya Sharma</strong></td>
-                    <td style="color: var(--muted-foreground);">priya.sharma@aerohr.in</td>
+                    <td style="color: #94a3b8;">priya.sharma@aerohr.in</td>
                     <td>Staff Backend Engineer</td>
                     <td>Offshore India Hub</td>
-                    <td><span class="status">Hired</span></td>
+                    <td><span class="pill-ready">Hired</span></td>
                   </tr>
-                  <tr>
+                  <tr class="table-row-hover">
                     <td><strong>Aarav Patel</strong></td>
-                    <td style="color: var(--muted-foreground);">aarav.patel@aerohr.in</td>
+                    <td style="color: #94a3b8;">aarav.patel@aerohr.in</td>
                     <td>DevOps SRE Lead</td>
                     <td>Offshore India Hub</td>
-                    <td><span class="status">Hired</span></td>
+                    <td><span class="pill-ready">Hired</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -1521,17 +1232,206 @@
           </div>
         </div>
       </main>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 2: ROSTER & HRIS (WORKFORCE OVERVIEW DASHBOARD)           -->
+      <!-- ============================================================= -->
+      <main class="view-panel" id="view-hris">
+        <div class="page-title-row">
+          <div class="page-title-wrap">
+            <div class="badge-minimal" style="margin-bottom: 6px;">YOUR PEOPLE. YOUR PERSPECTIVE.</div>
+            <h1>Workforce overview</h1>
+            <p>A clear picture of your people, and what comes next.</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline" onclick="openModal('Date range')">
+              <span>Oct 1 – Oct 31, 2026</span>
+              <span>▾</span>
+            </button>
+            <button class="btn btn-outline" onclick="exportWorkforceReport()">
+              <span>📥 Export CSV</span>
+            </button>
+            <button class="btn btn-primary" onclick="openModal('Add employee')">
+              <span>+ Add employee</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Metrics Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 20px;">
+          <div class="panel" style="padding: 16px 18px;">
+            <div style="color: #94a3b8; font-size: 11px;">Total headcount</div>
+            <div style="font-size: 28px; font-weight: 800; color: #ffffff; margin-top: 6px;">1,284</div>
+            <div style="font-size: 10.5px; color: #34d399; margin-top: 4px;">▲ +8.2% vs. last month</div>
+          </div>
+          <div class="panel" style="padding: 16px 18px;">
+            <div style="color: #94a3b8; font-size: 11px;">Active employees</div>
+            <div style="font-size: 28px; font-weight: 800; color: #ffffff; margin-top: 6px;">1,218</div>
+            <div style="font-size: 10.5px; color: #34d399; margin-top: 4px;">▲ +6.4% vs. last month</div>
+          </div>
+          <div class="panel" style="padding: 16px 18px;">
+            <div style="color: #94a3b8; font-size: 11px;">Open positions</div>
+            <div style="font-size: 28px; font-weight: 800; color: #ffffff; margin-top: 6px;">32</div>
+            <div style="font-size: 10.5px; color: #34d399; margin-top: 4px;">▲ +4 new this month</div>
+          </div>
+          <div class="panel" style="padding: 16px 18px;">
+            <div style="color: #94a3b8; font-size: 11px;">Retention rate</div>
+            <div style="font-size: 28px; font-weight: 800; color: #ffffff; margin-top: 6px;">96.8%</div>
+            <div style="font-size: 10.5px; color: #34d399; margin-top: 4px;">▲ +2.1% vs. last quarter</div>
+          </div>
+        </div>
+
+        <!-- Workforce Table & Insights Lower Grid -->
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 16px;">
+          <!-- Table Panel -->
+          <div class="panel" style="padding: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <div>
+                <strong style="font-size: 14px; color: #ffffff;">Your workforce</strong>
+                <span class="pill-ready" style="margin-left: 6px;">1,284</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Search employees..." style="width: 200px; padding: 5px 10px;" id="hrisSearchInput" oninput="filterHrisTable()">
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Employee</th>
+                    <th>Department</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="hrisTableBody">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- People Insights Column -->
+          <div class="panel" style="padding: 18px;">
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 14px;">
+              <span style="color: #34d399;">✨</span>
+              <strong style="font-size: 13px; color: #ffffff;">People insights</strong>
+              <span class="pill-ready" style="margin-left: auto;">3</span>
+            </div>
+            <div class="detail-line" style="flex-direction: column; align-items: flex-start; gap: 3px;">
+              <strong style="color: #ffffff;">Hiring momentum</strong>
+              <span style="font-size: 11px; color: #94a3b8;">8 roles ready for review across engineering.</span>
+            </div>
+            <div class="detail-line" style="flex-direction: column; align-items: flex-start; gap: 3px;">
+              <strong style="color: #ffffff;">Upcoming anniversaries</strong>
+              <span style="font-size: 11px; color: #94a3b8;">12 teammates celebrate milestones this month.</span>
+            </div>
+            <div class="detail-line" style="flex-direction: column; align-items: flex-start; gap: 3px;">
+              <strong style="color: #ffffff;">Compliance on track</strong>
+              <span style="font-size: 11px; color: #94a3b8;">98% employee documents up to date.</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 3: OFFSHORE INDIA HUB                                    -->
+      <!-- ============================================================= -->
+      <main class="view-panel" id="view-offshore">
+        <div class="page-title-row">
+          <div class="page-title-wrap">
+            <div class="badge-minimal">GLOBAL EXPANSION VAULT</div>
+            <h1>Offshore India Recruitment Engine</h1>
+            <p>Direct integration with Supabase, candidate KYC verification, and Resend notification chain.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openModal('Add employee')">+ Onboard Offshore Hire</button>
+        </div>
+        <div class="panel" style="padding: 20px;">
+          <div class="detail-line"><span>Pipeline Route</span><strong style="color: #ffffff;">Offshore_India_Hub (Bangalore &amp; Hyderabad)</strong></div>
+          <div class="detail-line"><span>Shift Configuration</span><span>US_EST_Alignment (18:30 - 03:30 IST)</span></div>
+          <div class="detail-line"><span>Active Candidate Vault</span><span class="pill-ready">Supabase Postgres Connected</span></div>
+          <div class="detail-line"><span>KYC / Compliance</span><span class="pill-ready">Aadhaar &amp; PAN Verification Ready</span></div>
+        </div>
+      </main>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 4: TIME & INVOICING                                      -->
+      <!-- ============================================================= -->
+      <main class="view-panel" id="view-timesheets">
+        <div class="page-title-row">
+          <div class="page-title-wrap">
+            <div class="badge-minimal">FINANCIAL OPERATIONS</div>
+            <h1>Time Tracking &amp; Invoicing</h1>
+            <p>Weekly consultant timesheets, client approval chains, and automated invoice dispatch.</p>
+          </div>
+        </div>
+        <div class="panel" style="padding: 20px;">
+          <div class="detail-line"><span>Pending Timesheets</span><span class="pill-inprogress">3 Awaiting Client Approval</span></div>
+          <div class="detail-line"><span>Current Billing Cycle</span><strong style="color: #ffffff;">Oct 01 – Oct 15, 2026</strong></div>
+          <div class="detail-line"><span>Approved Invoices</span><span class="pill-ready">$342,850.00 Net 15</span></div>
+        </div>
+      </main>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 5: HCM PRODUCT SUITE (4 PILLARS)                         -->
+      <!-- ============================================================= -->
+      <main class="view-panel" id="view-catalog">
+        <div class="page-title-row">
+          <div class="page-title-wrap">
+            <div class="badge-minimal">PLATFORM ARCHITECTURE</div>
+            <h1>AeroHR Complete HCM Product Suite</h1>
+            <p>Rippling-tier modular design structured across 4 foundational platform pillars.</p>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+          <div class="panel" style="padding: 18px;">
+            <div style="font-size: 20px; margin-bottom: 8px;">👥</div>
+            <strong style="font-size: 14px; color: #ffffff; display: block;">1. HR Management</strong>
+            <p style="font-size: 11.5px; color: #94a3b8; margin: 6px 0 0;">Global HRIS, Onboarding Wizards, Compliance &amp; Benefits administration.</p>
+          </div>
+          <div class="panel" style="padding: 18px;">
+            <div style="font-size: 20px; margin-bottom: 8px;">💵</div>
+            <strong style="font-size: 14px; color: #ffffff; display: block;">2. Global Payroll</strong>
+            <p style="font-size: 11.5px; color: #94a3b8; margin: 6px 0 0;">Multi-currency contractor payouts, direct tax withholdings &amp; W-2 filings.</p>
+          </div>
+          <div class="panel" style="padding: 18px;">
+            <div style="font-size: 20px; margin-bottom: 8px;">💻</div>
+            <strong style="font-size: 14px; color: #ffffff; display: block;">3. IT &amp; Hardware</strong>
+            <p style="font-size: 11.5px; color: #94a3b8; margin: 6px 0 0;">Zero-touch device MDM, Jamf Pro enrollment, and Okta SCIM app access.</p>
+          </div>
+          <div class="panel" style="padding: 18px;">
+            <div style="font-size: 20px; margin-bottom: 8px;">🛡️</div>
+            <strong style="font-size: 14px; color: #ffffff; display: block;">4. Security &amp; Spend</strong>
+            <p style="font-size: 11.5px; color: #94a3b8; margin: 6px 0 0;">Corporate cards, SOC 2 compliance ledger, and audit tracking.</p>
+          </div>
+        </div>
+      </main>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 6: REPORTS & AI TELEMETRY                                -->
+      <!-- ============================================================= -->
+      <main class="view-panel" id="view-reports">
+        <div class="page-title-row">
+          <div class="page-title-wrap">
+            <div class="badge-minimal">INTELLIGENCE SUITE</div>
+            <h1>AI Reports &amp; Telemetry</h1>
+            <p>Real-time analytics, retention prediction, and automated candidate onboarding logs.</p>
+          </div>
+        </div>
+        <div class="panel" style="padding: 20px;">
+          <div class="detail-line"><span>Telemetry Ingestion</span><span class="pill-ready">Active (0ms Latency)</span></div>
+          <div class="detail-line"><span>Edge Function Monitoring</span><span class="pill-ready">Swift Function Health: 100%</span></div>
+          <div class="detail-line"><span>Email Dispatch Tracking</span><strong style="color: #ffffff;">Formspree &amp; Resend Synchronized</strong></div>
+        </div>
+      </main>
     </div>
   </div>
 
-  <!-- Interactive Modal Dialog Backdrop -->
+  <!-- Interactive Modal Dialog -->
   <div class="dialog-backdrop" id="appModalBackdrop" style="display: none;" onclick="closeModal()">
     <section class="dialog-card" id="appModalCard" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
-      <div class="dialog-heading">
+      <div class="dialog-header">
         <h2 id="modalTitle">Dialog</h2>
-        <button class="dialog-close" onclick="closeModal()" aria-label="Close dialog">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-        </button>
+        <button onclick="closeModal()" style="color: #94a3b8; font-size: 16px;">✕</button>
       </div>
       <div id="modalBodyContent">
         <!-- Rendered dynamically -->
@@ -1539,402 +1439,228 @@
     </section>
   </div>
 
-  <!-- Floating Toast Notification -->
-  <div class="notice" id="appNotice" style="display: none;" role="status">
-    <span class="status-dot"></span>
-    <span id="noticeMessage">Notice message</span>
+  <!-- Toast Notice -->
+  <div class="toast-notice" id="appToast" style="display: none;">
+    <span class="pill-ready" style="padding: 2px 6px;"></span>
+    <span id="toastMessage">Notice</span>
   </div>
 
   <script>
-    // -------------------------------------------------------------
-    // AeroHR Enterprise State & Data Architecture
-    // -------------------------------------------------------------
-    const INITIAL_EMPLOYEES = [
-      { id: 'AHR-001', name: 'Olivia Rhye', role: 'Senior Product Designer', department: 'Design', location: 'San Francisco, US', status: 'Active', initials: 'OR', tone: 'violet', email: 'olivia@aerohr.demo' },
-      { id: 'AHR-002', name: 'Phoenix Baker', role: 'Engineering Manager', department: 'Engineering', location: 'London, UK', status: 'Active', initials: 'PB', tone: 'mint', email: 'phoenix@aerohr.demo' },
-      { id: 'AHR-003', name: 'Lana Steiner', role: 'People Operations Lead', department: 'People', location: 'Berlin, DE', status: 'On leave', initials: 'LS', tone: 'amber', email: 'lana@aerohr.demo' },
-      { id: 'AHR-004', name: 'Demi Wilkinson', role: 'Growth Marketing Manager', department: 'Marketing', location: 'New York, US', status: 'Active', initials: 'DW', tone: 'violet', email: 'demi@aerohr.demo' },
-      { id: 'AHR-005', name: 'Drew Cano', role: 'Senior Software Engineer', department: 'Engineering', location: 'San Francisco, US', status: 'Active', initials: 'DC', tone: 'mint', email: 'drew@aerohr.demo' },
-      { id: 'AHR-006', name: 'Natali Craig', role: 'Account Executive', department: 'Sales', location: 'London, UK', status: 'Active', initials: 'NC', tone: 'amber', email: 'natali@aerohr.demo' }
-    ];
-
-    const DEPARTMENTS = ['All departments', 'Engineering', 'Design', 'People', 'Marketing', 'Sales'];
-
-    let state = {
-      employees: [...INITIAL_EMPLOYEES],
-      activeNav: 'Overview',
-      activeTab: 'Overview',
-      tableSubtab: 'All employees',
-      tableAction: 'Manage',
-      selectedDepartment: 'All departments',
-      searchQuery: '',
-      chartPeriod: '12 months',
-      chartMetric: 'Headcount',
-      chartHoverIndex: 7
+    // -------------------------------------------------------------------------
+    // Core Application Navigation Logic (Previous Version Parity)
+    // -------------------------------------------------------------------------
+    const VIEW_TITLES = {
+      'onboarding': 'Developer & Contractor Onboarding Velocity',
+      'offshore': 'Offshore India Hub & KYC Vault',
+      'hris': 'IT Staffing Consultant Roster & Workforce Overview',
+      'timesheets': 'Time Tracking & Invoicing',
+      'catalog': 'AeroHR Complete HCM Product Suite (4 Pillars)',
+      'reports': 'AI Intelligence & Telemetry Reports'
     };
 
-    // -------------------------------------------------------------
-    // Toast Notification System
-    // -------------------------------------------------------------
-    let noticeTimer = null;
-    function showToast(message) {
-      const el = document.getElementById('appNotice');
-      const msg = document.getElementById('noticeMessage');
-      if (!el || !msg) return;
-      msg.innerText = message;
-      el.style.display = 'flex';
-      if (noticeTimer) clearTimeout(noticeTimer);
-      noticeTimer = setTimeout(() => {
-        el.style.display = 'none';
-      }, 3500);
-    }
+    const HRIS_EMPLOYEES = [
+      { id: 'AHR-001', name: 'Olivia Rhye', role: 'Senior Product Designer', department: 'Design', location: 'San Francisco, US', status: 'Active' },
+      { id: 'AHR-002', name: 'Phoenix Baker', role: 'Engineering Manager', department: 'Engineering', location: 'London, UK', status: 'Active' },
+      { id: 'AHR-003', name: 'Lana Steiner', role: 'People Operations Lead', department: 'People', location: 'Berlin, DE', status: 'On leave' },
+      { id: 'AHR-004', name: 'Demi Wilkinson', role: 'Growth Marketing Manager', department: 'Marketing', location: 'New York, US', status: 'Active' },
+      { id: 'AHR-005', name: 'Drew Cano', role: 'Senior Software Engineer', department: 'Engineering', location: 'San Francisco, US', status: 'Active' },
+      { id: 'AHR-006', name: 'Natali Craig', role: 'Account Executive', department: 'Sales', location: 'London, UK', status: 'Active' }
+    ];
 
-    // -------------------------------------------------------------
-    // Navigation & View Routing
-    // -------------------------------------------------------------
-    function switchNav(name) {
-      state.activeNav = name;
-      document.querySelectorAll('.sidebar .nav-item').forEach(b => {
-        b.setAttribute('data-active', 'false');
+    const STAFFING_PLACEMENTS = {
+      'devon': { name: 'Devon Sanders', avatar: 'DS', role: 'Senior Fullstack Cloud Architect', client: 'Acme Corp', rate: '$135.00/hr', type: '1099 Contractor', startDate: 'Oct 14, 2026', clientKey: 'acme', workerCategory: '1099' },
+      'rachel': { name: 'Rachel Wu', avatar: 'RW', role: 'Lead Frontend Engineer', client: 'Horizon Cloud', rate: '$165k/yr', type: 'W-2 Employee', startDate: 'Oct 21, 2026', clientKey: 'horizon', workerCategory: 'w2' },
+      'carlos': { name: 'Carlos Mendoza', avatar: 'CM', role: 'Staff DevOps & SRE', client: 'HealthScale AI', rate: '$140.00/hr', type: 'C2C Consultant', startDate: 'Nov 01, 2026', clientKey: 'healthscale', workerCategory: 'c2c' },
+      'elena': { name: 'Elena Rostova', avatar: 'ER', role: 'Principal ML Engineer', client: 'FinTech Prime', rate: '$190k/yr', type: 'W-2 Employee', startDate: 'Nov 08, 2026', clientKey: 'fintech', workerCategory: 'w2' }
+    };
+
+    function switchNav(navKey) {
+      // 1. Update left sidebar link active classes
+      document.querySelectorAll('.sidebar-nav .nav-link').forEach(link => {
+        link.classList.remove('active');
       });
+      const activeLink = document.getElementById(`nav-${navKey}`);
+      if (activeLink) activeLink.classList.add('active');
 
-      const navBtn = document.getElementById(`nav-${name.toLowerCase().replace(/[^a-z0-9]/g, '')}`);
-      if (navBtn) navBtn.setAttribute('data-active', 'true');
+      // 2. Hide all view panels and display the target view
+      document.querySelectorAll('.view-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      const targetPanel = document.getElementById(`view-${navKey}`);
+      if (targetPanel) targetPanel.classList.add('active');
 
-      document.getElementById('breadcrumbCurrent').innerText = name;
-
-      const overviewView = document.getElementById('overviewDashboardView');
-      const recruitmentView = document.getElementById('recruitmentEngineView');
-
-      if (name === 'Recruitment') {
-        overviewView.style.display = 'none';
-        recruitmentView.style.display = 'block';
-      } else {
-        recruitmentView.style.display = 'none';
-        overviewView.style.display = 'block';
-
-        if (name === 'People') {
-          setMainTab('People');
-        } else if (name === 'Analytics') {
-          setMainTab('Analytics');
-        } else if (name === 'Overview') {
-          setMainTab('Overview');
-        }
+      // 3. Update topbar breadcrumb text
+      const topTitle = document.getElementById('topbarBreadcrumbTitle');
+      if (topTitle && VIEW_TITLES[navKey]) {
+        topTitle.innerText = VIEW_TITLES[navKey];
       }
 
       // Close mobile drawer if open
-      document.getElementById('appSidebar').classList.remove('open');
+      const sb = document.getElementById('appSidebar');
+      if (sb) sb.classList.remove('open');
     }
 
-    function toggleMobileSidebar() {
-      document.getElementById('appSidebar').classList.toggle('open');
+    // Alias for compatibility
+    function switchTab(tabId) {
+      switchNav(tabId);
     }
 
-    // -------------------------------------------------------------
-    // Main Tabs (Overview, People, Analytics, Activity)
-    // -------------------------------------------------------------
-    function setMainTab(tabName) {
-      state.activeTab = tabName;
-      document.querySelectorAll('.main-tabs .main-tab').forEach(b => {
-        b.setAttribute('data-active', 'false');
-      });
+    // -------------------------------------------------------------------------
+    // Onboarding Velocity Interactive Controllers
+    // -------------------------------------------------------------------------
+    function switchStaffingConsultant(key) {
+      const cand = STAFFING_PLACEMENTS[key];
+      if (!cand) return;
 
-      const activeBtn = document.getElementById(`tab-${tabName.toLowerCase()}`);
-      if (activeBtn) activeBtn.setAttribute('data-active', 'true');
+      const av = document.getElementById('activeConsultantAvatar');
+      const nm = document.getElementById('activeConsultantName');
+      const tb = document.getElementById('activeConsultantTypeBadge');
+      const rb = document.getElementById('activeConsultantRateBadge');
+      const sm = document.getElementById('activeConsultantSubMeta');
+      const sel = document.getElementById('activeConsultantSelect');
 
-      const chartSection = document.getElementById('chartSectionPanel');
-      const chartHeading = document.getElementById('chartPanelHeading');
-      const pageTitle = document.getElementById('pageHeadingTitle');
-      const pageSub = document.getElementById('pageHeadingSubtitle');
+      if (av) av.innerText = cand.avatar;
+      if (nm) nm.innerText = cand.name;
+      if (tb) tb.innerText = cand.type;
+      if (rb) rb.innerText = cand.rate;
+      if (sm) sm.innerHTML = `${cand.role} • Client: <strong style="color: #ffffff;">${cand.client}</strong> • Start Date: <strong style="color: #ffffff;">${cand.startDate}</strong>`;
+      if (sel && sel.value !== key) sel.value = key;
 
-      if (tabName === 'Analytics') {
-        pageTitle.innerText = 'Workforce intelligence';
-        pageSub.innerText = 'Deep operational performance, attrition risks, and talent growth rates.';
-        chartHeading.innerText = 'Workforce intelligence';
-        chartSection.style.display = 'block';
-      } else if (tabName === 'People') {
-        pageTitle.innerText = 'Your people, connected.';
-        pageSub.innerText = 'Direct employee roster, active placements, and department directory.';
-        chartSection.style.display = 'none';
-      } else if (tabName === 'Activity') {
-        pageTitle.innerText = 'Workspace activity';
-        pageSub.innerText = 'Real-time telemetry and employee actions across the organization.';
-        chartSection.style.display = 'none';
+      const c1Type = document.getElementById('card1ContractType');
+      if (c1Type) c1Type.innerText = cand.type;
+      const c1Rate = document.getElementById('card1RateTerms');
+      if (c1Rate) c1Rate.innerText = `${cand.rate} • Net 15`;
+    }
+
+    function switchCohortMode(mode) {
+      const usBtn = document.getElementById('cohortTabUS');
+      const inBtn = document.getElementById('cohortTabIndia');
+      const badge = document.getElementById('activeCohortBadge');
+
+      if (mode === 'india') {
+        if (usBtn) usBtn.classList.remove('active');
+        if (inBtn) inBtn.classList.add('active');
+        if (badge) badge.innerText = 'Offshore India Engine (Bangalore)';
+        showToast('Switched to Offshore India Onboarding Hub');
       } else {
-        pageTitle.innerText = 'Workforce overview';
-        pageSub.innerText = 'A clear picture of your people, and what comes next.';
-        chartHeading.innerText = 'Workforce growth';
-        chartSection.style.display = 'block';
+        if (inBtn) inBtn.classList.remove('active');
+        if (usBtn) usBtn.classList.add('active');
+        if (badge) badge.innerText = 'US Commercial Practice';
+        showToast('Switched to US Commercial Placements');
       }
     }
 
-    // -------------------------------------------------------------
-    // Timeline SVG Chart Calculations & Interactivity
-    // -------------------------------------------------------------
-    const TIMELINE_DATA = {
-      '30 days': {
-        labels: ['Sep 11', 'Sep 15', 'Sep 19', 'Sep 23', 'Sep 27', 'Oct 01', 'Oct 05', 'Oct 10'],
-        headcount: [1240, 1248, 1252, 1260, 1264, 1271, 1278, 1284],
-        retention: [95.2, 95.5, 95.8, 96.0, 96.2, 96.5, 96.6, 96.8]
-      },
-      '90 days': {
-        labels: ['Jul 10', 'Jul 23', 'Aug 05', 'Aug 18', 'Aug 31', 'Sep 13', 'Sep 26', 'Oct 10'],
-        headcount: [1180, 1195, 1210, 1225, 1240, 1255, 1270, 1284],
-        retention: [94.5, 94.8, 95.1, 95.6, 96.0, 96.3, 96.6, 96.8]
-      },
-      '12 months': {
-        labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-        headcount: [1044, 1062, 1080, 1098, 1116, 1134, 1152, 1170, 1198, 1226, 1255, 1284],
-        retention: [94.0, 94.3, 94.7, 95.0, 95.3, 95.6, 95.9, 96.2, 96.4, 96.5, 96.7, 96.8]
-      }
-    };
-
-    function renderTimelineSvg() {
-      const wrap = document.getElementById('chartSvgWrapper');
-      if (!wrap) return;
-
-      const dataset = TIMELINE_DATA[state.chartPeriod] || TIMELINE_DATA['12 months'];
-      const labels = dataset.labels;
-      const isRetention = state.chartMetric === 'Retention';
-      const vals = isRetention ? dataset.retention : dataset.headcount;
-
-      const minVal = isRetention ? 92 : 1000;
-      const maxVal = isRetention ? 100 : 1300;
-      const range = maxVal - minVal;
-
-      const n = labels.length;
-      const width = 880;
-      const startX = 55;
-      const endX = 855;
-      const stepX = (endX - startX) / (n - 1);
-
-      const pts = vals.map((v, i) => {
-        const x = startX + i * stepX;
-        const norm = (v - minVal) / range;
-        const y = 160 - norm * 125; // y maps between 35 and 160
-        return [x, y, v];
+    function filterStaffingStage(cardId, btnEl) {
+      ['card-contract', 'card-compliance', 'card-storage-ledger'].forEach(cid => {
+        const el = document.getElementById(cid);
+        if (el) el.style.display = cid === cardId ? 'block' : 'none';
       });
 
-      const pathStr = pts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p[0]} ${p[1]}`).join(' ');
-      const fillPathStr = `${pathStr} L ${endX} 174 L ${startX} 174 Z`;
+      document.querySelectorAll('.stage-pills .stage-pill').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
 
-      const secondaryPts = pts.map(([x, y]) => [x, y + 16]);
-      const secPathStr = secondaryPts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p[0]} ${p[1]}`).join(' ');
+      const labels = {
+        'card-contract': 'Contracts & NDA',
+        'card-compliance': 'Identity & Compliance',
+        'card-storage-ledger': 'Storage Ledger'
+      };
+      const indicator = document.getElementById('activeMatrixTabIndicator');
+      if (indicator && labels[cardId]) {
+        indicator.innerText = `Active Section: ${labels[cardId]}`;
+      }
+    }
 
-      const activeIdx = Math.min(state.chartHoverIndex, n - 1);
-      const activePt = pts[activeIdx];
-      const activeLabel = labels[activeIdx];
+    function setStaffingWorkerFilter(filterType, btnEl) {
+      document.querySelectorAll('#staffingWorkerPills button').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
 
-      const yGridLabels = isRetention ? ['100%', '98%', '95%', '92%'] : ['1,300', '1,200', '1,100', '1,000'];
-      const yGridCoords = [35, 75, 115, 155];
+      const select = document.getElementById('activeConsultantSelect');
+      if (select) {
+        let firstMatch = null;
+        Array.from(select.options).forEach(opt => {
+          const cand = STAFFING_PLACEMENTS[opt.value];
+          if (!cand) return;
+          if (filterType === 'all' || cand.workerCategory === filterType) {
+            opt.style.display = '';
+            if (!firstMatch) firstMatch = opt.value;
+          } else {
+            opt.style.display = 'none';
+          }
+        });
+        if (firstMatch) {
+          select.value = firstMatch;
+          switchStaffingConsultant(firstMatch);
+        }
+      }
+      showToast(`Filtered: ${filterType.toUpperCase()}`);
+    }
 
-      let svgHtml = `
-        <svg class="timeline-svg" viewBox="0 0 920 205" preserveAspectRatio="none" role="img" aria-label="${state.chartMetric} timeline">
-          <defs>
-            <linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.16"/>
-              <stop offset="100%" stop-color="var(--primary)" stop-opacity="0.0"/>
-            </linearGradient>
-          </defs>
-      `;
+    function filterStaffingPlacements() {
+      const q = (document.getElementById('staffingSearchInput')?.value || '').toLowerCase().trim();
+      const client = document.getElementById('filterClientProjectSelect')?.value || 'all';
+      const select = document.getElementById('activeConsultantSelect');
+      if (!select) return;
 
-      // Grid lines
-      yGridCoords.forEach((y, i) => {
-        svgHtml += `
-          <g>
-            <line class="chart-grid" x1="55" y1="${y}" x2="880" y2="${y}"/>
-            <text class="chart-text" x="8" y="${y + 4}">${yGridLabels[i]}</text>
-          </g>
-        `;
+      let firstMatch = null;
+      Array.from(select.options).forEach(opt => {
+        const cand = STAFFING_PLACEMENTS[opt.value];
+        if (!cand) return;
+        const matchesClient = client === 'all' || cand.clientKey === client;
+        const matchesQuery = !q || `${cand.name} ${cand.role} ${cand.client}`.toLowerCase().includes(q);
+
+        if (matchesClient && matchesQuery) {
+          opt.style.display = '';
+          if (!firstMatch) firstMatch = opt.value;
+        } else {
+          opt.style.display = 'none';
+        }
       });
 
-      // Shaded Area & Curves
-      svgHtml += `
-        <path d="${fillPathStr}" fill="url(#chart-fill)"/>
-        <path class="chart-secondary" d="${secPathStr}"/>
-        <path class="chart-primary" d="${pathStr}"/>
-      `;
-
-      // Active Tooltip Marker
-      if (activePt) {
-        const tooltipX = Math.min(Math.max(activePt[0] - 55, 60), 750);
-        const tooltipY = Math.max(activePt[1] - 48, 8);
-        const displayVal = isRetention ? `${activePt[2].toFixed(1)}%` : activePt[2].toLocaleString();
-        const displayUnit = isRetention ? 'retention' : 'employees';
-
-        svgHtml += `
-          <g>
-            <line x1="${activePt[0]}" x2="${activePt[0]}" y1="20" y2="174" stroke="var(--muted-foreground)" stroke-dasharray="3 4" stroke-opacity="0.5"/>
-            <circle cx="${activePt[0]}" cy="${activePt[1]}" r="4.5" fill="var(--primary)" stroke="var(--card)" stroke-width="2"/>
-            <rect class="chart-tooltip" x="${tooltipX}" y="${tooltipY}" width="118" height="40" rx="5"/>
-            <text class="chart-text" x="${tooltipX + 12}" y="${tooltipY + 16}">${activeLabel}, 2026</text>
-            <text class="chart-tooltip-text" x="${tooltipX + 12}" y="${tooltipY + 31}"><strong>${displayVal}</strong> <tspan fill="var(--muted-foreground)">${displayUnit}</tspan></text>
-          </g>
-        `;
+      if (firstMatch) {
+        select.value = firstMatch;
+        switchStaffingConsultant(firstMatch);
       }
-
-      // X-Axis labels
-      labels.forEach((lbl, i) => {
-        const x = startX + i * stepX;
-        svgHtml += `<text class="chart-text" x="${x}" y="195" text-anchor="middle">${lbl}</text>`;
-      });
-
-      // Hover trigger invisible vertical rects
-      pts.forEach((p, i) => {
-        svgHtml += `
-          <rect x="${p[0] - stepX / 2}" y="0" width="${stepX}" height="174" fill="transparent" style="cursor: pointer;" onmouseenter="onChartHover(${i})"/>
-        `;
-      });
-
-      svgHtml += `</svg>`;
-      wrap.innerHTML = svgHtml;
     }
 
-    function onChartHover(idx) {
-      state.chartHoverIndex = idx;
-      renderTimelineSvg();
-    }
-
-    function setChartPeriod(period, btn) {
-      state.chartPeriod = period;
-      btn.parentElement.querySelectorAll('button').forEach(b => b.setAttribute('data-active', 'false'));
-      btn.setAttribute('data-active', 'true');
-      renderTimelineSvg();
-    }
-
-    function setChartMetric(metric, btn) {
-      state.chartMetric = metric;
-      btn.parentElement.querySelectorAll('button').forEach(b => b.setAttribute('data-active', 'false'));
-      btn.setAttribute('data-active', 'true');
-
-      const primaryLabel = document.getElementById('legendTextPrimary');
-      if (primaryLabel) {
-        primaryLabel.innerText = metric === 'Retention' ? 'Retention rate' : 'Total headcount';
-      }
-      renderTimelineSvg();
-    }
-
-    // -------------------------------------------------------------
-    // Workforce Table Filtering & Rendering
-    // -------------------------------------------------------------
-    function filterEmployeeTable() {
-      const q = (document.getElementById('employeeSearchInput')?.value || '').toLowerCase().trim();
-      state.searchQuery = q;
-      renderEmployeeTable();
-    }
-
-    function setTableSubtab(subtab, btn) {
-      state.tableSubtab = subtab;
-      btn.parentElement.querySelectorAll('.main-tab').forEach(b => b.setAttribute('data-active', 'false'));
-      btn.setAttribute('data-active', 'true');
-      renderEmployeeTable();
-    }
-
-    function setWorkforceAction(act, btn) {
-      state.tableAction = act;
-      btn.parentElement.querySelectorAll('button').forEach(b => b.setAttribute('data-active', 'false'));
-      btn.setAttribute('data-active', 'true');
-
-      const th = document.getElementById('thLocationHeader');
-      if (th) {
-        th.innerText = act === 'Review' ? 'Review status' : 'Location';
-      }
-      renderEmployeeTable();
-    }
-
-    function renderEmployeeTable() {
-      const tbody = document.getElementById('employeeTableBody');
-      const emptyState = document.getElementById('tableEmptyState');
-      const countLabel = document.getElementById('tableShowingCount');
+    // -------------------------------------------------------------------------
+    // HRIS Roster Table
+    // -------------------------------------------------------------------------
+    function renderHrisTable() {
+      const tbody = document.getElementById('hrisTableBody');
       if (!tbody) return;
+      const q = (document.getElementById('hrisSearchInput')?.value || '').toLowerCase().trim();
 
-      const filtered = state.employees.filter(p => {
-        const matchesQuery = !state.searchQuery || `${p.name} ${p.role} ${p.department} ${p.location}`.toLowerCase().includes(state.searchQuery);
-        const matchesDept = state.selectedDepartment === 'All departments' || p.department === state.selectedDepartment;
-        const matchesSubtab = state.tableSubtab === 'All employees' ? true :
-                              state.tableSubtab === 'On leave' ? p.status === 'On leave' :
-                              (p.id === 'AHR-005' || p.id === 'AHR-006' || p.id.startsWith('AHR-new'));
-        return matchesQuery && matchesDept && matchesSubtab;
-      });
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = '';
-        if (emptyState) emptyState.style.display = 'block';
-      } else {
-        if (emptyState) emptyState.style.display = 'none';
-        tbody.innerHTML = filtered.map(p => `
-          <tr class="employee-row" onclick="openEmployeeDetailsModal('${p.id}')">
-            <td onclick="event.stopPropagation()">
-              <input type="checkbox" class="employee-select-check" aria-label="Select ${p.name}">
-            </td>
-            <td>
-              <div class="employee-cell">
-                <span class="avatar ${p.tone}">${p.initials}</span>
-                <div>
-                  <div class="employee-name">${p.name}</div>
-                  <div class="employee-role">${p.role}</div>
-                </div>
-              </div>
-            </td>
-            <td style="color: var(--muted-foreground);">${p.department}</td>
-            <td style="color: var(--muted-foreground);">
-              ${state.tableAction === 'Review' ? (p.id === 'AHR-001' ? 'Completed' : 'Pending review') : p.location}
-            </td>
-            <td>
-              <span class="status ${p.status === 'On leave' ? 'away' : ''}">
-                <span class="status-dot"></span>
-                ${p.status}
-              </span>
-            </td>
-            <td>
-              <button onclick="event.stopPropagation(); openEmployeeDetailsModal('${p.id}')" style="padding: 4px; color: var(--muted-foreground);" title="View Details">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-              </button>
-            </td>
-          </tr>
-        `).join('');
-      }
-
-      if (countLabel) {
-        countLabel.innerText = `Showing ${filtered.length} of ${state.employees.length} demo employees`;
-      }
+      const filtered = HRIS_EMPLOYEES.filter(p => !q || `${p.name} ${p.role} ${p.department} ${p.location}`.toLowerCase().includes(q));
+      tbody.innerHTML = filtered.map(p => `
+        <tr class="table-row-hover">
+          <td><strong style="color: #ffffff;">${p.name}</strong><br><small style="color: #94a3b8;">${p.role}</small></td>
+          <td style="color: #94a3b8;">${p.department}</td>
+          <td style="color: #94a3b8;">${p.location}</td>
+          <td><span class="pill-ready">${p.status}</span></td>
+        </tr>
+      `).join('');
     }
 
-    function toggleSelectAllEmployees(checked) {
-      document.querySelectorAll('.employee-select-check').forEach(c => c.checked = checked);
+    function filterHrisTable() {
+      renderHrisTable();
     }
 
-    function resetTableFilters() {
-      state.searchQuery = '';
-      state.selectedDepartment = 'All departments';
-      state.tableSubtab = 'All employees';
-      const input = document.getElementById('employeeSearchInput');
-      if (input) input.value = '';
-      document.querySelectorAll('.table-tabs .main-tab').forEach((b, i) => b.setAttribute('data-active', i === 0 ? 'true' : 'false'));
-      const lbl = document.getElementById('filterDeptLabel');
-      if (lbl) lbl.innerText = 'Filters';
-      renderEmployeeTable();
-    }
-
-    // -------------------------------------------------------------
-    // Export CSV Report
-    // -------------------------------------------------------------
     function exportWorkforceReport() {
-      const csv = 'Name,Role,Department,Location,Status,Email\n' +
-        state.employees.map(p => `"${p.name}","${p.role}","${p.department}","${p.location}","${p.status}","${p.email}"`).join('\n');
+      const csv = 'Name,Role,Department,Location,Status\n' +
+        HRIS_EMPLOYEES.map(p => `"${p.name}","${p.role}","${p.department}","${p.location}","${p.status}"`).join('\n');
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'aerohr-workforce-report.csv';
+      a.download = 'aerohr-workforce.csv';
       a.click();
       URL.revokeObjectURL(url);
-      showToast('Workforce report exported (CSV)');
+      showToast('Workforce CSV Report downloaded');
     }
 
-    // -------------------------------------------------------------
-    // Modals System
-    // -------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // Modals & Slide-Overs
+    // -------------------------------------------------------------------------
     function openModal(modalType) {
       const backdrop = document.getElementById('appModalBackdrop');
       const title = document.getElementById('modalTitle');
@@ -1945,216 +1671,78 @@
 
       if (modalType === 'Add employee') {
         body.innerHTML = `
-          <form onsubmit="handleQuickAddEmployee(event)">
-            <label class="form-field">
-              <span>Full Name</span>
-              <input name="name" required placeholder="e.g. Sarah Jenkins">
-            </label>
-            <label class="form-field">
-              <span>Work Email</span>
-              <input name="email" type="email" required placeholder="sarah@acme.com">
-            </label>
-            <label class="form-field">
-              <span>Job Title</span>
-              <input name="role" required placeholder="e.g. Principal Cloud Architect">
-            </label>
-            <label class="form-field">
-              <span>Location</span>
-              <input name="location" required placeholder="San Francisco, US">
-            </label>
-            <label class="form-field">
-              <span>Department</span>
-              <select name="department">
-                ${DEPARTMENTS.slice(1).map(d => `<option value="${d}">${d}</option>`).join('')}
+          <form onsubmit="handleModalAddEmployee(event)">
+            <div class="form-group">
+              <label>Candidate Full Name</label>
+              <input class="form-control" name="full_name" required placeholder="e.g. Alex Morgan">
+            </div>
+            <div class="form-group">
+              <label>Work Email Address</label>
+              <input class="form-control" name="email" type="email" required placeholder="candidate@domain.com">
+            </div>
+            <div class="form-group">
+              <label>Role / Placement Title</label>
+              <input class="form-control" name="role_type" required placeholder="e.g. Senior DevOps Architect">
+            </div>
+            <div class="form-group">
+              <label>Placement Pipeline Route</label>
+              <select class="form-control" name="pipeline_route">
+                <option value="US_Commercial">US Commercial Practice (W-2 / 1099)</option>
+                <option value="Offshore_India_Hub">Offshore India Hub (Bangalore / Hyderabad)</option>
               </select>
-            </label>
-            <p class="subtitle" style="margin-bottom: 16px;">Synchronized with Acme Enterprise Demo Session &amp; Supabase Ledger.</p>
+            </div>
+            <div style="font-size: 11px; color: #94a3b8; margin: 12px 0 16px;">
+              Generates a secure UUID candidate token, logs to Supabase ledger, and initiates verified email dispatch.
+            </div>
             <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; height: 38px;">
-              <span>+ Confirm &amp; Add Employee</span>
+              <span>🚀 Initialize &amp; Dispatch Onboarding Link</span>
             </button>
           </form>
         `;
-      } else if (modalType === 'Departments') {
+      } else if (modalType === 'Your profile') {
         body.innerHTML = `
-          <p class="subtitle" style="margin-bottom: 16px;">Filter workforce by active organizational department.</p>
-          <div style="display: flex; flex-direction: column; gap: 6px;">
-            ${DEPARTMENTS.map(d => `
-              <button class="btn btn-outline" style="justify-content: space-between; width: 100%;" onclick="selectDepartmentFilter('${d}')">
-                <span>${d}</span>
-                ${state.selectedDepartment === d ? '<span style="color: var(--primary);">✓</span>' : ''}
-              </button>
-            `).join('')}
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div class="user-avatar" style="width: 44px; height: 44px; font-size: 14px;">SJ</div>
+            <div>
+              <strong style="color: #ffffff; font-size: 15px;">Sarah Jenkins</strong>
+              <div style="font-size: 11px; color: #94a3b8;">Super Administrator • Executive Controls</div>
+            </div>
           </div>
+          <div class="detail-line"><span>Organization</span><strong style="color: #ffffff;">Acme Enterprise Practice</strong></div>
+          <div class="detail-line"><span>Role Access</span><span class="pill-ready">Super Admin</span></div>
+          <div class="detail-line"><span>Security Session</span><span>SHA-256 Verified</span></div>
         `;
       } else if (modalType === 'Search') {
         body.innerHTML = `
-          <label class="form-field" style="margin-top: 0;">
-            <span>Search people, roles, or locations</span>
-            <input id="modalSearchInput" placeholder="Type a name, e.g. Olivia, Engineer..." autofocus oninput="handleModalSearch(this.value)">
-          </label>
-          <div id="modalSearchResults" style="display: flex; flex-direction: column; gap: 6px; max-height: 250px; overflow-y: auto; margin-top: 14px;">
-            ${state.employees.map(p => `
-              <button class="btn btn-outline" style="justify-content: space-between; width: 100%;" onclick="closeModal(); openEmployeeDetailsModal('${p.id}')">
-                <span style="font-weight: 600;">${p.name} <small style="color: var(--muted-foreground); font-weight: normal;">• ${p.role}</small></span>
-                <span style="color: var(--muted-foreground);">→</span>
-              </button>
-            `).join('')}
+          <div class="form-group">
+            <input class="form-control" placeholder="Search consultants, contracts, legal documents..." autofocus oninput="handleGlobalSearch(this.value)">
           </div>
-        `;
-      } else if (modalType === 'Date range') {
-        body.innerHTML = `
-          <p class="subtitle" style="margin-bottom: 16px;">Choose a timeline reporting window.</p>
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <button class="btn btn-outline" style="justify-content: space-between;" onclick="setChartPeriod('30 days', document.querySelector('.segmented button')); closeModal();">
-              <span>Last 30 days</span>
-              <span>Sep 11 – Oct 10</span>
-            </button>
-            <button class="btn btn-outline" style="justify-content: space-between;" onclick="setChartPeriod('90 days', document.querySelector('.segmented button')); closeModal();">
-              <span>Last 90 days</span>
-              <span>Jul 10 – Oct 10</span>
-            </button>
-            <button class="btn btn-outline" style="justify-content: space-between;" onclick="setChartPeriod('12 months', document.querySelector('.segmented button')); closeModal();">
-              <span>Last 12 months</span>
-              <span>Oct 2025 – Oct 2026</span>
-            </button>
+          <div id="searchResultsList" style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
+            <div class="detail-line" style="cursor: pointer;" onclick="closeModal(); switchStaffingConsultant('devon'); switchNav('onboarding');">
+              <strong>Devon Sanders</strong><span class="pill-ready">1099 Contractor</span>
+            </div>
+            <div class="detail-line" style="cursor: pointer;" onclick="closeModal(); switchStaffingConsultant('rachel'); switchNav('onboarding');">
+              <strong>Rachel Wu</strong><span class="pill-ready">W-2 Employee</span>
+            </div>
+            <div class="detail-line" style="cursor: pointer;" onclick="closeModal(); switchStaffingConsultant('carlos'); switchNav('onboarding');">
+              <strong>Carlos Mendoza</strong><span class="pill-ready">C2C Consultant</span>
+            </div>
           </div>
         `;
       } else if (modalType === 'Notifications') {
         body.innerHTML = `
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div class="detail-line"><span>8 candidate placements await Day 1 onboarding</span><span class="status-dot"></span></div>
-            <div class="detail-line"><span>12 work anniversaries upcoming this month</span><span class="status-dot"></span></div>
-            <div class="detail-line"><span>6 compliance verification documents pending review</span><span class="status-dot"></span></div>
-          </div>
-        `;
-      } else if (modalType === 'Your profile') {
-        body.innerHTML = `
-          <div class="employee-cell" style="margin-bottom: 18px;">
-            <span class="avatar mint" style="width: 42px; height: 42px; font-size: 14px;">JD</span>
-            <div>
-              <h3 style="font-size: 14px; font-weight: 600;">Jordan Davis</h3>
-              <p class="subtitle" style="margin-top: 2px;">Workspace Administrator • Super Admin</p>
-            </div>
-          </div>
-          <div class="detail-line"><span>Organization</span><strong style="color: var(--foreground);">Acme Corporation</strong></div>
-          <div class="detail-line"><span>Operating Hub</span><span>US Commercial Practice</span></div>
-          <div class="detail-line"><span>Session Security</span><span class="status">SHA-256 Hardened</span></div>
-          <div class="detail-line"><span>Live Engine</span><span>AeroHR v.2.8 Enterprise</span></div>
+          <div class="detail-line"><span>8 candidate placements await Day 1 onboarding</span><span class="pill-ready">Action Required</span></div>
+          <div class="detail-line"><span>12 work anniversaries upcoming this month</span><span class="pill-ready">Milestone</span></div>
+          <div class="detail-line"><span>3 client invoices due for verification</span><span class="pill-inprogress">Pending</span></div>
         `;
       } else {
         body.innerHTML = `
-          <p class="subtitle">Operational module: ${modalType}</p>
-          <div class="detail-line"><span>Status</span><span class="status">Synchronized</span></div>
-          <div class="detail-line"><span>Workspace</span><span>Acme Corporation</span></div>
+          <div class="detail-line"><span>Module Status</span><span class="pill-ready">Synchronized</span></div>
+          <div class="detail-line"><span>Access Control</span><span>Enterprise Super Admin</span></div>
         `;
       }
 
       backdrop.style.display = 'flex';
-    }
-
-    function openEmployeeDetailsModal(empId) {
-      const emp = state.employees.find(e => e.id === empId);
-      if (!emp) return;
-
-      const backdrop = document.getElementById('appModalBackdrop');
-      const title = document.getElementById('modalTitle');
-      const body = document.getElementById('modalBodyContent');
-      if (!backdrop || !title || !body) return;
-
-      title.innerText = 'Employee Details';
-      body.innerHTML = `
-        <div class="employee-cell" style="margin-bottom: 18px;">
-          <span class="avatar ${emp.tone}" style="width: 44px; height: 44px; font-size: 15px;">${emp.initials}</span>
-          <div>
-            <h3 style="font-size: 15px; font-weight: 700;">${emp.name}</h3>
-            <p class="subtitle" style="margin-top: 2px;">${emp.role}</p>
-          </div>
-        </div>
-        <div class="detail-line"><span>Employee ID</span><strong style="color: var(--foreground);">${emp.id}</strong></div>
-        <div class="detail-line"><span>Department</span><span>${emp.department}</span></div>
-        <div class="detail-line"><span>Location</span><span>${emp.location}</span></div>
-        <div class="detail-line"><span>Work Email</span><span style="color: var(--primary);">${emp.email}</span></div>
-        <div class="detail-line"><span>Status</span><span class="status ${emp.status === 'On leave' ? 'away' : ''}"><span class="status-dot"></span>${emp.status}</span></div>
-
-        <button class="btn btn-outline" style="width: 100%; justify-content: center; margin-top: 20px;" onclick="toggleEmployeeLeaveStatus('${emp.id}')">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/></svg>
-          <span>${emp.status === 'Active' ? 'Mark as On Leave' : 'Mark as Active'}</span>
-        </button>
-      `;
-      backdrop.style.display = 'flex';
-    }
-
-    function toggleEmployeeLeaveStatus(empId) {
-      state.employees = state.employees.map(p => {
-        if (p.id === empId) {
-          const next = p.status === 'Active' ? 'On leave' : 'Active';
-          return { ...p, status: next };
-        }
-        return p;
-      });
-      closeModal();
-      renderEmployeeTable();
-      showToast('Employee status updated in live workspace');
-    }
-
-    function handleQuickAddEmployee(e) {
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const name = String(fd.get('name'));
-      const email = String(fd.get('email'));
-      const role = String(fd.get('role'));
-      const location = String(fd.get('location'));
-      const department = String(fd.get('department'));
-
-      const initials = name.split(' ').map(s => s[0]).slice(0, 2).join('').toUpperCase() || 'EM';
-      const tones = ['mint', 'violet', 'amber'];
-      const tone = tones[Math.floor(Math.random() * tones.length)];
-
-      const newEmp = {
-        id: `AHR-new-${Date.now().toString().slice(-4)}`,
-        name,
-        email,
-        role,
-        location,
-        department,
-        status: 'Active',
-        initials,
-        tone
-      };
-
-      state.employees.unshift(newEmp);
-      closeModal();
-      state.tableSubtab = 'All employees';
-      renderEmployeeTable();
-      showToast(`Success! ${name} added to live workforce roster`);
-    }
-
-    function selectDepartmentFilter(dept) {
-      state.selectedDepartment = dept;
-      const lbl = document.getElementById('filterDeptLabel');
-      if (lbl) {
-        lbl.innerText = dept === 'All departments' ? 'Filters' : dept;
-      }
-      closeModal();
-      renderEmployeeTable();
-    }
-
-    function handleModalSearch(val) {
-      const q = val.toLowerCase().trim();
-      const container = document.getElementById('modalSearchResults');
-      if (!container) return;
-
-      const matches = state.employees.filter(p => !q || `${p.name} ${p.role} ${p.location}`.toLowerCase().includes(q));
-      if (!matches.length) {
-        container.innerHTML = '<p class="subtitle" style="text-align: center; padding: 12px;">No matching employees found.</p>';
-      } else {
-        container.innerHTML = matches.map(p => `
-          <button class="btn btn-outline" style="justify-content: space-between; width: 100%;" onclick="closeModal(); openEmployeeDetailsModal('${p.id}')">
-            <span style="font-weight: 600;">${p.name} <small style="color: var(--muted-foreground); font-weight: normal;">• ${p.role}</small></span>
-            <span style="color: var(--muted-foreground);">→</span>
-          </button>
-        `).join('');
-      }
     }
 
     function closeModal() {
@@ -2162,21 +1750,68 @@
       if (backdrop) backdrop.style.display = 'none';
     }
 
-    // -------------------------------------------------------------
-    // Recruitment Subtabs (Contracts, Compliance, Storage Ledger)
-    // -------------------------------------------------------------
-    function switchRecTab(tab) {
-      ['contracts', 'compliance', 'ledger'].forEach(t => {
-        const pane = document.getElementById(`rec-pane-${t}`);
-        const btn = document.getElementById(`rec-tab-${t}`);
-        if (pane) pane.style.display = t === tab ? 'block' : 'none';
-        if (btn) btn.setAttribute('data-active', t === tab ? 'true' : 'false');
+    function handleModalAddEmployee(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = String(fd.get('full_name'));
+      const email = String(fd.get('email'));
+      const role = String(fd.get('role_type'));
+      const route = String(fd.get('pipeline_route'));
+
+      // Add to HRIS table
+      HRIS_EMPLOYEES.unshift({
+        id: `AHR-${Date.now().toString().slice(-4)}`,
+        name,
+        role,
+        department: 'Engineering',
+        location: route.includes('India') ? 'Bangalore, IN' : 'San Francisco, US',
+        status: 'Active'
       });
+
+      // Add to Storage Ledger
+      const ledgerTbody = document.getElementById('dbCandidatesTableBody');
+      if (ledgerTbody) {
+        const tr = document.createElement('tr');
+        tr.className = 'table-row-hover';
+        tr.innerHTML = `
+          <td><strong>${name}</strong></td>
+          <td style="color: #94a3b8;">${email}</td>
+          <td>${role}</td>
+          <td>${route}</td>
+          <td><span class="pill-ready">Hired</span></td>
+        `;
+        ledgerTbody.prepend(tr);
+      }
+
+      closeModal();
+      renderHrisTable();
+      showToast(`Success! Candidate packet initialized for ${name}`);
     }
 
-    // -------------------------------------------------------------
-    // Keyboard Shortcut Support (⌘K / Ctrl+K)
-    // -------------------------------------------------------------
+    function handleGlobalSearch(query) {
+      // Inline search helper
+    }
+
+    // -------------------------------------------------------------------------
+    // Toast Notifications
+    // -------------------------------------------------------------------------
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById('appToast');
+      const text = document.getElementById('toastMessage');
+      if (!toast || !text) return;
+
+      text.innerText = msg;
+      toast.style.display = 'flex';
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3500);
+    }
+
+    // -------------------------------------------------------------------------
+    // Keyboard Shortcut (⌘K / Ctrl+K)
+    // -------------------------------------------------------------------------
     window.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
@@ -2187,12 +1822,12 @@
       }
     });
 
-    // -------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Initialization
-    // -------------------------------------------------------------
+    // -------------------------------------------------------------------------
     window.addEventListener('DOMContentLoaded', () => {
-      renderTimelineSvg();
-      renderEmployeeTable();
+      renderHrisTable();
+      switchStaffingConsultant('devon');
     });
   </script>
 </body>
