@@ -3587,9 +3587,10 @@
       flex-wrap: wrap;
     }
     .aero-stage-pill {
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 600;
-      padding: 8px 16px;
+      padding: 10px 20px;
+      min-height: 44px;
       border-radius: 8px;
       border: 1px solid transparent;
       background: transparent;
@@ -3598,7 +3599,7 @@
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       white-space: nowrap;
       letter-spacing: -0.01em;
     }
@@ -4309,14 +4310,15 @@
       background: transparent;
       border: 1px solid transparent;
       color: #94a3b8;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 7px;
+      padding: 10px 18px;
+      min-height: 44px;
+      border-radius: 8px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
     }
@@ -4331,9 +4333,9 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
     .aero-capsule-chip .chip-dot {
-      width: 2px;
-      height: 2px;
-      min-width: 2px;
+      width: 4px;
+      height: 4px;
+      min-width: 4px;
       border-radius: 50%;
       background: #ffffff;
       display: none;
@@ -4352,7 +4354,123 @@
       -webkit-backdrop-filter: blur(24px) saturate(170%);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 10px;
-      padding: 6px 14px;
+      padding: 8px 16px;
+      min-height: 44px;
+    }
+
+    /* Shimmer Skeleton Loading State */
+    @keyframes aeroSkeletonShimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+    .aero-skeleton-shimmer {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%);
+      background-size: 200% 100%;
+      animation: aeroSkeletonShimmer 1.8s infinite ease-in-out;
+      border-radius: 6px;
+    }
+
+    /* Right-Aligned Slide-Out Workspace Drawer */
+    .aero-drawer-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .aero-drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .aero-candidate-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 520px;
+      max-width: 92vw;
+      height: 100vh;
+      background: rgba(10, 13, 20, 0.96);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: -12px 0 40px rgba(0, 0, 0, 0.85);
+      z-index: 9999;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .aero-candidate-drawer.open {
+      transform: translateX(0);
+    }
+    .aero-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(15, 20, 32, 0.6);
+      min-height: 72px;
+    }
+    .aero-drawer-close-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      width: 44px;
+      height: 44px;
+      min-height: 44px;
+      min-width: 44px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+    .aero-drawer-close-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .aero-drawer-body {
+      padding: 24px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .aero-drawer-section {
+      background: rgba(15, 20, 32, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .aero-drawer-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     /* Tab Panels Fade Transitions */
@@ -8384,29 +8502,29 @@
 
               <!-- 2. Stripe-Style Ultra-Thin Minimalist Progress Ribbon -->
               <div class="aero-stripe-tracker" id="offshoreTracker">
-                <div class="aero-stripe-step phase-done" id="phaseStep1" onclick="setOffshorePhase('hired')">
+                <div class="aero-stripe-step phase-done" id="phaseStep1" onclick="advanceActiveCandidateToStep('hired')" title="Milestone 1: Hired (Click to advance/view)">
                   <span class="aero-stripe-indicator">✓</span>
-                  <span class="aero-stripe-title">1. Hire Confirmed</span>
+                  <span class="aero-stripe-title">1. Hired</span>
                 </div>
                 <span class="aero-stripe-sep">/</span>
-                <div class="aero-stripe-step phase-active" id="phaseStep2" onclick="setOffshorePhase('pre_offer_docs')">
+                <div class="aero-stripe-step phase-active" id="phaseStep2" onclick="advanceActiveCandidateToStep('pre_offer_docs')" title="Milestone 2: Doc Upload (Click to advance/view)">
                   <span class="aero-stripe-indicator"></span>
-                  <span class="aero-stripe-title">2. Pre-Offer Docs</span>
+                  <span class="aero-stripe-title">2. Doc Upload</span>
                 </div>
                 <span class="aero-stripe-sep">/</span>
-                <div class="aero-stripe-step phase-upcoming" id="phaseStep3" onclick="setOffshorePhase('contract_generation')">
+                <div class="aero-stripe-step phase-upcoming" id="phaseStep3" onclick="advanceActiveCandidateToStep('contract_generation')" title="Milestone 3: KYC Verified (Click to advance/view)">
                   <span class="aero-stripe-indicator"></span>
-                  <span class="aero-stripe-title">3. Contract Generation</span>
+                  <span class="aero-stripe-title">3. KYC Verified</span>
                 </div>
                 <span class="aero-stripe-sep">/</span>
-                <div class="aero-stripe-step phase-upcoming" id="phaseStep4" onclick="setOffshorePhase('e_sign_execution')">
+                <div class="aero-stripe-step phase-upcoming" id="phaseStep4" onclick="advanceActiveCandidateToStep('e_sign_execution')" title="Milestone 4: Tech Provisioned (Click to advance/view)">
                   <span class="aero-stripe-indicator"></span>
-                  <span class="aero-stripe-title">4. E-Sign Execution</span>
+                  <span class="aero-stripe-title">4. Tech Provisioned</span>
                 </div>
                 <span class="aero-stripe-sep">/</span>
-                <div class="aero-stripe-step phase-upcoming" id="phaseStep5" onclick="setOffshorePhase('server_archived')">
+                <div class="aero-stripe-step phase-upcoming" id="phaseStep5" onclick="advanceActiveCandidateToStep('server_archived')" title="Milestone 5: Active Sync (Click to advance/view)">
                   <span class="aero-stripe-indicator"></span>
-                  <span class="aero-stripe-title">5. Server Archived</span>
+                  <span class="aero-stripe-title">5. Active Sync</span>
                 </div>
               </div>
 
@@ -8430,7 +8548,7 @@
                   </button>
                   <button class="aero-capsule-chip" id="chipRoleLeads" onclick="setOffshoreRoleFilter('team_lead', this)">
                     <span class="chip-dot"></span>
-                    <span>Team Leads</span>
+                    <span>Offshore Team Lead</span>
                     <span style="font-size: 10px; color: #64748b; margin-left: 2px;" id="badgeCountLeads">1</span>
                   </button>
                 </div>
@@ -11531,6 +11649,150 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         </div>
       </footer>
     </form>
+  </aside>
+  <!-- ========================================================================= -->
+  <!-- OFFSHORE CANDIDATE PROFILE DRILL-DOWN DRAWER (PROGRESSIVE DISCLOSURE)     -->
+  <!-- ========================================================================= -->
+  <div id="offshoreCandidateDrawerBackdrop" class="aero-drawer-backdrop" onclick="closeCandidateDrawer()"></div>
+  <aside id="offshoreCandidateDrawer" class="aero-candidate-drawer" aria-hidden="true" role="dialog" aria-modal="true">
+    <!-- Drawer Header -->
+    <div class="aero-drawer-header">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div class="aero-drawer-avatar" id="drawerCandidateAvatar" style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; color: #ffffff; border: 1px solid rgba(255,255,255,0.15);">RS</div>
+        <div>
+          <h3 style="font-size: 16px; font-weight: 800; color: #ffffff; margin: 0; letter-spacing: -0.01em;" id="drawerCandidateName">Rahul Sharma</h3>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;" id="drawerCandidateRole">Senior Bench Sales Recruiter</div>
+        </div>
+      </div>
+      <button class="aero-drawer-close-btn" onclick="closeCandidateDrawer()" aria-label="Close Profile Drawer">✕</button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div class="aero-drawer-body">
+      <!-- Section 1: Milestone Progress & Phase-Shift Advance -->
+      <div class="aero-drawer-section">
+        <div class="aero-drawer-section-title">
+          <span>Active Lifecycle Milestone</span>
+          <span class="pill-neon-emerald" id="drawerStepBadge">2. Doc Upload</span>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; flex-wrap: wrap;">
+          <div style="font-size: 12px; color: #94a3b8;" id="drawerStepDescription">
+            Candidate verification credentials in-flight.
+          </div>
+          <button class="aero-btn aero-btn-primary" id="btnDrawerPhaseShift" onclick="advanceActiveCandidateFromDrawer()" style="min-height: 44px; padding: 0 18px; font-weight: 700; border-radius: 8px;">
+            ⚡ Phase Shift to Next Milestone ➔
+          </button>
+        </div>
+      </div>
+
+      <!-- Section 2: Contact & Compensation Identity -->
+      <div class="aero-drawer-section">
+        <div class="aero-drawer-section-title">
+          <span>Candidate Information Packet</span>
+          <span style="font-size: 10.5px; color: #64748b;" id="drawerCreatedAt">Sync ID: 018eb512</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12px;">
+          <div>
+            <div style="color: #64748b; font-size: 11px;">Official Email</div>
+            <div style="color: #ffffff; font-weight: 600; font-family: monospace; word-break: break-all;" id="drawerCandidateEmail">rahul.sharma@aero-offshore.internal</div>
+          </div>
+          <div>
+            <div style="color: #64748b; font-size: 11px;">Fixed Compensation (CTC)</div>
+            <div style="color: #34d399; font-weight: 700;" id="drawerCandidateCtc">₹16,50,000 PA</div>
+          </div>
+          <div>
+            <div style="color: #64748b; font-size: 11px;">Operational Shift</div>
+            <div style="color: #ffffff; font-weight: 600;" id="drawerCandidateShift">Night Shift (6:30 PM - 3:30 AM IST)</div>
+          </div>
+          <div>
+            <div style="color: #64748b; font-size: 11px;">Compliance Standard</div>
+            <div style="color: #cbd5e1; font-weight: 600;" id="drawerCandidateRules">ISO-27001 & Client Non-Solicitation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Verification Vault Checklist -->
+      <div class="aero-drawer-section">
+        <div class="aero-drawer-section-title">
+          <span>Cryptographic KYC Checklist</span>
+          <span style="font-size: 10.5px; color: #10b981;">Supabase Storage Vault</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- Aadhaar -->
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: rgba(10, 13, 20, 0.7); border-radius: 8px; border: 1px solid rgba(255,255,255,0.04);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 16px;">🪪</span>
+              <div>
+                <strong style="color: #ffffff; font-size: 12px;">Aadhaar National ID</strong>
+                <div style="font-size: 10.5px; color: #64748b;">UIDAI Digilocker Verified</div>
+              </div>
+            </div>
+            <span class="pill-neon-emerald" id="drawerStatusAadhaar">Verified</span>
+          </div>
+
+          <!-- PAN -->
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: rgba(10, 13, 20, 0.7); border-radius: 8px; border: 1px solid rgba(255,255,255,0.04);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 16px;">💳</span>
+              <div>
+                <strong style="color: #ffffff; font-size: 12px;">PAN Tax Card</strong>
+                <div style="font-size: 10.5px; color: #64748b;" id="drawerMetaPan">NSDL Verification</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pill-neon-amber" id="drawerStatusPan">Pending Review</span>
+              <button class="aero-btn aero-btn-primary aero-btn-sm" id="drawerBtnApprovePan" onclick="adminApprovePanDoc(); updateDrawerStatusFromActiveCand();" style="min-height: 36px; padding: 0 10px; font-size: 11px;">
+                ⚡ Approve
+              </button>
+            </div>
+          </div>
+
+          <!-- Relieving Letter -->
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: rgba(10, 13, 20, 0.7); border-radius: 8px; border: 1px solid rgba(255,255,255,0.04);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 16px;">📄</span>
+              <div>
+                <strong style="color: #ffffff; font-size: 12px;">Relieving &amp; Experience</strong>
+                <div style="font-size: 10.5px; color: #64748b;" id="drawerMetaRelieving">Required for Phase 3</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pill-neon-crimson" id="drawerStatusRelieving">Missing</span>
+              <button class="aero-btn aero-btn-outline aero-btn-sm" onclick="openUploadVaultDocModal('experience')" style="min-height: 36px; padding: 0 10px; font-size: 11px;">
+                ⬆️ Upload
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Direct Candidate Drop-Link -->
+      <div class="aero-drawer-section">
+        <div class="aero-drawer-section-title">
+          <span>Candidate Direct Portal Link</span>
+          <span style="font-size: 10.5px; color: #64748b;">Token Gated</span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center; margin-top: 6px;">
+          <input type="text" id="drawerPortalUrlInput" readonly class="form-input" style="font-family: monospace; font-size: 11px; padding: 10px 12px; background: rgba(10, 13, 20, 0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; flex: 1; color: #818cf8; min-height: 44px;">
+          <button class="aero-btn aero-btn-outline" onclick="copyDrawerPortalLink()" style="min-height: 44px; padding: 0 14px; font-weight: 700; white-space: nowrap;">
+            📋 Copy
+          </button>
+          <a id="drawerOpenPortalLink" href="candidate_portal_demo.html" target="_blank" class="aero-btn aero-btn-primary" style="min-height: 44px; padding: 0 14px; font-weight: 700; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+            🚀 Open &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Section 5: Dynamic Navigation Shortcuts -->
+      <div style="display: flex; gap: 10px; margin-top: auto; padding-top: 10px;">
+        <button class="aero-btn aero-btn-outline" style="flex: 1; min-height: 44px; font-weight: 700;" onclick="switchOffshoreWorkspaceTab('kyc'); closeCandidateDrawer();">
+          🪪 View KYC Vault
+        </button>
+        <button class="aero-btn aero-btn-primary" style="flex: 1; min-height: 44px; font-weight: 700;" onclick="switchOffshoreWorkspaceTab('provisioning'); closeCandidateDrawer();">
+          🔑 Open AeroSign Studio
+        </button>
+      </div>
+    </div>
   </aside>
 
   <!-- Global Toast -->
@@ -16177,9 +16439,13 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
     const OFFSHORE_STEP_MAP = {
       'hired': 1,
       'pre_offer_docs': 2,
+      'doc_upload': 2,
       'contract_generation': 3,
+      'kyc_verified': 3,
       'e_sign_execution': 4,
-      'server_archived': 5
+      'tech_provisioned': 4,
+      'server_archived': 5,
+      'active_sync': 5
     };
 
     const OFFSHORE_STEP_NAMES = [
@@ -16299,7 +16565,11 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
           badge.textContent = 'Offshore India Practice';
         }
         switchOffshoreWorkspaceTab(currentOffshoreTab || 'dossier');
-        fetchAndRenderDbCandidates();
+        if (typeof initOffshoreRosterHook === 'function') {
+          initOffshoreRosterHook();
+        } else {
+          fetchAndRenderDbCandidates();
+        }
       } else {
         if (tabUS) tabUS.classList.add('active');
         if (tabIndia) tabIndia.classList.remove('active');
@@ -16409,11 +16679,11 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       }
 
       const phaseLabels = [
-        '1. Hire Confirmed',
-        '2. Pre-Offer Docs',
-        '3. Contract Generation',
-        '4. E-Sign Execution',
-        '5. Server Archived'
+        '1. Hired',
+        '2. Doc Upload',
+        '3. KYC Verified',
+        '4. Tech Provisioned',
+        '5. Active Sync'
       ];
       if (notify) {
         if (phaseNum === 1) switchOffshoreWorkspaceTab('dossier');
@@ -16474,68 +16744,179 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       if (elLeads) elLeads.innerText = leadsCount;
     }
 
+    // Timeout wrapper for robust network requests (Forgiving error mitigation)
+    function executeWithTimeout(promise, timeoutMs = 4000) {
+      let timer = null;
+      const timeoutPromise = new Promise((_, reject) => {
+        timer = setTimeout(() => {
+          reject(new Error('NETWORK_TIMEOUT'));
+        }, timeoutMs);
+      });
+      return Promise.race([
+        promise.finally(() => clearTimeout(timer)),
+        timeoutPromise
+      ]);
+    }
+
+    // Shimmering skeleton state layout during in-flight database requests
+    function renderDbTableSkeleton() {
+      const targets = [
+        document.getElementById('offshoreDbRosterBody'),
+        document.getElementById('ledgerStorageTableBody')
+      ].filter(Boolean);
+      if (targets.length === 0) return;
+
+      const skeletonRow = `
+        <tr class="aero-skeleton-row" style="min-height: 52px; border-bottom: 1px solid rgba(255,255,255,0.04);">
+          <td style="padding: 16px 20px;">
+            <div class="aero-skeleton-shimmer" style="height: 14px; width: 140px; border-radius: 4px; margin-bottom: 6px;"></div>
+            <div class="aero-skeleton-shimmer" style="height: 10px; width: 180px; border-radius: 4px;"></div>
+          </td>
+          <td style="padding: 16px 20px;">
+            <div class="aero-skeleton-shimmer" style="height: 22px; width: 110px; border-radius: 6px;"></div>
+          </td>
+          <td style="padding: 16px 20px;">
+            <div class="aero-skeleton-shimmer" style="height: 22px; width: 120px; border-radius: 6px;"></div>
+          </td>
+          <td style="padding: 16px 20px;">
+            <div class="aero-skeleton-shimmer" style="height: 20px; width: 70px; border-radius: 6px;"></div>
+          </td>
+          <td style="padding: 16px 20px;">
+            <div class="aero-skeleton-shimmer" style="height: 20px; width: 70px; border-radius: 6px;"></div>
+          </td>
+          <td style="padding: 16px 20px;">
+            <div class="aero-skeleton-shimmer" style="height: 20px; width: 70px; border-radius: 6px;"></div>
+          </td>
+          <td style="padding: 16px 20px;">
+            <div class="aero-skeleton-shimmer" style="height: 28px; width: 90px; border-radius: 6px;"></div>
+          </td>
+          <td style="padding: 16px 20px;">
+            <div class="aero-skeleton-shimmer" style="height: 28px; width: 110px; border-radius: 6px;"></div>
+          </td>
+        </tr>
+      `;
+
+      targets.forEach(tbody => {
+        tbody.innerHTML = skeletonRow.repeat(3);
+      });
+    }
+
+    // Format incoming database candidate records to ensure consistent object schema
+    function formatIncomingRecord(serverItem) {
+      const existing = OFFSHORE_DB_STATE.find(c => c.id === serverItem.id);
+      return {
+        ...existing,
+        ...serverItem,
+        ctc: existing?.ctc || serverItem.ctc || (serverItem.role_type === 'team_lead' ? '₹24,00,000 PA' : serverItem.role_type === 'opt' ? '₹14,80,000 PA' : '₹16,50,000 PA'),
+        rules: existing?.rules || serverItem.rules || 'ISO-27001 & Client Non-Solicitation',
+        shift: existing?.shift || serverItem.shift || (serverItem.role_type === 'team_lead' ? 'Hybrid US/India Hours (4:00 PM - 1:00 AM IST)' : 'Night Shift (6:30 PM - 3:30 AM IST)'),
+        esign: existing?.esign || serverItem.esign || {
+          dispatched: { done: true, meta: 'Dispatched via Resend TLS' },
+          opened: { done: serverItem.current_step !== 'hired', meta: 'Bangalore, Chrome IP: 49.37.112.4' },
+          signed: { done: serverItem.current_step === 'server_archived' || serverItem.current_step === 'active_sync', meta: (serverItem.current_step === 'server_archived' || serverItem.current_step === 'active_sync') ? 'Digitally Sealed: SHA-256 Validated' : 'Awaiting candidate signature...' }
+        }
+      };
+    }
+
+    // Real-time Postgres change subscription for public.offshore_onboarding
+    let offshoreRealtimeSubscribed = false;
+    function initOffshoreRealtimeSubscription() {
+      if (!supabaseClient || offshoreRealtimeSubscribed) return;
+
+      try {
+        const channel = supabaseClient
+          .channel('offshore_onboarding_live')
+          .on(
+            'postgres_changes',
+            { event: '*', schema: 'public', table: 'offshore_onboarding' },
+            (payload) => {
+              console.log('⚡ Realtime Postgres Event from offshore_onboarding:', payload);
+              if (payload.eventType === 'INSERT') {
+                const formatted = formatIncomingRecord(payload.new);
+                if (!OFFSHORE_DB_STATE.some(c => c.id === formatted.id)) {
+                  OFFSHORE_DB_STATE.unshift(formatted);
+                }
+              } else if (payload.eventType === 'UPDATE') {
+                const idx = OFFSHORE_DB_STATE.findIndex(c => c.id === payload.new.id);
+                if (idx !== -1) {
+                  OFFSHORE_DB_STATE[idx] = formatIncomingRecord(payload.new);
+                } else {
+                  OFFSHORE_DB_STATE.unshift(formatIncomingRecord(payload.new));
+                }
+              } else if (payload.eventType === 'DELETE') {
+                OFFSHORE_DB_STATE = OFFSHORE_DB_STATE.filter(c => c.id !== payload.old.id);
+              }
+
+              updateFilterBadgeCounts();
+              renderDbRosterTable();
+              renderOffshoreCandidateData();
+              const active = OFFSHORE_DB_STATE.find(c => c.id === activeOffshoreCandidateId);
+              if (active) renderCandidateDrawer(active);
+            }
+          )
+          .subscribe((status) => {
+            if (status === 'SUBSCRIBED') {
+              offshoreRealtimeSubscribed = true;
+              console.log('⚡ Connected to Supabase real-time channel: offshore_onboarding_live');
+            }
+          });
+      } catch (err) {
+        console.warn('Realtime subscription notification:', err);
+      }
+    }
+
+    // Active Roster Subscription Hook (useEffect-equivalent for browser lifecycle)
+    function initOffshoreRosterHook() {
+      initOffshoreRealtimeSubscription();
+      fetchAndRenderDbCandidates();
+    }
+
     // Fetch candidate records directly from Supabase / REST API (with local state fallback)
     async function fetchAndRenderDbCandidates() {
-      // 1. Direct query from Supabase Live Project
+      // 1. Render shimmering skeleton during in-flight network activity
+      renderDbTableSkeleton();
+
+      // 2. Direct query from Supabase Live Project: supabase.from('offshore_onboarding').select('*')
       if (supabaseClient) {
         try {
-          const { data: supaData, error: supaErr } = await supabaseClient
+          const fetchPromise = supabaseClient
             .from('offshore_onboarding')
             .select('*')
             .order('created_at', { ascending: false });
 
+          const { data: supaData, error: supaErr } = await executeWithTimeout(fetchPromise, 4500);
+
           if (!supaErr && Array.isArray(supaData) && supaData.length > 0) {
             console.log('⚡ Loaded candidates directly from Supabase:', supaData.length);
-            OFFSHORE_DB_STATE = supaData.map(serverItem => {
-              const existing = OFFSHORE_DB_STATE.find(c => c.id === serverItem.id);
-              return {
-                ...existing,
-                ...serverItem,
-                ctc: existing?.ctc || (serverItem.role_type === 'team_lead' ? '₹24,00,000 PA' : serverItem.role_type === 'opt' ? '₹14,80,000 PA' : '₹16,50,000 PA'),
-                rules: existing?.rules || 'ISO-27001 & Client Non-Solicitation',
-                shift: existing?.shift || (serverItem.role_type === 'team_lead' ? 'Hybrid US/India Hours (4:00 PM - 1:00 AM IST)' : 'Night Shift (6:30 PM - 3:30 AM IST)'),
-                esign: existing?.esign || {
-                  dispatched: { done: true, meta: 'Dispatched via Resend TLS' },
-                  opened: { done: serverItem.current_step !== 'hired', meta: 'Bangalore, Chrome IP: 49.37.112.4' },
-                  signed: { done: serverItem.current_step === 'server_archived', meta: serverItem.current_step === 'server_archived' ? 'Digitally Sealed: SHA-256 Validated' : 'Awaiting candidate signature...' }
-                }
-              };
-            });
+            OFFSHORE_DB_STATE = supaData.map(formatIncomingRecord);
             updateFilterBadgeCounts();
             renderDbRosterTable();
             renderOffshoreCandidateData();
             return;
           }
         } catch (supaEx) {
-          console.warn('Supabase direct query notice:', supaEx);
+          console.warn('Supabase direct query notice / timeout caught:', supaEx);
+          if (supaEx.message === 'NETWORK_TIMEOUT') {
+            showToast('Connection timed out. Retrying sync...');
+          }
         }
       }
 
-      // 2. Fallback: Query local server REST API
+      // 3. Fallback: Query local server REST API with timeout guard
       try {
-        const resp = await fetch('/api/offshore/candidates');
-        if (resp.ok) {
+        const restPromise = fetch('/api/offshore/candidates');
+        const resp = await executeWithTimeout(restPromise, 3500);
+        if (resp && resp.ok) {
           const resJson = await resp.json();
           if (resJson && Array.isArray(resJson.data) && resJson.data.length > 0) {
-            OFFSHORE_DB_STATE = resJson.data.map(serverItem => {
-              const existing = OFFSHORE_DB_STATE.find(c => c.id === serverItem.id);
-              return {
-                ...existing,
-                ...serverItem,
-                ctc: existing?.ctc || (serverItem.role_type === 'team_lead' ? '₹24,00,000 PA' : serverItem.role_type === 'opt' ? '₹14,80,000 PA' : '₹16,50,000 PA'),
-                rules: existing?.rules || 'ISO-27001 & Client Non-Solicitation',
-                shift: existing?.shift || (serverItem.role_type === 'team_lead' ? 'Hybrid US/India Hours (4:00 PM - 1:00 AM IST)' : 'Night Shift (6:30 PM - 3:30 AM IST)'),
-                esign: existing?.esign || {
-                  dispatched: { done: true, meta: 'Dispatched via Resend TLS' },
-                  opened: { done: serverItem.current_step !== 'hired', meta: 'Bangalore, Chrome IP: 49.37.112.4' },
-                  signed: { done: serverItem.current_step === 'server_archived', meta: serverItem.current_step === 'server_archived' ? 'Digitally Sealed: SHA-256 Validated' : 'Awaiting candidate signature...' }
-                }
-              };
-            });
+            OFFSHORE_DB_STATE = resJson.data.map(formatIncomingRecord);
           }
         }
       } catch (err) {
-        console.warn('Offshore REST API offline; running with in-memory replica:', err);
+        console.warn('Offshore REST API fallback notice:', err);
+        if (err.message === 'NETWORK_TIMEOUT') {
+          showToast('Connection timed out. Retrying sync...');
+        }
       }
 
       updateFilterBadgeCounts();
@@ -16553,13 +16934,32 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       return '<span class="pill-neon-crimson">Missing</span>';
     }
 
+    function formatStepLabel(step) {
+      const stepLabels = {
+        'hired': '1. Hired',
+        'pre_offer_docs': '2. Doc Upload',
+        'doc_upload': '2. Doc Upload',
+        'contract_generation': '3. KYC Verified',
+        'kyc_verified': '3. KYC Verified',
+        'e_sign_execution': '4. Tech Provisioned',
+        'tech_provisioned': '4. Tech Provisioned',
+        'server_archived': '5. Active Sync',
+        'active_sync': '5. Active Sync'
+      };
+      return stepLabels[step] || step;
+    }
+
     function getStepStatusBadge(step) {
       const stepMap = {
         'hired': '<span class="pill-neon-slate">1. Hired</span>',
-        'pre_offer_docs': '<span class="pill-neon-amber">2. Pre-Offer Docs</span>',
-        'contract_generation': '<span class="pill-neon-amber">3. Contract Gen</span>',
-        'e_sign_execution': '<span class="pill-neon-amber">4. E-Sign</span>',
-        'server_archived': '<span class="pill-neon-emerald">5. Archived</span>'
+        'pre_offer_docs': '<span class="pill-neon-amber">2. Doc Upload</span>',
+        'doc_upload': '<span class="pill-neon-amber">2. Doc Upload</span>',
+        'contract_generation': '<span class="pill-neon-amber">3. KYC Verified</span>',
+        'kyc_verified': '<span class="pill-neon-amber">3. KYC Verified</span>',
+        'e_sign_execution': '<span class="pill-neon-amber">4. Tech Provisioned</span>',
+        'tech_provisioned': '<span class="pill-neon-amber">4. Tech Provisioned</span>',
+        'server_archived': '<span class="pill-neon-emerald">5. Active Sync</span>',
+        'active_sync': '<span class="pill-neon-emerald">5. Active Sync</span>'
       };
       return stepMap[step] || `<span class="pill-neon-slate">${step}</span>`;
     }
@@ -16575,7 +16975,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       const filtered = getFilteredOffshoreCandidates();
       if (filtered.length === 0) {
         targets.forEach(tbody => {
-          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #64748b; padding: 24px;">No offshore candidates found for this role filter.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #64748b; padding: 24px; min-height: 44px;">No offshore candidates found for this role filter.</td></tr>`;
         });
         return;
       }
@@ -16587,35 +16987,40 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         const roleLabel = formatOffshoreRoleName(c.role_type);
         
         html += `
-          <tr style="cursor: pointer; transition: background 0.15s ease; ${isActive ? 'background: rgba(99, 102, 241, 0.08); border-left: 3px solid #6366f1;' : ''}" onclick="selectActiveOffshoreCandidate('${c.id}')">
-            <td>
+          <tr style="cursor: pointer; transition: background 0.15s ease; min-height: 44px; ${isActive ? 'background: rgba(99, 102, 241, 0.08); border-left: 3px solid #6366f1;' : ''}" onclick="openCandidateDrawer('${c.id}')" title="Click to view candidate profile drawer">
+            <td style="padding: 16px 20px;">
               <div style="font-weight: 700; color: #ffffff; font-size: 13.5px; letter-spacing: -0.01em;">${escapeHtmlSafe(c.full_name)}</div>
               <div style="font-size: 11.5px; color: #64748b; font-family: monospace; margin-top: 3px;">${escapeHtmlSafe(c.email)}</div>
             </td>
-            <td>
+            <td style="padding: 16px 20px;">
               <span style="display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; color: #e2e8f0; background: rgba(255, 255, 255, 0.06); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.08);">${escapeHtmlSafe(c.role_type.replace('_', ' ').toUpperCase())}</span>
             </td>
-            <td>
+            <td style="padding: 16px 20px;">
               ${getStepStatusBadge(c.current_step)}
             </td>
-            <td>
+            <td style="padding: 16px 20px;">
               ${getDocStatusBadge(c.aadhaar_status)}
             </td>
-            <td>
+            <td style="padding: 16px 20px;">
               ${getDocStatusBadge(c.pan_status)}
             </td>
-            <td>
+            <td style="padding: 16px 20px;">
               ${getDocStatusBadge(c.experience_doc_status)}
             </td>
-            <td>
-              <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 10px; padding: 2px 8px; font-family: monospace;" onclick="event.stopPropagation(); copyDirectTokenLink('${c.secure_token}')" title="Copy Drop-Link">
+            <td style="padding: 16px 20px;">
+              <button class="aero-btn aero-btn-outline" style="min-height: 44px; font-size: 11px; padding: 0 12px; font-family: monospace; border-radius: 6px;" onclick="event.stopPropagation(); copyDirectTokenLink('${c.secure_token}')" title="Copy Drop-Link">
                 🔑 ${shortToken}
               </button>
             </td>
-            <td>
-              <button class="aero-btn aero-btn-sm ${isActive ? 'aero-btn-primary' : 'aero-btn-outline'}" style="font-size: 10.5px; padding: 4px 12px; font-weight: 700;" onclick="event.stopPropagation(); selectActiveOffshoreCandidate('${c.id}')">
-                ${isActive ? '✓ Active' : 'Select'}
-              </button>
+            <td style="padding: 16px 20px;">
+              <div style="display: inline-flex; align-items: center; gap: 8px;">
+                <button class="aero-btn aero-btn-primary" style="min-height: 44px; font-size: 11px; padding: 0 14px; font-weight: 700; border-radius: 6px; white-space: nowrap;" onclick="event.stopPropagation(); advanceCandidateStage('${c.id}')" title="Advance to next onboarding milestone">
+                  Phase Shift ➔
+                </button>
+                <button class="aero-btn ${isActive ? 'aero-btn-primary' : 'aero-btn-outline'}" style="min-height: 44px; font-size: 11px; padding: 0 12px; font-weight: 700; border-radius: 6px; white-space: nowrap;" onclick="event.stopPropagation(); openCandidateDrawer('${c.id}')">
+                  ${isActive ? '✓ Selected' : 'Open'}
+                </button>
+              </div>
             </td>
           </tr>
         `;
@@ -16646,6 +17051,229 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
       }
       showToast(`📋 Copied candidate drop-link: ${fullUrl}`);
     }
+
+    // =========================================================================
+    // END-TO-END TIMELINE STAGE MOVEMENT & PHASE SHIFT CONTROLLER
+    // =========================================================================
+    async function advanceCandidateStage(candidateId, targetStep = null) {
+      const cand = OFFSHORE_DB_STATE.find(c => c.id === candidateId);
+      if (!cand) return;
+
+      const stepFlow = [
+        'hired',
+        'pre_offer_docs',
+        'contract_generation',
+        'e_sign_execution',
+        'server_archived'
+      ];
+
+      let nextStep = targetStep;
+      if (!nextStep) {
+        const curIdx = stepFlow.indexOf(cand.current_step);
+        if (curIdx >= 0 && curIdx < stepFlow.length - 1) {
+          nextStep = stepFlow[curIdx + 1];
+        } else if (cand.current_step === 'doc_upload') {
+          nextStep = 'contract_generation';
+        } else if (cand.current_step === 'kyc_verified') {
+          nextStep = 'e_sign_execution';
+        } else if (cand.current_step === 'tech_provisioned') {
+          nextStep = 'server_archived';
+        } else {
+          showToast(`Candidate ${cand.full_name} is already at final milestone: Active Sync`);
+          return;
+        }
+      }
+
+      // Optimistic state progression
+      const prevStep = cand.current_step;
+      cand.current_step = nextStep;
+      if (nextStep === 'server_archived' || nextStep === 'active_sync') {
+        cand.aadhaar_status = 'verified';
+        cand.pan_status = 'verified';
+        cand.experience_doc_status = 'verified';
+        if (cand.esign && cand.esign.signed) cand.esign.signed.done = true;
+      }
+
+      // Instantly advance timeline indicator & UI views
+      setOffshorePhase(nextStep, false);
+      renderDbRosterTable();
+      renderOffshoreCandidateData();
+      renderCandidateDrawer(cand);
+
+      // Live Supabase update with error mitigation:
+      // await supabase.from('offshore_onboarding').update({ current_step: nextStep }).eq('id', selectedCandidateId);
+      if (supabaseClient) {
+        try {
+          const updatePromise = supabaseClient
+            .from('offshore_onboarding')
+            .update({ current_step: nextStep })
+            .eq('id', candidateId);
+
+          const { error: supaErr } = await executeWithTimeout(updatePromise, 4500);
+
+          if (supaErr) {
+            console.warn('Supabase phase shift returned notice:', supaErr);
+            showToast('Connection timed out. Retrying sync...');
+          } else {
+            console.log(`⚡ Supabase candidate ${candidateId} advanced to ${nextStep}`);
+            showToast(`🚀 ${cand.full_name} advanced to ${formatStepLabel(nextStep)}`);
+          }
+        } catch (ex) {
+          console.warn('Supabase phase shift caught error / timeout:', ex);
+          showToast('Connection timed out. Retrying sync...');
+        }
+      } else {
+        showToast(`🚀 ${cand.full_name} advanced to ${formatStepLabel(nextStep)} (Optimistic)`);
+      }
+    }
+
+    // Direct click handler for top timeline progress ribbon
+    function advanceActiveCandidateToStep(stepName) {
+      if (!activeOffshoreCandidateId) return;
+      advanceCandidateStage(activeOffshoreCandidateId, stepName);
+    }
+
+    // =========================================================================
+    // CONTEXTUAL DRAWER (PROGRESSIVE DISCLOSURE PROFILE DRILL-DOWN)
+    // =========================================================================
+    function openCandidateDrawer(candidateId) {
+      const cand = OFFSHORE_DB_STATE.find(c => c.id === candidateId) || OFFSHORE_DB_STATE[0];
+      if (!cand) return;
+
+      selectActiveOffshoreCandidate(cand.id);
+      renderCandidateDrawer(cand);
+
+      const drawer = document.getElementById('offshoreCandidateDrawer');
+      const backdrop = document.getElementById('offshoreCandidateDrawerBackdrop');
+
+      if (drawer) {
+        drawer.classList.add('open');
+        drawer.setAttribute('aria-hidden', 'false');
+      }
+      if (backdrop) {
+        backdrop.classList.add('active');
+      }
+    }
+
+    function closeCandidateDrawer() {
+      const drawer = document.getElementById('offshoreCandidateDrawer');
+      const backdrop = document.getElementById('offshoreCandidateDrawerBackdrop');
+
+      if (drawer) {
+        drawer.classList.remove('open');
+        drawer.setAttribute('aria-hidden', 'true');
+      }
+      if (backdrop) {
+        backdrop.classList.remove('active');
+      }
+    }
+
+    function renderCandidateDrawer(cand) {
+      if (!cand) return;
+
+      const avatar = document.getElementById('drawerCandidateAvatar');
+      const name = document.getElementById('drawerCandidateName');
+      const role = document.getElementById('drawerCandidateRole');
+      const stepBadge = document.getElementById('drawerStepBadge');
+      const stepDesc = document.getElementById('drawerStepDescription');
+      const createdAt = document.getElementById('drawerCreatedAt');
+      const email = document.getElementById('drawerCandidateEmail');
+      const ctc = document.getElementById('drawerCandidateCtc');
+      const shift = document.getElementById('drawerCandidateShift');
+      const rules = document.getElementById('drawerCandidateRules');
+
+      // Initials
+      if (avatar) {
+        const parts = cand.full_name ? cand.full_name.split(' ') : ['C', 'A'];
+        avatar.innerText = (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+      }
+
+      if (name) name.innerText = cand.full_name;
+      if (role) role.innerText = formatOffshoreRoleName(cand.role_type);
+      if (stepBadge) {
+        stepBadge.innerHTML = getStepStatusBadge(cand.current_step);
+      }
+      if (stepDesc) {
+        const descMap = {
+          'hired': 'Offer accepted. Awaiting candidate document uploads in the portal.',
+          'pre_offer_docs': 'Document uploads in-flight. Digilocker & NSDL KYC validation pending.',
+          'doc_upload': 'Document uploads in-flight. Digilocker & NSDL KYC validation pending.',
+          'contract_generation': 'KYC Verified. AeroSign contract draft prepared for candidate.',
+          'kyc_verified': 'KYC Verified. AeroSign contract draft prepared for candidate.',
+          'e_sign_execution': 'AeroSign agreement dispatched via Resend TLS. Awaiting OTP e-sign.',
+          'tech_provisioned': 'AeroSign agreement dispatched via Resend TLS. Awaiting OTP e-sign.',
+          'server_archived': 'Candidate onboarding complete. Active sync running in database.',
+          'active_sync': 'Candidate onboarding complete. Active sync running in database.'
+        };
+        stepDesc.innerText = descMap[cand.current_step] || 'Candidate verification in-flight.';
+      }
+
+      if (createdAt) createdAt.innerText = `Sync ID: ${cand.id.substring(0, 8)}`;
+      if (email) email.innerText = cand.email;
+      if (ctc) ctc.innerText = cand.ctc || '₹16,50,000 PA';
+      if (shift) shift.innerText = cand.shift || 'Night Shift (6:30 PM - 3:30 AM IST)';
+      if (rules) rules.innerText = cand.rules || 'ISO-27001 & Client Non-Solicitation';
+
+      // Vault Check statuses
+      const sAadhaar = document.getElementById('drawerStatusAadhaar');
+      const sPan = document.getElementById('drawerStatusPan');
+      const sRelieving = document.getElementById('drawerStatusRelieving');
+      const btnApprovePan = document.getElementById('drawerBtnApprovePan');
+
+      if (sAadhaar) {
+        sAadhaar.className = cand.aadhaar_status === 'verified' ? 'pill-neon-emerald' : cand.aadhaar_status === 'pending_review' ? 'pill-neon-amber' : 'pill-neon-crimson';
+        sAadhaar.innerText = cand.aadhaar_status === 'verified' ? 'Verified' : cand.aadhaar_status === 'pending_review' ? 'Pending Review' : 'Missing';
+      }
+      if (sPan) {
+        sPan.className = cand.pan_status === 'verified' ? 'pill-neon-emerald' : cand.pan_status === 'pending_review' ? 'pill-neon-amber' : 'pill-neon-crimson';
+        sPan.innerText = cand.pan_status === 'verified' ? 'Verified' : cand.pan_status === 'pending_review' ? 'Pending Review' : 'Missing';
+      }
+      if (btnApprovePan) {
+        btnApprovePan.style.display = cand.pan_status === 'verified' ? 'none' : 'inline-flex';
+      }
+      if (sRelieving) {
+        sRelieving.className = cand.experience_doc_status === 'verified' ? 'pill-neon-emerald' : cand.experience_doc_status === 'pending_review' ? 'pill-neon-amber' : 'pill-neon-crimson';
+        sRelieving.innerText = cand.experience_doc_status === 'verified' ? 'Verified' : cand.experience_doc_status === 'pending_review' ? 'Pending Review' : 'Missing';
+      }
+
+      // Portal drop-link
+      const portalInput = document.getElementById('drawerPortalUrlInput');
+      const portalLink = document.getElementById('drawerOpenPortalLink');
+      const portalUrl = `https://yourdashboard.com/portal/upload/${cand.secure_token}`;
+      if (portalInput) portalInput.value = portalUrl;
+      if (portalLink) portalLink.href = `candidate_portal_demo.html?token=${cand.secure_token}`;
+    }
+
+    function advanceActiveCandidateFromDrawer() {
+      if (!activeOffshoreCandidateId) return;
+      advanceCandidateStage(activeOffshoreCandidateId);
+    }
+
+    function copyDrawerPortalLink() {
+      const input = document.getElementById('drawerPortalUrlInput');
+      if (input && input.value) {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(input.value);
+        }
+        showToast(`📋 Copied candidate portal link: ${input.value}`);
+      }
+    }
+
+    function updateDrawerStatusFromActiveCand() {
+      const cand = OFFSHORE_DB_STATE.find(c => c.id === activeOffshoreCandidateId);
+      if (cand) {
+        renderCandidateDrawer(cand);
+        renderDbRosterTable();
+        renderOffshoreCandidateData();
+      }
+    }
+
+    // Keyboard ESC listener for contextual drawer dismissal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeCandidateDrawer();
+      }
+    });
 
     // Render detailed views for the currently active candidate
     function renderOffshoreCandidateData() {
@@ -18813,7 +19441,9 @@ ${cState.candidate.jobDescription}
       if (typeof AutomatedOnboardingWorkflow !== 'undefined' && AutomatedOnboardingWorkflow.init) {
         AutomatedOnboardingWorkflow.init();
       }
-      if (typeof fetchAndRenderDbCandidates === 'function') {
+      if (typeof initOffshoreRosterHook === 'function') {
+        initOffshoreRosterHook();
+      } else if (typeof fetchAndRenderDbCandidates === 'function') {
         fetchAndRenderDbCandidates();
       } else if (typeof renderOffshoreCandidateData === 'function') {
         renderOffshoreCandidateData();
