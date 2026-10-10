@@ -108,151 +108,177 @@
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Custom Refined Scrollbars */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.5); }
+    /* Custom Refined Scrollbars & Smooth Inertial Scroll */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: rgba(10, 13, 20, 0.2); }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.15); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.35); }
+
+    html, body, .main-wrapper, .table-container, .aero-db-roster-box, .aero-flow-card {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
 
     /* ========================================================================= */
     /* 1. LOGIN SCREEN (SPLIT-SCREEN WITH AMBIENT DEPTH)                         */
     /* ========================================================================= */
+    /* ======================================================================= */
+    /* 1. SATELLITE ENTRYWAY: THE PREMIUM MOBBIN-STYLE LOGIN INTERFACE         */
+    /* ======================================================================= */
     #login-container {
       position: fixed;
       inset: 0;
-      z-index: 9999;
-      background: var(--bg-ambient);
+      z-index: 99999;
       display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100vw;
       height: 100vh;
       overflow-y: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      background: radial-gradient(circle at 50% 25%, rgba(20, 27, 45, 0.9) 0%, rgba(10, 13, 20, 0.98) 55%, #05070b 100%);
+      background-color: #05070b;
+      padding: 24px;
+      box-sizing: border-box;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    #login-container.hidden { display: none; }
-
-    /* Login Brand Hero Side */
-    .login-hero {
-      flex: 1.15;
-      background: radial-gradient(circle at 10% 20%, #1e293b 0%, #0f172a 80%, #030712 100%);
-      color: white;
-      padding: 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .login-hero::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 520px;
-      height: 520px;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.28) 0%, rgba(15, 23, 42, 0) 70%);
-      border-radius: 50%;
+    #login-container.hidden {
+      display: none !important;
+      opacity: 0;
       pointer-events: none;
-      animation: floatHeroSlow 12s ease-in-out infinite alternate;
     }
-    .login-hero::after {
-      content: '';
+
+    /* Subtle Dark Background Noise Mesh Overlay */
+    .aero-login-mesh {
       position: absolute;
-      bottom: -80px;
-      left: 10%;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(15, 23, 42, 0) 70%);
-      border-radius: 50%;
+      inset: 0;
       pointer-events: none;
-      animation: floatHeroSlow 9s ease-in-out infinite alternate-reverse;
-    }
-    @keyframes floatHeroSlow {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(35px, 25px) scale(1.06); }
-    }
-
-    .brand-logo-hero {
-      width: 42px;
-      height: 42px;
-      background: var(--accent-gradient);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 22px;
-      color: white;
-      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      z-index: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0) 80%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0) 80%);
     }
 
-    .hero-features {
-      margin-top: 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    /* Ambient Subtle Glow Orbs */
+    .aero-login-glow-1 {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 540px;
+      height: 380px;
+      background: radial-gradient(ellipse, rgba(56, 189, 248, 0.09) 0%, rgba(99, 102, 241, 0.05) 45%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Minimal Centered Authentication Grid Wrapper */
+    .aero-login-card-wrapper {
       position: relative;
       z-index: 2;
-    }
-    .hero-feat-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 13px;
-      color: #e2e8f0;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      padding: 13px 18px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, border-color 0.2s;
-    }
-    .hero-feat-item:hover {
-      transform: translateX(5px);
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(99, 102, 241, 0.4);
-    }
-    .hero-feat-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(59, 130, 246, 0.25);
-      border: 1px solid rgba(59, 130, 246, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-    }
-
-    /* Login Form Pane */
-    .login-form-pane {
-      flex: 0.85;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 48px;
-      background: var(--bg-ambient);
-      position: relative;
-      overflow-y: auto;
-    }
-    .login-card {
       width: 100%;
       max-width: 440px;
-      background: var(--card);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 36px;
-      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.95);
-      position: relative;
-      z-index: 2;
+      background: rgba(10, 13, 20, 0.85);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      padding: 40px 36px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+                  0 24px 48px -12px rgba(0, 0, 0, 0.75),
+                  inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+      box-sizing: border-box;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    body.dark .login-card {
-      box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    .aero-login-card-wrapper:hover {
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+                  0 32px 64px -12px rgba(0, 0, 0, 0.85),
+                  inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+    }
+
+    /* Translucent Single-Stroke Text Input Lines */
+    .aero-mobbin-input-group {
+      margin-bottom: 22px;
+      position: relative;
+    }
+    .aero-mobbin-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .aero-mobbin-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 44px;
+    }
+    .aero-mobbin-input {
+      width: 100%;
+      height: 44px;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+      border-radius: 0 !important;
+      padding: 10px 0 !important;
+      color: #ffffff !important;
+      font-size: 14px;
+      font-weight: 500;
+      outline: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-sizing: border-box;
+    }
+    .aero-mobbin-input::placeholder {
+      color: #64748b;
+    }
+    /* Soft progressive neon blue outer border glow overlay on focus */
+    .aero-mobbin-input:focus {
+      border-bottom-color: #38bdf8 !important;
+      box-shadow: 0 2px 14px -2px rgba(56, 189, 248, 0.5) !important;
+    }
+
+    /* Solid Charcoal Submit Button with Micro-Bevel & Inset Top White Accent Path */
+    .aero-charcoal-btn {
+      width: 100%;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #181d28; /* Solid charcoal */
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+                  0 1px 2px 0 rgba(0, 0, 0, 0.3),
+                  0 4px 14px rgba(0, 0, 0, 0.45);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    .aero-charcoal-btn:hover {
+      background: #222938;
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
+                  0 2px 4px 0 rgba(0, 0, 0, 0.3),
+                  0 8px 24px rgba(0, 0, 0, 0.6);
+      transform: translateY(-1px);
+    }
+    .aero-charcoal-btn:active {
+      transform: translateY(0);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+                  0 1px 2px 0 rgba(0, 0, 0, 0.4);
     }
 
     .form-group {
@@ -269,6 +295,8 @@
     }
     .form-input {
       width: 100%;
+      height: 44px;
+      box-sizing: border-box;
       padding: 9px 14px;
       border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -3114,34 +3142,37 @@
       display: inline-block;
     }
 
-    /* Universal Action Hub Toolbar - Mobbin Enterprise Skin */
+    /* Universal Action Hub Toolbar - Mobbin Obsidian Tier 1 Command Dock */
     .aero-universal-toolbar {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(13, 16, 23, 0.85);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 12px;
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 12px;
-      padding: 5px 8px;
+      padding: 6px 8px;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     }
     .aero-toolbar-segment {
       display: inline-flex;
       align-items: center;
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 9px;
       padding: 3px;
       gap: 3px;
+      height: 44px;
+      box-sizing: border-box;
     }
     .aero-segment-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;
-      border-radius: 6px;
+      padding: 0 14px;
+      height: 38px;
+      border-radius: 7px;
       border: none;
       background: transparent;
       color: #94a3b8;
@@ -3164,17 +3195,18 @@
     }
     .aero-toolbar-divider {
       width: 1px;
-      height: 22px;
+      height: 24px;
       background: rgba(255, 255, 255, 0.06);
       margin: 0 2px;
     }
     .aero-toolbar-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 7px;
+      padding: 0 16px;
+      height: 44px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
       background: rgba(255, 255, 255, 0.03);
       color: #94a3b8;
       font-size: 12px;
@@ -3183,6 +3215,7 @@
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       white-space: nowrap;
+      box-sizing: border-box;
     }
     .aero-toolbar-btn:hover {
       background: rgba(255, 255, 255, 0.06);
@@ -3190,18 +3223,19 @@
       color: #ffffff;
       transform: translateY(-1px);
     }
+    /* Solid charcoal submit button with micro-bevel and inset top white accent path */
     .aero-toolbar-btn.aero-toolbar-primary {
-      background: #1e293b;
+      background: #181d28;
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       font-weight: 700;
       letter-spacing: -0.01em;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 4px 14px rgba(0, 0, 0, 0.45);
     }
     .aero-toolbar-btn.aero-toolbar-primary:hover {
-      background: #334155;
-      border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.3);
+      background: #222938;
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 2px 4px 0 rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.55);
       transform: translateY(-1px);
     }
 
@@ -3319,19 +3353,19 @@
       margin: 4px 0 0 0;
     }
 
-    /* Top Filters Bar - Mobbin Surface */
+    /* Top Filters Bar - Mobbin Obsidian Surface */
     .aero-filter-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
-      background: rgba(13, 16, 23, 0.85);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      padding: 18px 24px;
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      padding: 24px;
       border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -3368,10 +3402,10 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
-      background: rgba(13, 16, 23, 0.85);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 14px;
       padding: 24px;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
@@ -3439,18 +3473,18 @@
     .aero-ribbon-delta {
       font-size: 11px;
       font-weight: 600;
-      color: #94a3b8;
+      color: #64748b;
       letter-spacing: -0.02em;
     }
     .aero-ribbon-sub {
       font-size: 11px;
-      color: #94a3b8;
+      color: #64748b;
       font-weight: 600;
       letter-spacing: -0.02em;
     }
     .aero-ribbon-detail {
       font-size: 11.5px;
-      color: #94a3b8;
+      color: #64748b;
       margin-top: 8px;
       line-height: 1.45;
     }
@@ -3462,7 +3496,7 @@
       gap: 6px;
       font-size: 11px;
       font-weight: 600;
-      color: #94a3b8;
+      color: #64748b;
       letter-spacing: -0.01em;
       white-space: nowrap;
     }
@@ -3482,10 +3516,10 @@
       gap: 16px;
     }
     .aero-kpi-card-modern {
-      background: rgba(13, 16, 23, 0.85);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 14px;
       padding: 24px;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
@@ -3494,7 +3528,7 @@
       overflow: hidden;
     }
     .aero-kpi-card-modern:hover {
-      border-color: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.12);
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 16px 32px -4px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
     }
     .aero-kpi-top {
@@ -3538,12 +3572,12 @@
       flex-wrap: wrap;
       gap: 12px;
       margin: 18px 0 18px 0;
-      padding: 6px 8px;
-      background: rgba(13, 16, 23, 0.85);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      padding: 8px 12px;
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     }
     .aero-stage-pills {
@@ -3585,10 +3619,10 @@
       width: 100%;
     }
     .aero-flow-card {
-      background: rgba(13, 16, 23, 0.85);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 16px;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
       display: flex;
@@ -3599,7 +3633,7 @@
       margin-bottom: 24px;
     }
     .aero-flow-card:hover {
-      border-color: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.12);
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 16px 32px -4px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 0 15px rgba(255, 255, 255, 0.03);
     }
     .aero-flow-card.fade-card-exit {
@@ -4980,19 +5014,19 @@
 
     /* Live Database Ledger Table (public.offshore_onboarding) */
     .aero-db-roster-box {
-      background: rgba(15, 18, 28, 0.7);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 13, 20, 0.8);
+      backdrop-filter: blur(24px) saturate(170%);
+      -webkit-backdrop-filter: blur(24px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 14px;
       margin-bottom: 24px;
       overflow: hidden;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 12px 24px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .aero-db-roster-box:hover {
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      box-shadow: 0 0 25px rgba(99, 102, 241, 0.15);
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 16px 32px -4px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
     }
     .aero-db-roster-header {
       padding: 16px 24px;
@@ -5533,112 +5567,89 @@
   <!-- ======================================================================= -->
   <!-- 1. AUTHENTICATION & LOGIN VIEW                                          -->
   <!-- ======================================================================= -->
+  <!-- ======================================================================= -->
+  <!-- 1. SATELLITE ENTRYWAY: THE PREMIUM MOBBIN-STYLE LOGIN INTERFACE         -->
+  <!-- ======================================================================= -->
   <div id="login-container">
-    <!-- Left Hero Pane -->
-    <div class="login-hero">
-      <div>
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
-          <div class="brand-logo-hero">A</div>
-          <span style="font-size: 22px; font-weight: 800; letter-spacing: -0.5px;">AeroHR</span>
-          <span class="brand-badge">PURE AI</span>
-        </div>
-        <h2 style="font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 12px;">The Autonomous Workforce Operating System.</h2>
-        <p style="font-size: 14px; color: #94a3b8; line-height: 1.6; max-width: 460px;">
-          Experience an AI-first employee portal covering five core operational pillars: Onboarding, Daily Attendance, Break Timings, Timesheet Submission, and Client Invoicing.
-        </p>
+    <!-- Subtle Dark Background Noise Mesh Overlay -->
+    <div class="aero-login-mesh"></div>
+    <div class="aero-login-glow-1"></div>
 
-        <div class="hero-features">
-          <div class="hero-feat-item">
-            <div class="hero-feat-icon">🚀</div>
-            <span><strong>New Employee Onboarding</strong> with cryptographic W-4/I-9 e-signatures</span>
-          </div>
-          <div class="hero-feat-item">
-            <div class="hero-feat-icon">⏱️</div>
-            <span><strong>Daily Attendance & Break Timings</strong> with California Labor Code compliance</span>
-          </div>
-          <div class="hero-feat-item">
-            <div class="hero-feat-icon">📅</div>
-            <span><strong>Weekly Timesheet Submission</strong> with Google Calendar AI pre-fills</span>
-          </div>
-          <div class="hero-feat-item">
-            <div class="hero-feat-icon">💰</div>
-            <span><strong>Instant Invoicing Pipeline</strong> converting approved time to client invoices</span>
-          </div>
-          <div class="hero-feat-item">
-            <div class="hero-feat-icon">✨</div>
-            <span><strong>Omnipresent Aero Copilot</strong> with zero-hallucination policy RAG</span>
-          </div>
+    <!-- Centered Minimal Authentication Grid Wrapper -->
+    <div class="aero-login-card-wrapper">
+      <!-- Brand & Gateway Title -->
+      <div style="text-align: center; margin-bottom: 28px;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 14px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);">
+          <span style="font-size: 20px; font-weight: 900; color: #ffffff; letter-spacing: -0.05em;">A</span>
         </div>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 6px;">
+          <h1 style="font-size: 20px; font-weight: 800; color: #ffffff; margin: 0; letter-spacing: -0.02em;">AeroHR Gateway</h1>
+          <span class="aero-minimal-badge" style="font-size: 9.5px; padding: 2px 7px;">SATELLITE ACCESS</span>
+        </div>
+        <p style="font-size: 12px; color: #64748b; margin: 0;">Autonomous Workforce Operating System &bull; SOC 2 Type II Encrypted</p>
       </div>
 
-      <div style="font-size: 11px; color: #64748b;">
-        © 2026 AeroHR Technologies Inc. SOC 2 Type II Certified • GDPR & FLSA Compliant
-      </div>
-    </div>
-
-    <!-- Right Form Pane -->
-    <div class="login-form-pane">
-      <div class="login-card">
-        <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 6px;">Sign in to your portal</h3>
-        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Enter enterprise credentials or test with 1-click demo accounts:</p>
-
-        <!-- Form -->
-        <form onsubmit="handleFormLogin(event)">
-          <div class="form-group">
-            <label class="form-label" for="loginEmail">Work Email</label>
-            <input class="form-input" id="loginEmail" type="email" placeholder="name@company.com" required value="admin@demo.com">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="loginPassword">Password</label>
-            <input class="form-input" id="loginPassword" type="password" placeholder="••••••••••••" required value="demo-password-2026">
-            <button type="button" class="pwd-toggle" onclick="togglePasswordVisibility()">👁️</button>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 12px;">
-            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-              <input type="checkbox" checked> <span>Remember device</span>
-            </label>
-            <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;" onclick="showToast('Password reset link sent to registered email.')">Forgot password?</a>
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; font-size: 14px;" id="loginSubmitBtn">
-            Sign In with Credentials
-          </button>
-
-          <button type="button" class="btn btn-primary" style="width: 100%; margin-top: 10px; background: var(--primary-gradient); font-size: 13.5px; font-weight: 700; padding: 10px; box-shadow: 0 4px 14px rgba(99,102,241,0.35);" onclick="authenticateUser(DEMO_USERS['admin'])">
-            👑 1-Click Enter as Super Admin (All Features Unlocked) →
-          </button>
-        </form>
-
-        <div style="margin-top: 14px;">
-          <button type="button" class="btn btn-outline" style="width: 100%; font-size: 13px;" onclick="showToast('Connecting to Okta / Google Workspace SAML...')">
-            🔐 Continue with Enterprise SSO (Okta / Google)
-          </button>
-        </div>
-
-        <!-- 3-Role Demo Persona Cards -->
-        <div class="demo-divider">Or continue as demo role</div>
-        <div class="demo-role-grid">
-          <div class="demo-card" onclick="loginAsDemo('employee')">
-            <div style="font-size: 16px; margin-bottom: 4px;">👤</div>
-            <div class="demo-role-title">Employee</div>
-            <div class="demo-role-email">employee@demo.com</div>
-          </div>
-          <div class="demo-card" onclick="loginAsDemo('hr')">
-            <div style="font-size: 16px; margin-bottom: 4px;">📋</div>
-            <div class="demo-role-title">HR Ops</div>
-            <div class="demo-role-email">hr@demo.com</div>
-          </div>
-          <div class="demo-card" onclick="loginAsDemo('admin')">
-            <div style="font-size: 16px; margin-bottom: 4px;">👑</div>
-            <div class="demo-role-title">Admin</div>
-            <div class="demo-role-email">admin@demo.com</div>
+      <!-- Credentials Form -->
+      <form onsubmit="handleFormLogin(event)">
+        <!-- Work Email Input (Single-Stroke Translucent Line) -->
+        <div class="aero-mobbin-input-group">
+          <label class="aero-mobbin-label" for="loginEmail">Enterprise Identity / Work Email</label>
+          <div class="aero-mobbin-input-wrap">
+            <input class="aero-mobbin-input" id="loginEmail" type="email" placeholder="name@company.com" required value="admin@demo.com">
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 12px;">
-          <button type="button" class="theme-toggle-btn" onclick="toggleTheme()" style="font-size: 12px;">Toggle Light / Dark Mode 🌓</button>
+        <!-- Password Input (Single-Stroke Translucent Line) -->
+        <div class="aero-mobbin-input-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <label class="aero-mobbin-label" for="loginPassword" style="margin-bottom: 0;">Secret Key / Password</label>
+            <a href="#" style="color: #64748b; font-size: 11px; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#64748b'" onclick="showToast('Verification recovery link dispatched to primary corporate inbox.')">Forgot?</a>
+          </div>
+          <div class="aero-mobbin-input-wrap">
+            <input class="aero-mobbin-input" id="loginPassword" type="password" placeholder="••••••••••••" required value="demo-password-2026">
+            <button type="button" class="pwd-toggle" onclick="togglePasswordVisibility()" style="position: absolute; right: 0; background: none; border: none; color: #64748b; cursor: pointer; padding: 8px; font-size: 14px;">👁️</button>
+          </div>
+        </div>
+
+        <!-- Device Trust Meta -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; font-size: 11.5px; color: #64748b;">
+          <label style="display: flex; align-items: center; gap: 7px; cursor: pointer;">
+            <input type="checkbox" checked style="accent-color: #38bdf8;"> <span>Attest Hardware Token (YubiKey)</span>
+          </label>
+          <span style="font-family: monospace; font-size: 10.5px; color: #64748b;">TLS 1.3 &bull; FIDO2</span>
+        </div>
+
+        <!-- Solid Charcoal Submit Button with Micro-Bevel & Inset Top White Accent Path -->
+        <button type="submit" class="aero-charcoal-btn" id="loginSubmitBtn">
+          <span>Authorize &amp; Launch Platform</span>
+          <span style="font-size: 12px; opacity: 0.7;">&rarr;</span>
+        </button>
+
+        <!-- 1-Click Super Admin Direct Launch -->
+        <button type="button" class="aero-charcoal-btn" style="margin-top: 10px; background: rgba(30, 41, 59, 0.85); border-color: rgba(255, 255, 255, 0.12); color: #38bdf8;" onclick="authenticateUser(DEMO_USERS['admin'])">
+          <span>👑 1-Click Launch Executive Platform (All Modules)</span>
+        </button>
+      </form>
+
+      <!-- 3-Role Demo Personas -->
+      <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+        <div style="font-size: 10.5px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; text-align: center;">Or switch sandbox persona:</div>
+        <div class="demo-role-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+          <div class="demo-card" style="padding: 10px 8px; text-align: center; border-radius: 8px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); cursor: pointer; transition: all 0.2s;" onclick="loginAsDemo('employee')">
+            <div style="font-size: 14px; margin-bottom: 2px;">👤</div>
+            <div style="font-size: 11px; font-weight: 700; color: #ffffff;">Employee</div>
+            <div style="font-size: 9.5px; color: #64748b;">W-2 Portal</div>
+          </div>
+          <div class="demo-card" style="padding: 10px 8px; text-align: center; border-radius: 8px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); cursor: pointer; transition: all 0.2s;" onclick="loginAsDemo('hr')">
+            <div style="font-size: 14px; margin-bottom: 2px;">📋</div>
+            <div style="font-size: 11px; font-weight: 700; color: #ffffff;">HR Ops</div>
+            <div style="font-size: 9.5px; color: #64748b;">Staffing Hub</div>
+          </div>
+          <div class="demo-card" style="padding: 10px 8px; text-align: center; border-radius: 8px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); cursor: pointer; transition: all 0.2s;" onclick="loginAsDemo('admin')">
+            <div style="font-size: 14px; margin-bottom: 2px;">👑</div>
+            <div style="font-size: 11px; font-weight: 700; color: #ffffff;">Admin</div>
+            <div style="font-size: 9.5px; color: #64748b;">Full Access</div>
+          </div>
         </div>
       </div>
     </div>
@@ -7704,13 +7715,9 @@
                   <span>🪪</span>
                   <span>Identity &amp; Compliance</span>
                 </button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-hardware', this)">
-                  <span>💻</span>
-                  <span>Hardware Assignment</span>
-                </button>
-                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-apps', this)">
-                  <span>🔑</span>
-                  <span>App Access</span>
+                <button class="aero-stage-pill" role="tab" aria-selected="false" onclick="filterStaffingStage('card-storage-ledger', this)">
+                  <span>💾</span>
+                  <span>Storage Ledger</span>
                 </button>
               </div>
               <div style="display: flex; gap: 8px; align-items: center;">
@@ -8117,6 +8124,63 @@
                     <button class="aero-btn aero-btn-outline aero-btn-sm" onclick="showToast('Opening Client Manager Approval Portal view...')">Client Portal Link</button>
                     <button class="aero-btn aero-btn-outline aero-btn-sm" onclick="showToast('Editing placement parameters for Acme Corp...')">Edit Placement</button>
                     <button class="aero-btn aero-btn-primary aero-btn-sm" onclick="showToast('Placement confirmed! Onboarding readiness locked at 98%.')">Confirm Assignment</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 7: Storage Ledger & Live Database Matrix View -->
+              <div class="aero-flow-card" id="card-storage-ledger" style="display: none;">
+                <div class="aero-card-head" onclick="toggleFlowAccordion('card-storage-ledger')">
+                  <div class="aero-card-title-wrap">
+                    <div class="aero-card-icon-box">💾</div>
+                    <div>
+                      <div class="aero-card-title-text">Enterprise Storage Ledger &amp; Live Database</div>
+                      <div class="aero-card-sub-text">public.offshore_onboarding &bull; candidate-vault encrypted repository</div>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="pill-neon-emerald" style="font-size: 10px;">Postgres Synchronized</span>
+                    <button class="aero-btn aero-btn-outline aero-btn-sm" style="font-size: 11px; padding: 4px 10px; margin-right: 6px;" onclick="event.stopPropagation(); fetchAndRenderDbCandidates();">🔄 Refresh</button>
+                    <span class="card-chevron" style="font-size: 11px; color: #94a3b8;">▾</span>
+                  </div>
+                </div>
+
+                <div class="aero-card-body" id="card-storage-ledger-body" style="padding: 24px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                      <span style="font-size: 11.5px; color: #64748b;">Active Supabase RLS Session &bull; Project: <code style="color: #38bdf8;">https://supabase.co</code></span>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                      <span class="card-tag tag-primary" style="font-size: 10px;">RLS Isolated</span>
+                      <span class="card-tag tag-success" style="font-size: 10px;">candidate-vault Connected</span>
+                    </div>
+                  </div>
+                  <div style="overflow-x: auto; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px;">
+                    <table class="aero-db-table" style="width: 100%; border-collapse: collapse;">
+                      <thead>
+                        <tr>
+                          <th>Candidate Name &amp; Email</th>
+                          <th>Role Type (offshore_role)</th>
+                          <th>Current Step (onboarding_step)</th>
+                          <th>Aadhaar KYC</th>
+                          <th>PAN Card</th>
+                          <th>Experience Doc</th>
+                          <th>Secure Token Drop-Link</th>
+                          <th>Pipeline Action</th>
+                        </tr>
+                      </thead>
+                      <tbody class="aero-db-roster-tbody" id="ledgerStorageTableBody">
+                        <!-- Populated dynamically from live database -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="aero-card-foot">
+                  <div style="font-size: 11px; color: #64748b;">Vault Hash: <code>SHA-256-VAULT-2026-ENCR</code></div>
+                  <div style="display: flex; gap: 6px;">
+                    <button class="aero-btn aero-btn-outline aero-btn-sm" onclick="showToast('Exporting Storage Ledger CSV...')">Export Ledger</button>
+                    <button class="aero-btn aero-btn-primary aero-btn-sm" onclick="fetchAndRenderDbCandidates()">Sync Database</button>
                   </div>
                 </div>
               </div>
@@ -11512,6 +11576,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         }
 
         currentRole = user.role;
+        sessionStorage.setItem('aero_authenticated', 'true');
         sessionStorage.removeItem('aero_signed_out');
         document.getElementById('login-container').classList.add('hidden');
         document.getElementById('app-shell').style.display = 'flex';
@@ -11595,6 +11660,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
     });
 
     function handleLogout() {
+      sessionStorage.removeItem('aero_authenticated');
       sessionStorage.setItem('aero_signed_out', 'true');
       document.getElementById('app-shell').style.display = 'none';
       document.getElementById('login-container').classList.remove('hidden');
@@ -15681,7 +15747,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
 
     // Filter staffing stages - Progressive Disclosure Tabbed Panel Matrix
     function filterStaffingStage(stageCardId, btnEl) {
-      const allStageCards = ['card-contract', 'card-compliance', 'card-hardware', 'card-apps', 'card-timetrack', 'card-assignment'];
+      const allStageCards = ['card-contract', 'card-compliance', 'card-hardware', 'card-apps', 'card-timetrack', 'card-assignment', 'card-storage-ledger'];
       
       // Default to card-contract if 'all' or empty
       const targetId = (stageCardId === 'all' || !stageCardId) ? 'card-contract' : stageCardId;
@@ -15709,11 +15775,17 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         'card-hardware': 'Hardware Assignment',
         'card-apps': 'App Access',
         'card-timetrack': 'Time Sync',
-        'card-assignment': 'Client Assignment'
+        'card-assignment': 'Client Assignment',
+        'card-storage-ledger': 'Storage Ledger'
       };
       const indicator = document.getElementById('activeMatrixTabIndicator');
       if (indicator && stageLabels[targetId]) {
         indicator.innerText = `Active Section: ${stageLabels[targetId]}`;
+      }
+
+      // If opening storage ledger, refresh the data table
+      if (targetId === 'card-storage-ledger' && typeof fetchAndRenderDbCandidates === 'function') {
+        fetchAndRenderDbCandidates();
       }
 
       // Show ONLY the one active section card container selected by the user, hiding the other sets entirely
@@ -15743,7 +15815,7 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
     // Collapse or expand all flow accordions
     let allAccordionsCollapsed = false;
     function toggleAllFlowAccordions() {
-      const allStageCards = ['card-contract', 'card-compliance', 'card-hardware', 'card-apps', 'card-timetrack', 'card-assignment'];
+      const allStageCards = ['card-contract', 'card-compliance', 'card-hardware', 'card-apps', 'card-timetrack', 'card-assignment', 'card-storage-ledger'];
       const toggleText = document.getElementById('toggleAllAccordionsText');
 
       allAccordionsCollapsed = !allAccordionsCollapsed;
@@ -16418,12 +16490,17 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
 
     // Render the live PostgreSQL Database Ledger table
     function renderDbRosterTable() {
-      const tbody = document.getElementById('offshoreDbRosterBody');
-      if (!tbody) return;
+      const targets = [
+        document.getElementById('offshoreDbRosterBody'),
+        document.getElementById('ledgerStorageTableBody')
+      ].filter(Boolean);
+      if (targets.length === 0) return;
 
       const filtered = getFilteredOffshoreCandidates();
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #64748b; padding: 24px;">No offshore candidates found for this role filter.</td></tr>`;
+        targets.forEach(tbody => {
+          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #64748b; padding: 24px;">No offshore candidates found for this role filter.</td></tr>`;
+        });
         return;
       }
 
@@ -16468,7 +16545,9 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         `;
       });
 
-      tbody.innerHTML = html;
+      targets.forEach(tbody => {
+        tbody.innerHTML = html;
+      });
     }
 
     function selectActiveOffshoreCandidate(id) {
@@ -18633,8 +18712,8 @@ ${cState.candidate.jobDescription}
         closeCopilot();
       }
 
-      // Auto-authenticate as Super Admin (Sarah Jenkins) by default so the user immediately sees all features, the IT Staffing Command Center, and the Onboarding Velocity Pipeline
-      if (sessionStorage.getItem('aero_signed_out') !== 'true') {
+      // Auto-authenticate only if already authenticated in this active session; otherwise present the Mobbin Satellite Entryway
+      if (sessionStorage.getItem('aero_authenticated') === 'true' && sessionStorage.getItem('aero_signed_out') !== 'true') {
         authenticateUser(DEMO_USERS['admin'], true);
       }
 
