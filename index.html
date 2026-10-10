@@ -5498,7 +5498,7 @@
     }
   </style>
 </head>
-<body>
+<body class="dark">
 
   <!-- ======================================================================= -->
   <!-- 1. AUTHENTICATION & LOGIN VIEW                                          -->
@@ -6284,7 +6284,7 @@
         <!-- =============================================================== -->
         <!-- 1. DASHBOARD (ROLE-AWARE EXECUTIVE COMMAND CENTER)              -->
         <!-- =============================================================== -->
-        <section id="view-dashboard" class="view-panel active">
+        <section id="view-dashboard" class="view-panel">
           
           <!-- ============================================================= -->
           <!-- EXECUTIVE ADMIN COMMAND CENTER (3-LAYER HIGH-LEVEL DASHBOARD) -->
@@ -6331,7 +6331,7 @@
             <div class="exec-kpi-grid">
               
               <!-- KPI 1: Total Headcount -->
-              <div class="exec-kpi-card" style="border-top: 3px solid var(--primary); cursor: pointer;" onclick="switchTab('hris')">
+              <div class="exec-kpi-card" style="border: 1px solid rgba(255, 255, 255, 0.08); cursor: pointer;" onclick="switchTab('hris')">
                 <div class="exec-kpi-top">
                   <span class="exec-kpi-label">Workforce Headcount</span>
                   <span class="exec-delta positive">▲ +5.9% Q3</span>
@@ -6343,19 +6343,19 @@
               </div>
 
               <!-- KPI 2: Payroll & WIP Ready -->
-              <div class="exec-kpi-card" style="border-top: 3px solid var(--success); cursor: pointer;" onclick="switchTab('timesheets')">
+              <div class="exec-kpi-card" style="border: 1px solid rgba(255, 255, 255, 0.08); cursor: pointer;" onclick="switchTab('timesheets')">
                 <div class="exec-kpi-top">
                   <span class="exec-kpi-label">Payroll & WIP Ready</span>
                   <span class="exec-delta positive">100% Matched</span>
                 </div>
-                <div class="exec-kpi-value" style="color: #059669;">$40,800</div>
+                <div class="exec-kpi-value" style="color: #34d399;">$40,800</div>
                 <div class="exec-kpi-sub">
                   <span>118 verified timesheets</span> • <span>0 overtime conflicts</span>
                 </div>
               </div>
 
               <!-- KPI 3: Hiring Velocity -->
-              <div class="exec-kpi-card" style="border-top: 3px solid #8b5cf6; cursor: pointer;" onclick="switchTab('hiring')">
+              <div class="exec-kpi-card" style="border: 1px solid rgba(255, 255, 255, 0.08); cursor: pointer;" onclick="switchTab('hiring')">
                 <div class="exec-kpi-top">
                   <span class="exec-kpi-label">Hiring Velocity (ATS)</span>
                   <span class="exec-delta positive">▼ -4 Days vs Q2</span>
@@ -6367,7 +6367,7 @@
               </div>
 
               <!-- KPI 4: Compliance & Trust -->
-              <div class="exec-kpi-card" style="border-top: 3px solid #f59e0b; cursor: pointer;" onclick="switchTab('trust')">
+              <div class="exec-kpi-card" style="border: 1px solid rgba(255, 255, 255, 0.08); cursor: pointer;" onclick="switchTab('trust')">
                 <div class="exec-kpi-top">
                   <span class="exec-kpi-label">Trust & SOC 2 Compliance</span>
                   <span class="exec-delta positive">Audit Passed</span>
@@ -6381,7 +6381,7 @@
             </div>
 
             <!-- EXECUTIVE SPOTLIGHT: MODULAR AUTOMATED ONBOARDING WORKFLOW & CANDIDATE TRACKER -->
-            <div class="card" id="execOnboardSpotlightCard" style="margin-bottom: 22px; padding: 20px 24px; background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(16,185,129,0.08) 100%); border: 1.5px solid rgba(99,102,241,0.3); border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div class="card" id="execOnboardSpotlightCard" style="margin-bottom: 22px; padding: 20px 24px; background: rgba(15, 18, 28, 0.75); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px;">
               <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
                 <div style="display: flex; align-items: center; gap: 14px;">
                   <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary-gradient); display: flex; align-items: center; justify-content: center; font-size: 24px; color: #fff; box-shadow: 0 4px 14px rgba(99,102,241,0.35); flex-shrink: 0;">
@@ -7461,7 +7461,7 @@
                 <!-- =============================================================== -->
         <!-- 4. DEVELOPER & CONTRACTOR ONBOARDING VELOCITY (IT STAFFING)     -->
         <!-- =============================================================== -->
-        <section id="view-onboarding" class="view-panel">
+        <section id="view-onboarding" class="view-panel active">
           
           <!-- DESKTOP HUB -->
           <div class="aero-staffing-hub" id="staffingDesktopHub">
@@ -11484,6 +11484,9 @@ FOR EACH ROW EXECUTE FUNCTION public.handle_new_offshore_onboarding();</pre>
         if (execMenuUserEmail) execMenuUserEmail.innerHTML = `${user.email} • <span>${user.role.toUpperCase()}</span>`;
 
         renderRoleInterface(user.role);
+        if (typeof switchTab === 'function') {
+          switchTab('onboarding');
+        }
         if (typeof AutomatedOnboardingWorkflow !== 'undefined' && AutomatedOnboardingWorkflow.init) {
           AutomatedOnboardingWorkflow.init();
         }
